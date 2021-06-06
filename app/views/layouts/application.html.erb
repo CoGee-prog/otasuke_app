@@ -8,9 +8,31 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
+      </script>
+    <![endif]-->
   </head>
-
   <body>
+    <header>
+     <div class="container">
+      <%=link_to "おたスケ",root_path,id:"logo"%>
+      <nav class="nav-right">
+        <%=link_to "ホーム",root_path%>
+        <ul class="menu">
+          <li> <%=link_to "ログイン",'#'%></li>
+          <li> <%=link_to "新規登録",'#'%></li>
+        </ul>
+      </nav>
+      <ul class="tab">
+        <li><%=link_to "対戦相手募集",'#'%></li>
+        <li><%=link_to "スケジュールから対戦相手検索",'#'%></li>
+        <li><%=link_to "スケジュール管理",'#'%></li>
+      </ul>
+     </div>
+    </header>
+    <div class="container">
     <%= yield %>
+    </div>
   </body>
 </html>
