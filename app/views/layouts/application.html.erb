@@ -15,24 +15,26 @@
   </head>
   <body>
     <header>
-     <div class="container">
-      <%=link_to "おたスケ",root_path,id:"logo"%>
-      <nav class="nav-right">
-        <%=link_to "ホーム",root_path%>
-        <ul class="menu">
-          <li> <%=link_to "ログイン",'#'%></li>
-          <li> <%=link_to "新規登録",'#'%></li>
+    <div class="wrapper">
+      <div class="container">
+       <div class="nav">
+         <%=link_to "おたスケ",root_path,id:"logo"%>
+         <%=link_to "ホーム",root_path%>
+       </div>
+          <ul class="menu">
+            <li><%=link_to "ログイン",'#'%></li>
+            <li><%=link_to "新規登録",'#'%></li>
+          </ul>
+        <ul class="tab">
+          <li><%=link_to "対戦相手募集",'#'%></li>
+          <li><%=link_to "スケジュールから対戦相手検索",'#'%></li>
+          <li><%=link_to "スケジュール管理",'#'%></li>
         </ul>
-      </nav>
-      <ul class="tab">
-        <li><%=link_to "対戦相手募集",'#'%></li>
-        <li><%=link_to "スケジュールから対戦相手検索",'#'%></li>
-        <li><%=link_to "スケジュール管理",'#'%></li>
-      </ul>
-     </div>
-    </header>
-    <div class="container">
-    <%= yield %>
+      </div>
+      </header>
+      <div class="container">
+       <%= yield %>
+      </div>
     </div>
   </body>
 </html>
