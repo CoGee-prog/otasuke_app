@@ -4,10 +4,21 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+// import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+require('jquery')
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()
+
+
+$(function(){
+    $(".tab").on("click",function(){
+        let this_class = $(this).attr("class");
+        let class_Array = this_class.split(" ");
+        $("#lamp").removeClass().addClass(`${class_Array[1]}`);
+    });
+});
+
