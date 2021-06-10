@@ -14,7 +14,7 @@ Rails.start()
 ActiveStorage.start()
 
 
-function(){
+$(function(){
     $(".tab").on("click",function(){
         let this_class = $(this).attr("class");
         let class_Array = this_class.split(" ");
