@@ -24,20 +24,22 @@
           <li><%=link_to "ログイン",'#'%></li>
           <li><%=link_to "新規登録",signup_path%></li>
         </ul>
-        <div class="container">
-          <div class="tab-area">
-            <div class="tab-buttons">
-              <div class="tab tab1"><%=link_to "対戦相手募集",'#'%></div>
-              <div class="tab tab2"><%=link_to "スケジュールから対戦相手検索",'#'%></div>
-              <div class="tab tab3"><%=link_to "スケジュール管理",'#'%></div>
-              <div id="lamp"></div>
-            </div>
+        <div class="tab-area">
+          <div class="tab-buttons">
+            <div class="tab tab1"><%=link_to "対戦相手募集",'#'%></div>
+            <div class="tab tab2"><%=link_to "スケジュールから対戦相手検索",'#'%></div>
+            <div class="tab tab3"><%=link_to "スケジュール管理",'#'%></div>
+            <div id="lamp"></div>
           </div>
-        </div>
+          </div>
       </div>
     </header>
       <div class="container">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
        <%= yield %>
+       <%= debug(params) if Rails.env.development? %>
       </div>
     </div>
   </body>
