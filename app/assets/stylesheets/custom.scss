@@ -13,17 +13,12 @@
 body{
     padding-top: 30px;
     background-color: #fff;
-    // overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 a{
     text-decoration: none;
     color: black;
-}
-
-ul {
-    list-style: none;
-   
 }
 
 .wrapper{
@@ -33,7 +28,7 @@ ul {
 
 .container{
     width: 800px;
-    margin: 0  auto;
+    margin: 0 auto;
 }
 
 // ロゴ
@@ -58,6 +53,7 @@ ul {
     justify-content: flex-end;
     li{
         margin-left: 10px;
+        list-style: none;
     }
     :hover{
         opacity: 0.7;
@@ -83,6 +79,7 @@ ul {
             float:left;
             text-align:center;
             left: 0;
+            cursor: pointer;
         }
         .tab1#lamp{
             position: absolute;
@@ -101,6 +98,7 @@ ul {
             float:left;
             text-align:center;
             left: 33.3%;
+            cursor: pointer;
         }
         .tab2#lamp{
             position: absolute;
@@ -118,6 +116,7 @@ ul {
             float:left;
             text-align:center;
             left: 66.6%;
+            cursor: pointer;
         }
         .tab3#lamp{
             position: absolute;
@@ -128,19 +127,13 @@ ul {
             display: block;
             left: 66.6%;
         }
-
-
-        :hover{
-            opacity: 0.7;
-        }
-
-
-      
+       :hover{
+           font-weight: bold;
+           background-color: #f1f1f1;
+       }
     }
 }
 
-
-    
 // ホーム画像
 
 .home-image{
@@ -171,5 +164,104 @@ ul {
         }
 
     }
+}
+
+// mixin
+
+@mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+  }
+
+  // デバック
+
+.debug_dump {
+    clear: both;
+    float: left;
+    width: 100%;
+    margin-top: 45px;
+    @include box_sizing;
+    background-color: #eaeaea;
+    padding: 10px 0px;
+  }
+
+
+//   入力フォーム
+
+.form{
+    width: 350px;
+    margin: 0 auto;
+    border: 2px black solid;
+    padding: 20px;
+    h2{
+        text-align: center;
+    }
+    input, textarea {
+        border: 1px solid #bbb;
+        width: 100%;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        @include box_sizing;
+      }
+    input {
+        height: auto !important;
+    }
+}
+
+.btn{
+    color: white;
+    margin-top: 5px;
+    height: 25px;
+    padding: 1px 6px;
+    width: 100%;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    @include box_sizing;
+}
+
+input.btn{
+    border: none;
+    outline: none;
+}
+
+.btn-orange{
+    background-color: #FF8C00; 
+}
+
+.btn-navy{
+    background-color: #0044A2;
+}
+
+#error_explanation {
+    color: red;
+    ul {
+      color: red;
+      margin: 0 0 30px 0;
+    }
+  }
+  
+.field_with_errors input{
+    outline: 0;
+    border-color: red;
+    background-color:#fff;
+}
+
+.alert-danger{
+    color: red;
+    margin: -30px 0 0 -40px ;  
+    li{
+        list-style: none;
+    }
+}
+
+.other{
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    border-top: 2px #aaa solid;
+    margin-top: 20px;
 }
 
