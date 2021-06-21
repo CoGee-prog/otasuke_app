@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.feature 'ユーザー登録テスト' do
-  scenario '無効なユーザー登録' do
+RSpec.describe 'ユーザー登録テスト', type: :system do
+  it '無効なユーザー登録' do
     visit root_path
     click_on '新規登録'
     expect(current_path).to eq signup_path
@@ -15,7 +15,7 @@ RSpec.feature 'ユーザー登録テスト' do
     end.not_to change(User, :count)
   end
 
-  scenario '有効なユーザー登録' do
+  it '有効なユーザー登録' do
     visit root_path
     click_on '新規登録'
     expect(current_path).to eq signup_path
@@ -27,5 +27,6 @@ RSpec.feature 'ユーザー登録テスト' do
       click_on '登録する'
       expect(current_path).to eq root_path
     end.to change(User, :count).by(1)
+    expect(has_css?('.dropdown')).to be_truthy
   end
 end

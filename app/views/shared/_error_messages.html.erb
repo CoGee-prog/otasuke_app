@@ -1,8 +1,8 @@
 <% if @user.errors.any? %>
-    <div class="alert-danger">
+    <div class="form-alert-danger">
         <ul>
-            <%@user.errors.full_messages_for(attribute).each do |msg|%>
-             <li><%=msg%></li>
+            <% @user.errors.full_messages_for(attribute).each do |msg| %>
+             <li><%= msg %></li>
             <% end %>
         </ul>
     </div>

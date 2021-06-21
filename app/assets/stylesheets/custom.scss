@@ -1,3 +1,5 @@
+@import "reset.css";
+
 // フォント
 
 @font-face {
@@ -55,17 +57,69 @@ a{
         margin-left: 10px;
         list-style: none;
     }
-    :hover{
+}
+
+.dropdown {
+    position: relative;
+    :after {
+        clear: both;
+    }
+    li {
+        width: 150px; 
+        height: 50px;
+        line-height: 50px;
+        background-color: white;
+        margin-left: 0;
+    }
+    li a {
+        display: block;
+        color: #008CFF;
+        text-align: center;
+    }
+    a:hover{
         opacity: 0.7;
+        background-color: #f3f3f3;   
     }
 }
+
+.down-arrow:after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin: 0 0 4px 3px;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.dropdown-menu {
+    border: solid 1px black;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+    position: absolute;
+    -webkit-transition: all .2s ease;
+    transition: all .2s ease;
+    margin-top: 5px;
+    margin-left: -108px;
+}
+
+.dropdown:hover .dropdown-menu {
+    visibility: visible;
+    opacity: 1;
+}
+
+// タブ
 
 .tab-area{
     border-top: 2px #444 solid;
     border-bottom: 2px #444 solid;
     width: 100vm;
-    margin: 0 calc(50% - 50vw) 15px;
-    height:30px;
+    margin: 5px calc(50% - 50vw) 15px;
+    height: 34px;
     line-height: 30px;
     .tab-buttons{
         position: relative;
@@ -196,6 +250,7 @@ a{
     padding: 20px;
     h2{
         text-align: center;
+        margin-bottom: 15px;
     }
     input, textarea {
         border: 1px solid #bbb;
@@ -223,6 +278,7 @@ a{
 }
 
 input.btn{
+    color: white;
     border: none;
     outline: none;
 }
@@ -249,9 +305,26 @@ input.btn{
     background-color:#fff;
 }
 
+.alert{
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
 .alert-danger{
     color: red;
-    margin: -30px 0 0 -40px ;  
+    background-color: #ffafaf;
+    li{
+        list-style: none;
+    }
+}
+
+.form-alert-danger{
+    color: red;
+    margin-top: -15px;
     li{
         list-style: none;
     }
