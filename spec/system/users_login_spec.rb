@@ -51,9 +51,35 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
       fill_in 'session[password]', with: user.password
       find('#login-btn').click
       expect(current_path).to eq root_path
+      expect(page).not_to have_link '新規登録'
+      expect(page).not_to have_link 'ログイン'
       expect(has_css?('.dropdown')).to be_truthy
       click_on 'ログアウト'
       expect(has_css?('.dropdown')).to be_falsey
+      # 2つ目のウィンドウでログアウトをクリックするユーザーのシュミレート
+      delete logout_path
+      follow_redirect!
+      expect(page).to have_link '新規登録'
+      expect(page).to have_link 'ログイン'
+    end
+  end
+
+  describe 'ログイン状態の保持のテスト' do
+    it 'ログイン状態を保持するを選択してログインする' do
+      visit login_path
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
+      check 'ログイン状態を保持する'
+      find('#login-btn').click
+      expect(get_me_the_cookie('remember_token')).not_to eq nil
+    end
+
+    it 'ログイン状態を保持するを選択しないでログインする' do
+      visit login_path
+      fill_in 'session[email]', with: user.email
+      fill_in 'session[password]', with: user.password
+      find('#login-btn').click
+      expect(get_me_the_cookie('remember_token')).to eq nil
     end
   end
 end
