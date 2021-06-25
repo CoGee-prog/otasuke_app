@@ -2,12 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   let(:user) do
-    User.new(
-      name: 'Example User',
-      email: 'user@example.com',
-      password: 'password',
-      password_confirmation: 'password'
-    )
+    FactoryBot.build(:user)
   end
 
   it 'ユーザーが有効である' do
@@ -73,5 +68,9 @@ RSpec.describe User, type: :model do
   it 'パスワードが最小の文字数を満たしていない場合、無効である' do
     user.password = user.password_confirmation = 'a' * 5
     expect(user).not_to be_valid
+  end
+
+  it 'remember_digestがnilならauthenticated?メソッドはfalseを返す' do
+    expect(user.authenticated?('')).to be_falsey
   end
 end
