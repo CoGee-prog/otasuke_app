@@ -1,26 +1,8 @@
 <%provide(:title, '新規登録')%>
+<%provide(:button_text, '登録する')%>
 <div class="form">
     <h2>新規登録</h2>
-    <%= form_with(model:@user,local:true) do |f|%>
-
-        <%= f.label :name,'ニックネーム' %>
-        <%= f.text_field :name %>
-        <%= render 'shared/error_messages', model: @user, attribute: :name %>
-
-        <%= f.label :email,'メールアドレス' %>
-        <%= f.email_field :email %>
-        <%= render 'shared/error_messages', model: @user, attribute: :email %>
-
-        <%= f.label :password,'パスワード' %>
-        <%= f.password_field :password %>
-        <%= render 'shared/error_messages', model: @user, attribute: :password %>
-
-        <%= f.label :password_confirmation,'パスワード再入力' %>
-        <%= f.password_field :password_confirmation %>
-        <%= render 'shared/error_messages', model: @user, attribute: :password_confirmation %>
-
-        <%= f.submit "登録する", class: "btn btn-orange" %>
-    <% end %>
+    <%= render 'form' %>
     <div class ="other">
         <a>既に登録済みの方はログインしてください</a>
         <%= link_to (login_path) do %>

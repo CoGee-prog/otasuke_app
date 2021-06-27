@@ -1,4 +1,7 @@
 <% provide(:title, "ホーム")%>
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
     <div class="home-image">
         <%= image_tag("Home_img.jpg",alt:"Baseball Image",width: "100%") %>
         <p><span class="title">草野球の対戦相手が<br>
