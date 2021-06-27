@@ -33,29 +33,22 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
 
   describe '有効な情報でのログイン' do
     it '有効な情報でのログイン' do
-      visit root_path
-      click_on 'ログイン'
-      expect(current_path).to eq login_path
-      fill_in 'session[email]', with: user.email
-      fill_in 'session[password]', with: user.password
-      find('#login-btn').click
+      log_in_as(user)
       expect(current_path).to eq root_path
+      expect(page).to have_selector('.alert-success', text: 'ログインしました')
       expect(has_css?('.dropdown')).to be_truthy
     end
 
     it '有効な情報でログインし、その後にログアウトする' do
-      visit root_path
-      click_on 'ログイン'
-      expect(current_path).to eq login_path
-      fill_in 'session[email]', with: user.email
-      fill_in 'session[password]', with: user.password
-      find('#login-btn').click
+      log_in_as(user)
       expect(current_path).to eq root_path
       expect(page).not_to have_link '新規登録'
       expect(page).not_to have_link 'ログイン'
       expect(has_css?('.dropdown')).to be_truthy
+      expect(page).to have_selector('.alert-success', text: 'ログインしました')
       click_on 'ログアウト'
       expect(has_css?('.dropdown')).to be_falsey
+      expect(page).to have_selector('.alert-success', text: 'ログアウトしました')
       # 2つ目のウィンドウでログアウトをクリックするユーザーのシュミレート
       delete logout_path
       follow_redirect!
@@ -75,10 +68,7 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
     end
 
     it 'ログイン状態を保持するを選択しないでログインする' do
-      visit login_path
-      fill_in 'session[email]', with: user.email
-      fill_in 'session[password]', with: user.password
-      find('#login-btn').click
+      log_in_as(user)
       expect(get_me_the_cookie('remember_token')).to eq nil
     end
   end

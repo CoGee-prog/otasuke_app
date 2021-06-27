@@ -28,5 +28,6 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
       expect(current_path).to eq root_path
     end.to change(User, :count).by(1)
     expect(has_css?('.dropdown')).to be_truthy
+    expect(page).to have_selector('.alert-success', text: 'ユーザー登録が完了しました！')
   end
 end
