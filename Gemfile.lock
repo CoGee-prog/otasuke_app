@@ -224,8 +224,6 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    semantic-ui-sass (2.4.4.0)
-      sassc
     semantic_range (3.0.0)
     show_me_the_cookies (5.0.1)
       capybara (>= 2, < 4)
@@ -292,7 +290,6 @@ DEPENDENCIES
   rubocop-rails (~> 2.10)
   sass-rails (>= 6)
   selenium-webdriver
-  semantic-ui-sass
   show_me_the_cookies
   spring
   spring-commands-rspec
