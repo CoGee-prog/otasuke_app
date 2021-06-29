@@ -360,20 +360,35 @@ input.btn{
 
 /* ページネーション */
 
-/*ページネーション自体のデザイン*/
-.pagination>li>a {          
-    border: none;     /*枠線をなくす*/
-    color: #696969;   /*文字の色を変える*/
+.pagination{
+    margin: 20px auto 0;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    // border: solid 1px #444;
   }
-  
-  /* 表示しているページ番号のデザイン */
-  .pagination>.active>a {     
-    background: #93c9ff;     /*背景の色を変える*/
-    border-radius: 15px;     /*角を丸くする*/
+  .pagination span{
+    text-align: center;
+    width: 50px;
   }
-  
-  /*ホバー時のデザイン*/
-  .pagination>li>a:hover {        
-    border-radius: 15px;    /*角を丸くする*/
+
+  .current{
+    color: #008CFF;
+  }
+  .pagination span a{
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .pagination span:hover{
+    background-color:#f3f3f3;
+  }
+  .pagination span a:hover{
+    background-color: #f3f3f3;
+  }
+
+  .gap{
+      background-color: white !important;
   }
   
