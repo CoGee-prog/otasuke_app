@@ -365,29 +365,28 @@ input.btn{
     width: 50%;
     display: flex;
     justify-content: flex-start;
-  }
-  .pagination span{
-    text-align: center;
-    width: 50px;
-  }
+    span{
+        text-align: center;
+        width: 50px;
+        :hover{
+            background-color:#f3f3f3;
+        }
+        a{
+            display: block;
+            width: 100%;
+            height: 100%;
+            :hover{
+                background-color: #f3f3f3;
+              }
+        }
+    }
+}
 
-  .current{
+.current{
     color: #008CFF;
-  }
-  .pagination span a{
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+}
 
-  .pagination span:hover{
-    background-color:#f3f3f3;
-  }
-  .pagination span a:hover{
-    background-color: #f3f3f3;
-  }
-
-  .gap{
-      background-color: white !important;
-  }
+.gap{
+    background-color: white !important;
+}
   
