@@ -1,9 +1,12 @@
 # メインのサンプルユーザーを1人作成する
-User.create!(name:  "Example User",
-            email: "example@example.com",
-            password:              "hogehoge",
-            password_confirmation: "hogehoge",
-            admin: true)
+User.create!(name:  "KK",
+            email: "bb.sca.ksk1@gmail.com",
+            password:              "koshien",
+            password_confirmation: "koshien",
+            admin: true,
+            activated: true,
+            activated_at: Time.zone.now)
+            
 
 # 追加のユーザーをまとめて生成する
 99.times do |n|
@@ -13,5 +16,7 @@ password = "password"
 User.create!(name:  name,
                 email: email,
                 password:              password,
-                password_confirmation: password)
+                password_confirmation: password,
+                activated: true,
+                activated_at: Time.zone.now)
 end
