@@ -12,9 +12,9 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
       fill_in 'session[password]', with: ''
       find('#login-btn').click
       expect(current_path).to eq login_path
-      expect(has_css?('.alert-danger')).to be_truthy
+      expect(page).to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
       visit root_path
-      expect(has_css?('.alert-danger')).to be_falsey
+      expect(page).not_to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
     end
 
     it 'メールアドレスは正しいが、パスワードが間違っている' do
@@ -25,9 +25,9 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
       fill_in 'session[password]', with: 'hogehoge'
       find('#login-btn').click
       expect(current_path).to eq login_path
-      expect(has_css?('.alert-danger')).to be_truthy
+      expect(page).to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
       visit root_path
-      expect(has_css?('.alert-danger')).to be_falsey
+      expect(page).not_to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
     end
   end
 
@@ -36,7 +36,7 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
       log_in_as(user)
       expect(current_path).to eq root_path
       expect(page).to have_selector('.alert-success', text: 'ログインしました')
-      expect(has_css?('.dropdown')).to be_truthy
+      expect(page).to have_selector('.dropdown', text: '設定')
     end
 
     it '有効な情報でログインし、その後にログアウトする' do
@@ -44,10 +44,10 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
       expect(current_path).to eq root_path
       expect(page).not_to have_link '新規登録'
       expect(page).not_to have_link 'ログイン'
-      expect(has_css?('.dropdown')).to be_truthy
+      expect(page).to have_selector('.dropdown', text: '設定')
       expect(page).to have_selector('.alert-success', text: 'ログインしました')
       click_on 'ログアウト'
-      expect(has_css?('.dropdown')).to be_falsey
+      expect(page).not_to have_selector('.dropdown', text: '設定')
       expect(page).to have_selector('.alert-success', text: 'ログアウトしました')
       # 2つ目のウィンドウでログアウトをクリックするユーザーのシュミレート
       delete logout_path

@@ -1,0 +1,14 @@
+<%provide(:title, 'パスワード再設定')%>
+<div class="form">
+    <%= render 'shared/error_messages' %>
+    <h2>パスワードの再設定</h2>
+    <p>メールアドレスを入力し送信すると、<br>
+    パスワード再設定のURLを送信します。</p>
+    <%= form_with(url:password_resets_path,scope: :password_reset, local:true) do |f| %>
+
+        <%= f.label :email, 'メールアドレス' %>
+        <%= f.email_field :email %>
+
+        <%= f.submit "送信する", class: "btn btn-navy", id: "login-btn" %>
+    <% end %>
+</div>

@@ -265,6 +265,10 @@ a{
     input {
         height: auto !important;
     }
+    > p{
+        text-align: center;
+        margin-bottom: 15px;
+    }
 }
 
 .btn{
@@ -284,6 +288,15 @@ input.btn{
     color: white;
     border: none;
     outline: none;
+}
+
+.password-forgot{
+    text-align: center;
+    margin-bottom: 15px;
+    > a{
+        display: inline-block;
+        color: blue;
+    }
 }
 
 .btn-orange{
