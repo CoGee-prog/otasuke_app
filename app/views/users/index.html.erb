@@ -1,7 +1,5 @@
 <% provide(:title, 'ユーザー一覧') %>
-<% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
-<% end %>
+<%= render 'shared/error_messages' %>
 <h1>ユーザー一覧</h1>
 <ul class="users">
   <% @users.each do |user| %>

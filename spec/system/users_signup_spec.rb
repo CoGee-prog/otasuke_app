@@ -32,11 +32,11 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
       expect(ActionMailer::Base.deliveries.size).to eq 1
       user = User.last
       mail = ActionMailer::Base.deliveries.last
-      token = mail.text_part.body.encoded[/(?<=account_activations\/)[^\/]+/]
+      token = mail.text_part.body.encoded[%r{(?<=account_activations/)[^/]+}]
       visit edit_account_activation_path(token, email: user.email)
       expect(current_path).to eq root_path
     end.to change(User, :count).by(1)
-    expect(has_css?('.dropdown')).to be_truthy
+    expect(page).to have_selector('.dropdown', text: '設定')
     expect(page).to have_selector('.alert-success', text: 'ユーザー登録が完了しました')
   end
 end

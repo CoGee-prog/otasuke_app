@@ -2,19 +2,19 @@
 
     <%= f.label :name,'ニックネーム' %>
     <%= f.text_field :name %>
-    <%= render 'shared/error_messages', model: @user, attribute: :name %>
+    <%= render 'shared/form_error_messages', model: @user, attribute: :name %>
 
     <%= f.label :email,'メールアドレス' %>
     <%= f.email_field :email %>
-    <%= render 'shared/error_messages', model: @user, attribute: :email %>
+    <%= render 'shared/form_error_messages', model: @user, attribute: :email %>
 
     <%= f.label :password,'パスワード' %>
     <%= f.password_field :password %>
-    <%= render 'shared/error_messages', model: @user, attribute: :password %>
+    <%= render 'shared/form_error_messages', model: @user, attribute: :password %>
 
     <%= f.label :password_confirmation,'パスワード再入力' %>
     <%= f.password_field :password_confirmation %>
-    <%= render 'shared/error_messages', model: @user, attribute: :password_confirmation %>
+    <%= render 'shared/form_error_messages', model: @user, attribute: :password_confirmation %>
 
     <%= f.submit yield(:button_text), class: "btn btn-orange" %>
 <% end %>

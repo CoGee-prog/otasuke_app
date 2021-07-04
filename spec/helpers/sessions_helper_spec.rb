@@ -13,7 +13,7 @@ RSpec.describe SessionsHelper, type: :helper do
     end
 
     it 'remember_digestが間違っている時current_userがnilを返す' do
-      user.update_attribute(:remember_digest, User.digest(User.new_token))
+      user.update(remember_digest: User.digest(User.new_token))
       expect(current_user).to eq nil
     end
   end
