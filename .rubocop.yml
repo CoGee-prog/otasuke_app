@@ -19,6 +19,9 @@ AllCops:
 AsciiComments:
   Enabled: false
 
+CyclomaticComplexity:
+  Max: 8
+
 Documentation:
   Enabled: false
 
@@ -27,6 +30,9 @@ ClassAndModuleChildren:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Layout/LineLength:
+  Max: 135
 
 Metrics/BlockLength:
   Exclude:

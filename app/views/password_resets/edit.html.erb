@@ -6,11 +6,11 @@
 
         <%= f.label :password, '新しいパスワード' %>
         <%= f.password_field :password %>
-        <%= render 'shared/form_error_messages', model: @user, attribute: :password %>
+        <%= render 'shared/form_error_messages', object: f.object, attribute: :password %>
 
         <%= f.label :password_confirmation,'パスワード再入力' %>
         <%= f.password_field :password_confirmation %>
-        <%= render 'shared/form_error_messages', model: @user, attribute: :password_confirmation %>
+        <%= render 'shared/form_error_messages', object: f.object, attribute: :password_confirmation %>
 
         <%= f.submit "パスワードを更新する", class: "btn btn-navy", id: "login-btn" %>
     <% end %>

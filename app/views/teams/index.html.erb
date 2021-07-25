@@ -1,0 +1,15 @@
+<% provide(:title, '所属チーム検索') %>
+<%= render 'shared/error_messages' %>
+<ul class="teams">
+    <h2>所属チーム検索</h2>
+    <%= form_tag(teams_path, method: :get) do %>
+        <%= text_field_tag :search, params[:search], placeholder: "チーム名" %>
+        <%= submit_tag '検索',name: nil, class: "btn-search btn-navy" %>
+    <% end %>
+
+    <div class="teams-left">
+        <%= render @teams %>
+    </div>
+</ul>
+
+<%= paginate @teams %>

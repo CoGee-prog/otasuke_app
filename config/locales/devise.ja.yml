@@ -26,6 +26,11 @@ ja:
         unconfirmed_email: 未確認Eメール
         unlock_token: ロック解除用トークン
         updated_at: 更新日
+      team:
+        name: チーム名
+        level: チームレベル
+        prefecture_id: 活動エリア
+        weekly: 活動曜日
     models:
       user: ユーザー
   devise:
@@ -149,5 +154,6 @@ ja:
       previous: "&lsaquo;"
       next: "&rsaquo;"
       truncate: "..."
+      
 
        

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user, only: %i[index destroy]
 
   def index
-    @users = User.all.page(params[:page]).per(10)
+    @users = User.all.page(params[:page])
   end
 
   def destroy
@@ -56,23 +56,14 @@ class UsersController < ApplicationController
 
   # beforeアクション
 
-  # ログイン済みユーザーかどうか確認
-  def logged_in_user
-    return if logged_in?
-
-    store_location
-    flash[:danger] = 'ログインしてください'
-    redirect_to login_url
-  end
-
   # 正しいユーザーかどうか確認
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    redirect_to(root_path) unless current_user?(@user)
   end
 
   # 管理者ユーザーかどうか確認
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to(root_path) unless current_user.admin?
   end
 end

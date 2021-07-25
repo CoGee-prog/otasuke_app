@@ -29,7 +29,6 @@ RSpec.describe 'Users', type: :request do
     it '間違ったユーザーがログインした時、ユーザーeditからリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_user_path(user)
-      expect(flash[:success]).not_to eq 'ユーザープロフィールを更新しました'
       expect(response).to redirect_to root_path
     end
 
