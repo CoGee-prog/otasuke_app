@@ -1,0 +1,52 @@
+<%provide(:title, 'チームプロフィール')%>
+<%= render 'shared/error_messages' %>
+<div class="team-profile">
+    <% if @team.image.attached? %>
+        <%= image_tag(@team.image,alt:"チームプロフィール画像", size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
+    <% else %>
+        <%= image_tag("default_team_image.png",alt:"チームプロフィール画像", size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
+    <% end %>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>チーム名</th>
+                <td><%= @team.name %></td>
+            </tr>
+            <tr>
+                <th>チームレベル</th>
+                <td><%= @team.level %></td>
+            </tr>
+            <tr>
+                <th>活動エリア</th>
+                <td><%= Prefecture.find(@team.prefecture_id).name %></td>
+            </tr>
+            <tr>
+                <th>活動曜日</th>
+                <td>
+                    <%  weekly_columns.each_with_index do |day,i| %>
+                        <% if @team[day] == true %>
+                            <a><%= ["月","火","水","木","金","土","日"][i] %></a>
+                        <% end %>
+                    <% end %>
+                </td>
+            </tr>
+            <tr>
+                <th>活動頻度</th>
+                <td><%= @team.activity_frequency %></td>
+            </tr>
+            <tr>
+                <th>チームHP等</th>
+                <td><%= @team.homepage_url %></td>
+            </tr>
+            <tr>
+                <th>その他</th>
+                <td><%= @team.other %></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <% if @team.admin_user_id == current_user.id %>
+        <%= link_to "編集する",edit_team_path(@team),class: "btn btn-orange"%>
+    <% end %>
+</div>

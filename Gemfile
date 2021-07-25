@@ -2,7 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.7'
-
+gem 'active_storage_validations'
+gem 'aws-sdk-s3', require: false
+gem 'image_processing'
+gem 'mini_magick'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.2'
 # Use mysql as the database for Active Record
@@ -59,6 +62,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+gem 'active_hash', '~> 2.3.0'
 gem 'faker'
 gem 'kaminari'
 gem 'rails-i18n', '~> 6.0.0'

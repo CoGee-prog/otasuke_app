@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :teams, through: :team_member
+  has_many :member_request, dependent: :destroy
+  has_many :team_member, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email
@@ -70,6 +73,11 @@ class User < ApplicationRecord
   # パスワード再設定の期限が切れている場合はtrueを返す
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
+  end
+
+  # チームリクエストを送っているかどうか
+  def already_requested?(team)
+    member_request.exists?(team_id: team.id)
   end
 
   private

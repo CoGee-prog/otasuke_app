@@ -1,0 +1,24 @@
+<li class="team">
+        <% if team.image.attached? && team.image.present? %>
+                <%= image_tag(team.image, alt:"チームプロフィール画像", size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
+        <% else %>  
+                <%= image_tag("default_team_image.png", alt:"チームプロフィール画像", size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
+        <% end %>
+    <div class="team-header">
+        <%= link_to team.name, team %><br>
+        <p><%= team.level %></p>
+    </div>
+    <div class="btn-apply  btn-orange">
+        <% if current_user.already_requested?(team) %>
+        <% else %>
+        <%= link_to "所属申請をする", '#' %> 
+        <% end %>
+    </div>
+    <div class="team-body">
+        活動エリア: <%= Prefecture.find(team.prefecture_id).name %><br>
+        <% if team.admin_user_id? %>
+            チーム管理者: <%= User.find(team.admin_user_id).name %>
+        <% end %>
+    </div>
+</li>
+

@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :user, class: User do
+    id { 1 }
     name { 'Ichiro Example' }
     email { 'ichiro@example.com' }
     password { 'password' }
@@ -7,9 +8,11 @@ FactoryBot.define do
     admin { 'true' }
     activated { 'true' }
     activated_at { Time.zone.now }
+    current_team_id { 1 }
   end
 
   factory :other_user, class: User do
+    id { 2 }
     name { 'Jiro Example' }
     email { 'Jiro@example.com' }
     password { 'password' }

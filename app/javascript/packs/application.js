@@ -13,7 +13,7 @@ Rails.start()
 // Turbolinks.start()
 ActiveStorage.start()
 
-
+// タブ
 $(function(){
     $(".tab").on("click",function(){
         let this_class = $(this).attr("class");
@@ -22,3 +22,15 @@ $(function(){
     });
 });
 
+
+// 画像プレビュー
+$(function(){
+    $('#team_image').on('change', function (e) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            $("#preview").attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    });
+});
+    
