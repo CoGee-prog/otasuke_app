@@ -15,4 +15,14 @@ Rails.application.routes.draw do
       post 'switch' 
     end
   end
+
+  namespace :user do
+    resources :member_requests, only: [:create, :destroy]
+  end
+
+  namespace :team do
+    resources :member_requests, only: [:show, :destroy]
+    resources :team_members, only: [:show, :create, :destroy]
+  end
+
 end

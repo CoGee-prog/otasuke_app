@@ -2,9 +2,9 @@
 <%= render 'shared/error_messages' %>
 <div class="team-profile">
     <% if @team.image.attached? %>
-        <%= image_tag(@team.image,alt:"チームプロフィール画像", size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
+        <%= image_tag(@team.image, size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
     <% else %>
-        <%= image_tag("default_team_image.png",alt:"チームプロフィール画像", size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
+        <%= image_tag("default_team_image.png", size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
     <% end %>
 
     <table class="table">
@@ -47,6 +47,8 @@
     </table>
 
     <% if @team.admin_user_id == current_user.id %>
-        <%= link_to "編集する",edit_team_path(@team),class: "btn btn-orange"%>
+    <span class="btn btn-orange">
+        <%= link_to "編集する",edit_team_path(@team) %>
+    </span>
     <% end %>
 </div>

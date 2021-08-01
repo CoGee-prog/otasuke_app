@@ -4,15 +4,14 @@
         <% if current_user && current_user.admin?  %>
             <%= link_to "ユーザー一覧", users_path %>
         <% end %>
-        <%= link_to "ホーム",root_path %>
     </div>
     <ul class="menu">
         <% if logged_in? %>
             <% if belong_team? %>
                 <% if @current_team.image.attached? %>
-                    <%= image_tag(@current_team.image,alt:"チームプロフィール画像", size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
+                    <%= image_tag(@current_team.image, size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
                 <% else %>
-                    <%= image_tag("default_team_image.png",alt:"チームプロフィール画像", size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
+                    <%= image_tag("default_team_image.png", size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
                 <% end %>
                 <%= link_to  @current_team.name, team_path(@current_team) %> 
             <% end %>
@@ -21,7 +20,8 @@
                     <a href="#" class="down-arrow">管理者メニュー</a>
                     <ul class="dropdown-menu">
                         <li><%= link_to "試合リクエスト", "#" %></li>
-                        <li><%= link_to "所属リクエスト", "#" %></li>
+                        <li><%= link_to "所属リクエスト", team_member_request_path(@current_team) %></li>
+                        <li><%= link_to "メンバー一覧", team_team_member_path(@current_team) %></li>
                         <li><%= link_to "チーム編集", edit_team_path(@current_team) %></li>
                         <li><%= link_to "チーム削除", team_path(@current_team), method: :delete, data: {confirm: "チームを削除しますか？"} %></li>
                     </ul>
@@ -38,8 +38,12 @@
                 </ul>
             </li>
         <% else %>
-            <li><%= link_to "ログイン",login_path %></li>
-            <li><%= link_to "新規登録",signup_path %></li>
+        <span class="btn btn-navy">
+            <%= link_to "ログイン",login_path %>
+        </span>
+        <span class="btn btn-orange">
+            <%= link_to "新規登録",signup_path %>
+        </span>
         <% end %>
     </ul>
     <div class="tab-area">

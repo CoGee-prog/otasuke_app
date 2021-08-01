@@ -30,4 +30,19 @@ FactoryBot.define do
     activity_sunday { 'true' }
     activity_frequency { '週2回' }
   end
+
+  factory :teams, class: Team do
+    name { Faker::Name.name }
+    admin_user_id { 1 }
+    level { '全国大会上位レベル' }
+    prefecture_id { 2 }
+    activity_monday { 'false' }
+    activity_tuesday { 'false' }
+    activity_wednesday { 'false' }
+    activity_thursday { 'false' }
+    activity_friday { 'false' }
+    activity_saturday { 'true' }
+    activity_sunday { 'true' }
+    activity_frequency { '週2回' }
+  end
 end

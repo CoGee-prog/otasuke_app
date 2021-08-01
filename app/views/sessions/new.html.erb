@@ -18,12 +18,12 @@
         <%= link_to "パスワードをお忘れですか？", new_password_reset_path %>
         </div>
 
-        <%= f.submit "ログイン", class: "btn btn-navy", id: "login-btn" %>
+        <%= f.submit "ログイン", class: "form-btn btn-navy", id: "login-btn" %>
     <% end %>
     <div class ="other">
         <p>アカウントをお持ちでない方</p>
         <%= link_to (signup_path) do %>
-            <div class="btn btn-orange">新規登録</div> 
+            <div class="form-btn btn-orange">新規登録</div> 
         <% end %>
     </div>
 </div>

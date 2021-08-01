@@ -11,6 +11,14 @@
     font-style: normal;
   }
 
+// mixin
+
+@mixin box_sizing {
+    -moz-box-sizing:    border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing:         border-box;
+  }
+
 
 // 共通
 
@@ -25,6 +33,11 @@ a{
     color: black;
 }
 
+h2{
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 .wrapper{
     width: 1200px;
     margin: 0 auto;
@@ -33,6 +46,24 @@ a{
 .container{
     width: 800px;
     margin: 0 auto;
+}
+
+.btn{
+    display: inline-block;
+    height: 25px;
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    @include box_sizing;
+    >a{
+        display: block;
+        color: white;
+        height: 25px;
+        padding: 1px 6px;
+        width: 100%;
+    }
 }
 
 // ロゴ
@@ -254,23 +285,11 @@ table,td,th{
     margin:0 auto 10px auto;
 }
 
-.team{
-    margin:0 auto;
-    text-align: center;
-    width: 400px;
-}
-
 .team_image{
     text-align: center;
 }
 
-// mixin
 
-@mixin box_sizing {
-    -moz-box-sizing:    border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing:         border-box;
-  }
 
   // デバック
 
@@ -321,7 +340,7 @@ table,td,th{
 }
 
 
-.btn{
+.form-btn{
     display: inline-block;
     color: white;
     margin-top: 5px;
@@ -335,7 +354,7 @@ table,td,th{
     @include box_sizing;
 }
 
-input.btn{
+input.form-btn{
     color: white;
     border: none;
     outline: none;
@@ -356,6 +375,10 @@ input.btn{
 
 .btn-navy{
     background-color: #0044A2;
+}
+
+.btn-red{
+    background-color: #FF5050;
 }
 
 #error_explanation {
@@ -497,12 +520,49 @@ select{
 
 .team-profile{
     align-items: center;
-    width: 450px;
+    width: 440px;
     padding: 10px;
     margin-bottom: 10px;
     margin: 0 auto;
     text-align: center;
+}
 
+// ユーザー一覧表示
+
+.users{
+    text-align: center;
+    list-style: none;
+}
+
+.user{
+    position: relative;
+    align-items: center;
+    border: #333 1px solid;
+    width: 450px;
+    padding: 10px;
+    margin: 0 auto -1px auto;
+    text-align: left;
+}
+
+.btn-destroy{
+    position: absolute;
+    top: 50%;
+    left: 85%;
+    transform: translateY(-50%);
+    display: inline-block;
+    height: 25px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    @include box_sizing;
+    >a{
+        display: block;
+        color: white;
+        height: 25px;
+        padding: 1px 6px;
+        width: 100%;
+    }
 }
 
 // チーム一覧表示
@@ -525,6 +585,7 @@ select{
     border: #333 1px solid;
     width: 450px;
     padding: 10px;
+    margin: 0 auto;
     margin-bottom: 10px;
     text-align: left;
     img{
@@ -536,6 +597,7 @@ select{
 .team-header{
     display: inline-block;
     text-align: left;
+    width: 240px;
 }
 
 .team-body{
@@ -543,12 +605,19 @@ select{
     margin-top: 5px;
 }
 
+.btns{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%);
+}
+
 .btn-apply{
     position: absolute;
     top: 50%;
+    left: 68%;
     transform: translateY(-50%);
     display: inline-block;
-    margin-left: 85px;
     height: 25px;
     padding: 1px 6px;
     font-size: 15px;
@@ -559,6 +628,18 @@ select{
     >a{
         color: white;
     }
+}
+
+.belonged{
+    position: absolute;
+    top: 50%;
+    left: 73%;
+    transform: translateY(-50%);
+    display: inline-block;
+    height: 25px;
+    padding: 1px 6px;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .btn-search{

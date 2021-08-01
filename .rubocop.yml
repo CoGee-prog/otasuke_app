@@ -42,7 +42,7 @@ Metrics/AbcSize:
   Max: 35
 
 Metrics/MethodLength:
-  Max: 16
+  Max: 22
 
 Naming/AccessorMethodName:
   Exclude:

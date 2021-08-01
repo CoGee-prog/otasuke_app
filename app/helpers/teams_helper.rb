@@ -14,7 +14,7 @@ module TeamsHelper
   end
 
   def belong_team?
-    !current_team.nil?
+    !current_team.nil? && !current_user.current_team_id.nil?
   end
 
   def weekly_columns

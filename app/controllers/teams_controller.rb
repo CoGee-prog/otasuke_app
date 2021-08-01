@@ -13,7 +13,10 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
+    return if (@team = Team.find_by(id: params[:id]))
+
+    flash[:danger] = '対象のチームは削除されたか存在しないチームです'
+    redirect_to root_path
   end
 
   def new
@@ -29,7 +32,7 @@ class TeamsController < ApplicationController
       current_user.current_team_id = @team.id
       current_user.save
       flash[:success] = 'チームを作成しました'
-      redirect_back_or root_path
+      redirect_to root_path
     else
       @team.image = nil
       render 'new'
@@ -71,10 +74,5 @@ class TeamsController < ApplicationController
                                  :activity_wednesday, :activity_thursday, :activity_friday,
                                  :activity_saturday, :activity_sunday, :activity_frequency,
                                  :homepage_url, :other)
-  end
-
-  def team_admin_user
-    @team = Team.find(params[:id])
-    redirect_to(root_path) unless @team.admin_user_id == current_user.id
   end
 end
