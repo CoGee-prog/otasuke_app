@@ -4,8 +4,7 @@ RSpec.describe 'チーム登録テスト', type: :system do
   let!(:user) { FactoryBot.create(:user) }
 
   it '無効なチーム登録' do
-    visit root_path
-    log_in_as user
+    log_in_as(user)
     click_on 'チーム作成'
     expect(current_path).to eq new_team_path
     expect do
@@ -16,8 +15,7 @@ RSpec.describe 'チーム登録テスト', type: :system do
   end
 
   it '有効なチーム登録' do
-    visit root_path
-    log_in_as user
+    log_in_as(user)
     click_on 'チーム作成'
     expect(current_path).to eq new_team_path
     expect do

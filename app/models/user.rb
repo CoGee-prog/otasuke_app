@@ -80,6 +80,11 @@ class User < ApplicationRecord
     member_request.exists?(team_id: team.id)
   end
 
+  # チームに所属しているかどうか
+  def already_belong?(team)
+    team_member.exists?(team_id: team.id)
+  end
+
   private
 
   # メールアドレスをすべて小文字にする

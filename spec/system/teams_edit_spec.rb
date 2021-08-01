@@ -5,8 +5,7 @@ RSpec.describe 'チーム編集テスト', type: :system do
   let!(:team) { FactoryBot.create(:team) }
 
   it '無効なチーム編集' do
-    visit root_path
-    log_in_as user
+    log_in_as(user)
     click_on 'ファイターズ'
     expect(current_path).to eq team_path(team)
     click_on '編集する'
@@ -18,8 +17,7 @@ RSpec.describe 'チーム編集テスト', type: :system do
   end
 
   it '有効なチーム登録' do
-    visit root_path
-    log_in_as user
+    log_in_as(user)
     click_on 'ファイターズ'
     expect(current_path).to eq team_path(team)
     click_on '編集する'

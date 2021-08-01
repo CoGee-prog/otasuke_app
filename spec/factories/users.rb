@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :user, class: User do
     id { 1 }
-    name { 'Ichiro Example' }
+    name { 'イチロー' }
     email { 'ichiro@example.com' }
     password { 'password' }
     password_confirmation { 'password' }
@@ -13,8 +13,18 @@ FactoryBot.define do
 
   factory :other_user, class: User do
     id { 2 }
-    name { 'Jiro Example' }
-    email { 'Jiro@example.com' }
+    name { 'ジロー' }
+    email { 'jiro@example.com' }
+    password { 'password' }
+    password_confirmation { 'password' }
+    activated { 'true' }
+    activated_at { Time.zone.now }
+  end
+
+  factory :not_admin_user, class: User do
+    id { 3 }
+    name { 'サブロー' }
+    email { 'saburo@example.com' }
     password { 'password' }
     password_confirmation { 'password' }
     activated { 'true' }
@@ -22,6 +32,7 @@ FactoryBot.define do
   end
 
   factory :users, class: User do
+    sequence(:id) { |n| n + 1 }
     name { Faker::Name.name }
     email { Faker::Internet.email }
     password { 'password' }

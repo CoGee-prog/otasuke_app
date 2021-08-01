@@ -12,27 +12,27 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'ユーザーeditアクションのテスト' do
-    it 'ログインしていない時、ユーザーeditからリダイレクトされる' do
+    it 'ログインしていない時、ユーザー編集からリダイレクトされる' do
       get edit_user_path(user)
-      expect(flash[:danger]).to be_truthy
+      expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
 
-    it 'ログインしていない時、ユーザーupdateからリダイレクトされる' do
+    it 'ログインしていない時、ユーザー更新からリダイレクトされる' do
       patch user_path(user), params: { user: { name: user.name, email: user.email } }
-      expect(flash[:danger]).to be_truthy
+      expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
   end
 
   describe '他のユーザーのプロフィール編集が失敗する' do
-    it '間違ったユーザーがログインした時、ユーザーeditからリダイレクトされる' do
+    it '間違ったユーザーがログインした時、ユーザー編集からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_user_path(user)
       expect(response).to redirect_to root_path
     end
 
-    it '間違ったユーザーがログインした時、ユーザーupdateからリダイレクトされる' do
+    it '間違ったユーザーがログインした時、ユーザー更新からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       patch user_path(user), params: { user: { name: user.name, email: user.email } }
       expect(flash[:success]).not_to eq 'ユーザープロフィールを更新しました'
@@ -50,14 +50,14 @@ RSpec.describe 'Users', type: :request do
       expect(other_user.admin?).to be_falsey
     end
 
-    it 'ログインしていないユーザーの場合、destroyからリダイレクトされる' do
+    it 'ログインしていないユーザーの場合、削除からリダイレクトされる' do
       expect do
         delete user_path(user)
       end.not_to change(User, :count)
       expect(response).to redirect_to login_path
     end
 
-    it 'ユーザー管理者ではないユーザーの場合、destroyからリダイレクトされる' do
+    it 'ユーザー管理者ではないユーザーの場合、削除からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       expect do
         delete user_path(user)
