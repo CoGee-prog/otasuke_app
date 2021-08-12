@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-  get 'password_resets/edit'
   root 'static_pages#home'
-  get '/signup', to:'users#new'
+  get 'no_event' => 'static_pages#event'
+  get '/signup', to: 'users#new'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -25,4 +24,7 @@ Rails.application.routes.draw do
     resources :team_members, only: [:show, :create, :destroy]
   end
 
+  resources :events
+  resources :event_entries, only: [:edit, :update]
+  
 end

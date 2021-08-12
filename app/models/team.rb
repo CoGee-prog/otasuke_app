@@ -1,8 +1,10 @@
 class Team < ApplicationRecord
   has_one_attached :image
-  has_many :users, through: :team_member
-  has_many :member_request, dependent: :destroy
-  has_many :team_member, dependent: :destroy
+  belongs_to :user
+  has_many :users, through: :team_members
+  has_many :member_requests, dependent: :destroy
+  has_many :team_members, dependent: :destroy
+  has_many :events, dependent: :destroy
   validates :name, presence: true, length: { maximum: 50 }
   validates :level, presence: true
   validates :prefecture_id, presence: true

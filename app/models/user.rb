@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  has_many :teams, through: :team_member
-  has_many :member_request, dependent: :destroy
-  has_many :team_member, dependent: :destroy
+  has_many :teams, through: :team_members
+  has_many :teams, dependent: :destroy, foreign_key: :admin_user_id
+  has_many :member_requests, dependent: :destroy
+  has_many :team_members, dependent: :destroy
+  has_many :event_entries, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email
@@ -77,12 +79,12 @@ class User < ApplicationRecord
 
   # チームリクエストを送っているかどうか
   def already_requested?(team)
-    member_request.exists?(team_id: team.id)
+    member_requests.exists?(team_id: team.id)
   end
 
   # チームに所属しているかどうか
   def already_belong?(team)
-    team_member.exists?(team_id: team.id)
+    team_members.exists?(team_id: team.id)
   end
 
   private

@@ -1,0 +1,34 @@
+<%= form_with(model:@event,local:true) do |f|%>
+
+<span class="day-time">
+    <span class="day">
+        <%= f.label :day,'日付' %>
+        <%= f.date_field :day , min: Date.today %>
+        <%= render 'shared/form_error_messages', object: f.object, attribute: :day %>
+    </span>
+
+    <span class="time">
+        <%= f.label :time ,'時間'%>
+        <%= f.time_select :time , :minute_step => 5 %>
+        <%= render 'shared/form_error_messages', object: f.object, attribute: :time %>
+    </span>
+</span>
+
+    <%= f.label :ground,'グラウンド' %>
+    <%= f.text_field :ground %>
+    <%= render 'shared/form_error_messages', object: f.object, attribute: :ground %>
+
+    <%= f.label :opponent_team_name,'対戦相手' %>
+    <%= f.text_field :opponent_team_name %>
+    <%= render 'shared/form_error_messages', object: f.object, attribute: :opponent_team_name %>
+    
+    <%= f.label :tournament_name,'大会名' %>
+    <%= f.text_field :tournament_name %>
+    <%= render 'shared/form_error_messages', object: f.object, attribute: :tournament_name %>
+
+    <%= f.label :other,'その他' %>
+    <%= f.text_field :other %>
+    <%= render 'shared/form_error_messages', object: f.object, attribute: :other %>
+
+    <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+<% end %>

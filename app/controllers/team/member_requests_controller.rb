@@ -3,7 +3,7 @@ class Team::MemberRequestsController < ApplicationController
   before_action :team_admin_user, only: :show
 
   def show
-    @requests = Team.find(params[:id]).member_request.all.page(params[:page])
+    @requests = Team.find(params[:id]).member_requests.all.page(params[:page])
   end
 
   def destroy

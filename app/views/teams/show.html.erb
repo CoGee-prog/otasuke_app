@@ -8,42 +8,40 @@
     <% end %>
 
     <table class="table">
-        <tbody>
-            <tr>
-                <th>チーム名</th>
-                <td><%= @team.name %></td>
-            </tr>
-            <tr>
-                <th>チームレベル</th>
-                <td><%= @team.level %></td>
-            </tr>
-            <tr>
-                <th>活動エリア</th>
-                <td><%= Prefecture.find(@team.prefecture_id).name %></td>
-            </tr>
-            <tr>
-                <th>活動曜日</th>
-                <td>
-                    <%  weekly_columns.each_with_index do |day,i| %>
-                        <% if @team[day] == true %>
-                            <a><%= ["月","火","水","木","金","土","日"][i] %></a>
-                        <% end %>
+        <tr>
+            <th>チーム名</th>
+            <td><%= @team.name %></td>
+        </tr>
+        <tr>
+            <th>チームレベル</th>
+            <td><%= @team.level %></td>
+        </tr>
+        <tr>
+            <th>活動エリア</th>
+            <td><%= Prefecture.find(@team.prefecture_id).name %></td>
+        </tr>
+        <tr>
+            <th>活動曜日</th>
+            <td>
+                <%  weekly_columns.each_with_index do |day,i| %>
+                    <% if @team[day] == true %>
+                        <%= ["月","火","水","木","金","土","日"][i] %>
                     <% end %>
-                </td>
-            </tr>
-            <tr>
-                <th>活動頻度</th>
-                <td><%= @team.activity_frequency %></td>
-            </tr>
-            <tr>
-                <th>チームHP等</th>
-                <td><%= @team.homepage_url %></td>
-            </tr>
-            <tr>
-                <th>その他</th>
-                <td><%= @team.other %></td>
-            </tr>
-        </tbody>
+                <% end %>
+            </td>
+        </tr>
+        <tr>
+            <th>活動頻度</th>
+            <td><%= @team.activity_frequency %></td>
+        </tr>
+        <tr>
+            <th>チームHP等</th>
+            <td><%=link_to @team.homepage_url, @team.homepage_url, target: :_blank, rel: "noopener noreferrer" %></td>
+        </tr>
+        <tr>
+            <th>その他</th>
+            <td><%= @team.other %></td>
+        </tr>
     </table>
 
     <% if @team.admin_user_id == current_user.id %>

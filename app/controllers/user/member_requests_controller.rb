@@ -7,7 +7,7 @@ class User::MemberRequestsController < ApplicationController
       flash[:danger] = '既にチームに所属しています'
       redirect_to teams_path
     else
-      request = current_user.member_request.new(team_id: team.id, user_id: current_user.id)
+      request = current_user.member_requests.new(team_id: team.id, user_id: current_user.id)
       if request.save
         flash[:success] = 'チーム所属申請を送信しました'
         redirect_to teams_path
@@ -19,7 +19,7 @@ class User::MemberRequestsController < ApplicationController
 
   def destroy
     team = Team.find(params[:id])
-    request = current_user.member_request.find_by(team_id: team.id, user_id: current_user.id)
+    request = current_user.member_requests.find_by(team_id: team.id, user_id: current_user.id)
     if request
       request.destroy
       flash[:success] = 'チーム所属申請を取り消しました'
