@@ -4,7 +4,7 @@
 <div class="teams">
     <div class="team-change">
         <span>
-            <% @current_user.team_member.each do |team_member| %>
+            <% @current_user.team_members.each do |team_member| %>
                 <div class="list">
                     <% if team_member.team.image.attached? %>
                         <%= image_tag(team_member.team.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>

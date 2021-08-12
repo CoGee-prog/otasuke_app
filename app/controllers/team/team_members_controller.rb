@@ -3,7 +3,7 @@ class Team::TeamMembersController < ApplicationController
   before_action :team_admin_user, only: :show
 
   def show
-    @members = Team.find(params[:id]).team_member.all.page(params[:page])
+    @members = Team.find(params[:id]).team_members.all.page(params[:page])
   end
 
   def create
@@ -12,7 +12,7 @@ class Team::TeamMembersController < ApplicationController
       @team = Team.find(@request.team_id)
       if @team.admin_user_id == current_user.id
         user = User.find(@request.user_id)
-        @belong = @team.team_member.new(team_id: @team.id, user_id: user.id)
+        @belong = @team.team_members.new(team_id: @team.id, user_id: user.id)
         if @belong.save
           @request.destroy
           user.current_team_id = @team.id

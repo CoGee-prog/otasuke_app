@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_13_133919) do
+ActiveRecord::Schema.define(version: 2021_08_07_082912) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +40,49 @@ ActiveRecord::Schema.define(version: 2021_07_13_133919) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "event_entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id", "user_id"], name: "index_event_entries_on_event_id_and_user_id", unique: true
+    t.index ["event_id"], name: "index_event_entries_on_event_id"
+    t.index ["user_id"], name: "index_event_entries_on_user_id"
+  end
+
+  create_table "event_option_entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "feeling", default: 0, null: false
+    t.bigint "event_option_id", null: false
+    t.bigint "event_entry_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_entry_id"], name: "index_event_option_entries_on_event_entry_id"
+    t.index ["event_option_id", "event_entry_id"], name: "index_event_option_entries_on_event_option_id_and_event_entry_id", unique: true
+    t.index ["event_option_id"], name: "index_event_option_entries_on_event_option_id"
+  end
+
+  create_table "event_options", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["event_id"], name: "index_event_options_on_event_id"
+  end
+
+  create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.date "day", null: false
+    t.time "time", null: false
+    t.string "ground"
+    t.string "opponent_team_name"
+    t.string "tournament_name"
+    t.string "other"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["day"], name: "index_events_on_day"
+    t.index ["team_id"], name: "index_events_on_team_id"
+    t.index ["time"], name: "index_events_on_time"
+  end
+
   create_table "member_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "team_id"
     t.bigint "user_id"
@@ -61,30 +104,31 @@ ActiveRecord::Schema.define(version: 2021_07_13_133919) do
   end
 
   create_table "teams", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.integer "admin_user_id"
-    t.string "level"
-    t.integer "prefecture_id"
+    t.string "name", null: false
+    t.string "level", null: false
+    t.integer "prefecture_id", null: false
     t.string "activity_frequency"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "homepage_url"
     t.text "other"
-    t.boolean "activity_monday"
-    t.boolean "activity_tuesday"
-    t.boolean "activity_wednesday"
-    t.boolean "activity_thursday"
-    t.boolean "activity_friday"
-    t.boolean "activity_saturday"
-    t.boolean "activity_sunday"
+    t.boolean "activity_monday", null: false
+    t.boolean "activity_tuesday", null: false
+    t.boolean "activity_wednesday", null: false
+    t.boolean "activity_thursday", null: false
+    t.boolean "activity_friday", null: false
+    t.boolean "activity_saturday", null: false
+    t.boolean "activity_sunday", null: false
+    t.bigint "admin_user_id", null: false
+    t.index ["admin_user_id"], name: "index_teams_on_admin_user_id"
     t.index ["level"], name: "index_teams_on_level"
     t.index ["name"], name: "index_teams_on_name"
     t.index ["prefecture_id"], name: "index_teams_on_prefecture_id"
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
+    t.string "name", null: false
+    t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "password_digest"
@@ -101,8 +145,15 @@ ActiveRecord::Schema.define(version: 2021_07_13_133919) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "event_entries", "events"
+  add_foreign_key "event_entries", "users"
+  add_foreign_key "event_option_entries", "event_entries"
+  add_foreign_key "event_option_entries", "event_options"
+  add_foreign_key "event_options", "events"
+  add_foreign_key "events", "teams"
   add_foreign_key "member_requests", "teams"
   add_foreign_key "member_requests", "users"
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
+  add_foreign_key "teams", "users", column: "admin_user_id"
 end

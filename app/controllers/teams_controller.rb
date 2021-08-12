@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
     @team.admin_user_id = current_user.id
     if @team.save
       @team.image.attach(params[:team][:image]) if params[:team][:image]
-      current_user.team_member.new(team_id: @team.id, user_id: current_user.id)
+      current_user.team_members.new(team_id: @team.id, user_id: current_user.id)
       current_user.current_team_id = @team.id
       current_user.save
       flash[:success] = 'チームを作成しました'
@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
   end
 
   def list
-    @team = @current_user.team_member
+    @team = @current_user.team_members
   end
 
   def switch

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'チーム切り替えテスト', type: :system do
   let!(:user) { FactoryBot.create(:user) }
+  let!(:other_user) { FactoryBot.create(:other_user) }
   let!(:team) { FactoryBot.create(:team) }
   let!(:other_team) { FactoryBot.create(:other_team) }
   let!(:team_member1) { FactoryBot.create(:team_member1, team: team, user: user) }
