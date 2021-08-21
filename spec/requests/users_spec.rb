@@ -4,14 +4,7 @@ RSpec.describe 'Users', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
 
-  describe 'GET /new' do
-    it 'returns http success' do
-      get '/signup'
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe 'ユーザーeditアクションのテスト' do
+  describe 'ユーザー編集のテスト' do
     it 'ログインしていない時、ユーザー編集からリダイレクトされる' do
       get edit_user_path(user)
       expect(flash[:danger]).to eq 'ログインしてください'

@@ -1,8 +1,7 @@
 class User < ApplicationRecord
-  has_many :teams, through: :team_members
-  has_many :teams, dependent: :destroy, foreign_key: :admin_user_id
   has_many :member_requests, dependent: :destroy
   has_many :team_members, dependent: :destroy
+  has_many :teams, through: :team_members, dependent: :destroy, foreign_key: :admin_user_id
   has_many :event_entries, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
 

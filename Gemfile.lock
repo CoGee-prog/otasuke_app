@@ -101,6 +101,9 @@ GEM
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     diff-lcs (1.4.4)
+    enum_attributes_validation (0.1.7)
+      activerecord
+      activesupport
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
@@ -132,6 +135,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
+    launchy (2.5.0)
+      addressable (~> 2.7)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -302,11 +307,13 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  enum_attributes_validation
   factory_bot_rails
   faker
   image_processing
   jbuilder (~> 2.7)
   kaminari
+  launchy
   listen (~> 3.3)
   mini_magick
   mysql2 (~> 0.5)

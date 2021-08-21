@@ -19,6 +19,7 @@ FactoryBot.define do
     password_confirmation { 'password' }
     activated { 'true' }
     activated_at { Time.zone.now }
+    current_team_id { 2 }
   end
 
   factory :not_admin_user, class: User do
@@ -29,6 +30,7 @@ FactoryBot.define do
     password_confirmation { 'password' }
     activated { 'true' }
     activated_at { Time.zone.now }
+    current_team_id { 1 }
   end
 
   factory :users, class: User do

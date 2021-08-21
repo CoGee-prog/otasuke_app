@@ -5,13 +5,13 @@ RSpec.describe 'Teams', type: :request do
   let!(:team) { FactoryBot.create(:team) }
 
   describe 'ログインしてないユーザーのチームアクションのテスト' do
-    it 'チーム生成からリダイレクトされる' do
+    it 'チーム作成からリダイレクトされる' do
       get new_team_path
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
 
-    it 'チーム作成からリダイレクトされる' do
+    it 'チーム登録からリダイレクトされる' do
       post teams_path, params: { team: { name: team.name, level: team.level, prefecture_id: team.prefecture_id,\
                                          activity_monday: team.activity_monday, activity_tuesday: team.activity_tuesday,\
                                          activity_wednesday: team.activity_wednesday, activity_thursday: team.activity_thursday,\
@@ -44,7 +44,9 @@ RSpec.describe 'Teams', type: :request do
     end
 
     it 'チーム削除からリダイレクトされる' do
-      delete team_path(team)
+      expect do
+        delete team_path(team)
+      end.not_to change(Team, :count)
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
@@ -68,7 +70,7 @@ RSpec.describe 'Teams', type: :request do
     end
   end
 
-  describe 'チーム管理者ユーザー以外からのチームプロフィール編集が失敗する' do
+  describe 'チーム管理者ユーザー以外からのチームプロフィール編集、更新、削除が失敗する' do
     it 'チーム編集からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_team_path(team)
@@ -85,6 +87,14 @@ RSpec.describe 'Teams', type: :request do
       expect(flash[:success]).not_to eq 'チームプロフィールを更新しました'
       expect(response).to redirect_to root_path
     end
+
+    it 'チーム削除からリダイレクトされる' do
+      post login_path params: { session: { email: other_user.email, password: other_user.password } }
+      expect do
+        delete team_path(team)
+      end.not_to change(Team, :count)
+      expect(response).to redirect_to root_path
+    end
   end
 
   describe 'チーム管理者属性に関するテスト' do
@@ -94,21 +104,6 @@ RSpec.describe 'Teams', type: :request do
       patch team_path(team), params: { team: { admin_user_id: other_user.id } }
       team.reload
       expect(team.admin_user_id).not_to eq other_user.id
-    end
-
-    it 'ログインしていないユーザーの場合、削除からリダイレクトされる' do
-      expect do
-        delete team_path(team)
-      end.not_to change(Team, :count)
-      expect(response).to redirect_to login_path
-    end
-
-    it 'チーム管理者ではないユーザーの場合、削除からリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
-      expect do
-        delete team_path(team)
-      end.not_to change(Team, :count)
-      expect(response).to redirect_to root_path
     end
   end
 end
