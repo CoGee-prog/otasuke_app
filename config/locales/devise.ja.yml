@@ -31,6 +31,16 @@ ja:
         level: チームレベル
         prefecture_id: 活動エリア
         weekly: 活動曜日
+        activity_frequency: 活動頻度
+        homepage_url: チームHP等
+        other: その他
+      event:
+        day: 日付
+        time: 時間
+        ground: グラウンド名
+        opponent_team_name: 対戦チーム名
+        tournament_name: 大会名
+        other: その他
     models:
       user: ユーザー
   devise:

@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user
   before_action :team_admin_user, only: %i[edit update destroy]
+  before_action :set_team, only: %i[edit update switch]
 
   def index
     @teams = Team.all.search(params[:search]).page(params[:page])
@@ -39,12 +40,9 @@ class TeamsController < ApplicationController
     end
   end
 
-  def edit
-    @team = Team.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @team = Team.find(params[:id])
     if @team.update(team_params)
       @team.image.attach(params[:team][:image]) if params[:team][:image]
       flash[:success] = 'チームプロフィールを更新しました'
@@ -60,7 +58,6 @@ class TeamsController < ApplicationController
   end
 
   def switch
-    @team = Team.find(params[:id])
     current_user.current_team_id = @team.id
     current_user.save
     flash[:success] = 'チームを切り替えました'
@@ -74,5 +71,9 @@ class TeamsController < ApplicationController
                                  :activity_wednesday, :activity_thursday, :activity_friday,
                                  :activity_saturday, :activity_sunday, :activity_frequency,
                                  :homepage_url, :other)
+  end
+
+  def set_team
+    @team = Team.find(params[:id])
   end
 end

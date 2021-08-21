@@ -18,7 +18,7 @@
         </tr>
         <% @events.sort_by {|events| [events.day, events.time]}.each do |event| %>
             <tr>
-                <th nowrap class="fixed">
+                <th nowrap class="fixed" id="event">
                 <%= event.day.strftime('%m/%d') %> 
                 <%= event.time.strftime('%H:%M') %> 
                 <%= event.ground %>
@@ -33,7 +33,7 @@
                 <% end %>
                 </th>
                 <% event_option = event.event_option %>
-                    <% event_option.calc_option_entry %>
+                    <% event_option.calc_event_option_entry %>
                     <td><%= event_option.count_ok %></td>
                     <td><%= event_option.count_neither %></td>
                     <td><%= event_option.count_ng %></td>
@@ -41,7 +41,7 @@
                         <% event_option_entry = event_entry.event_option_entry %>
                             <%if event_option_entry.event_entry.user_id == current_user.id %>
                                 <% if event_option_entry.None? %>
-                                    <td class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></td> 
+                                    <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></td> 
                                 <% else %>
                                     <td nowrap class="entry">
                                         <% if event_option_entry.NG? %>
@@ -55,7 +55,7 @@
                                 <% end %>
                             <% else %>
                                 <% if event_option_entry.None? %>
-                                    <td class="entry">&nbsp; - &nbsp;</td> 
+                                    <td nowrap class="entry">&nbsp; - &nbsp;</td> 
                                 <% else %>
                                     <td nowrap class="entry">
                                         <% if event_option_entry.NG? %>

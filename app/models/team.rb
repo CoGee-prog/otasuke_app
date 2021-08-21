@@ -7,7 +7,8 @@ class Team < ApplicationRecord
   has_many :events, dependent: :destroy
   validates :name, presence: true, length: { maximum: 50 }
   validates :level, presence: true
-  validates :prefecture_id, presence: true
+  validates :prefecture_id, presence: true,
+                            numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 47 }
   with_options inclusion: { in: [true, false] } do
     validates :activity_monday
     validates :activity_tuesday
@@ -18,6 +19,9 @@ class Team < ApplicationRecord
     validates :activity_sunday
   end
   validate :weekly_checked
+  validates :activity_frequency, length: { maximum: 50 }
+  validates :homepage_url, length: { maximum: 255 }
+  validates :other, length: { maximum: 255 }
 
   validates :image, content_type: { in: %w[image/jpeg image/jpg image/gif image/png],
                                     message: "\b有効な画像形式のみ設定できます" },

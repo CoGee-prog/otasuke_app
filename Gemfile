@@ -55,6 +55,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'launchy'
   gem 'show_me_the_cookies'
   gem 'webdrivers'
 end
@@ -63,6 +64,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'active_hash', '~> 2.3.0'
+gem 'enum_attributes_validation'
 gem 'faker'
 gem 'kaminari'
 gem 'rails-i18n', '~> 6.0.0'

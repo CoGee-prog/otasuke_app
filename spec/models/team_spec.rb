@@ -33,5 +33,30 @@ RSpec.describe Team, type: :model do
       team.name = 'a' * 51
       expect(team).not_to be_valid
     end
+
+    it '活動頻度が長すぎる場合、無効である' do
+      team.activity_frequency = 'a' * 51
+      expect(team).not_to be_valid
+    end
+
+    it 'チームHP等が長すぎる場合、無効である' do
+      team.homepage_url = 'a' * 256
+      expect(team).not_to be_valid
+    end
+
+    it 'その他が長すぎる場合、無効である' do
+      team.other = 'a' * 256
+      expect(team).not_to be_valid
+    end
+
+    it '活動エリアが1~47以外の場合、無効である' do
+      team.prefecture_id = 48
+      expect(team).not_to be_valid
+    end
+
+    it '活動エリアが整数以外の場合、無効である' do
+      team.prefecture_id = 40.1
+      expect(team).not_to be_valid
+    end
   end
 end
