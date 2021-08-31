@@ -13,6 +13,9 @@ Rails.application.routes.draw do
       get 'list'
       post 'switch' 
     end
+    collection do
+      get 'search_schedule'
+    end
   end
 
   namespace :user do
@@ -24,7 +27,11 @@ Rails.application.routes.draw do
     resources :team_members, only: [:show, :create, :destroy]
   end
 
-  resources :events
+  resources :events, only:[:new, :create, :show, :edit, :update, :destroy] do
+    member do
+      get 'detail_schedule'
+    end
+  end
   resources :event_entries, only: [:edit, :update]
   
 end

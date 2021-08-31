@@ -1,0 +1,38 @@
+<% provide(:title, 'スケジュールから対戦相手検索') %>
+<%= render 'shared/error_messages' %>
+<h2>スケジュールから対戦相手検索</h2>
+
+<%= render 'teams/team_profile' %>
+
+<div class="center">
+    <div class="detail-schedules">
+    <p><%= @team.name %> | スケジュール</p>
+    <% if @team.events.present? %>
+        <table>
+            <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
+                <tr>
+                    <th nowrap class="detail-schedule">
+                    <%= event.day_time.strftime('%m/%d %H:%M') %> 
+                    <%= event.ground %>
+                    <% if event.opponent_team_name.present? %>
+                    VS<%= event.opponent_team_name %>
+                    <% end %> 
+                    <%= event.tournament_name %>
+                    <%= event.other%>
+                    </th>
+                </tr>
+            <% end %>
+        </table>
+
+    <% else %>
+        <span class="no-event">
+            スケジュールが登録されていません
+        </span>
+    <% end %>
+
+
+        <span class="btn-event btn-orange">
+            <%= link_to '試合を申し込む', '#' %>
+        </span>
+    </div>  
+</div>

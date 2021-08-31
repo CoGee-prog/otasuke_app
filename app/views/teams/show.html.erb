@@ -1,52 +1,22 @@
 <%provide(:title, 'チームプロフィール')%>
 <%= render 'shared/error_messages' %>
-<div class="team-profile">
-    <% if @team.image.attached? %>
-        <%= image_tag(@team.image, size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
-    <% else %>
-        <%= image_tag("default_team_image.png", size: "100x100", gravity: :center, crop: "100x100+0+0", class: "icon") %>
+
+<%= render 'teams/team_profile' %>
+<div class="center">
+    <% if @team.admin_user_id == current_user.id %>
+        <span class="btn btn-orange">
+            <%= link_to "編集する",edit_team_path(@team) %>
+        </span>
     <% end %>
 
-    <table class="table">
-        <tr>
-            <th>チーム名</th>
-            <td><%= @team.name %></td>
-        </tr>
-        <tr>
-            <th>チームレベル</th>
-            <td><%= @team.level %></td>
-        </tr>
-        <tr>
-            <th>活動エリア</th>
-            <td><%= Prefecture.find(@team.prefecture_id).name %></td>
-        </tr>
-        <tr>
-            <th>活動曜日</th>
-            <td>
-                <%  weekly_columns.each_with_index do |day,i| %>
-                    <% if @team[day] == true %>
-                        <%= ["月","火","水","木","金","土","日"][i] %>
-                    <% end %>
-                <% end %>
-            </td>
-        </tr>
-        <tr>
-            <th>活動頻度</th>
-            <td><%= @team.activity_frequency %></td>
-        </tr>
-        <tr>
-            <th>チームHP等</th>
-            <td><%=link_to @team.homepage_url, @team.homepage_url, target: :_blank, rel: "noopener noreferrer" %></td>
-        </tr>
-        <tr>
-            <th>その他</th>
-            <td><%= @team.other %></td>
-        </tr>
-    </table>
-
-    <% if @team.admin_user_id == current_user.id %>
-    <span class="btn btn-orange">
-        <%= link_to "編集する",edit_team_path(@team) %>
-    </span>
+    <% if current_user.already_belong?(@team) %>
+        <% elsif current_user.already_requested?(@team) %>
+            <span class="btn btn-red">
+                <%= link_to "申請を取り消す", user_member_request_path(@team.id), method: :delete %>
+            </span>
+        <% else %>
+            <span class="btn btn-orange">
+                <%= link_to "所属申請をする", user_member_requests_path(team_id: @team.id), method: :post %> 
+            </span>
     <% end %>
 </div>

@@ -1,0 +1,32 @@
+<% @teams.each do |team| %>
+    <% if team != current_team %>
+        <li class="team">
+            <% if team.image.attached? && team.image.present? %>
+                    <%= image_tag(team.image,  size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
+            <% else %>  
+                    <%= image_tag("default_team_image.png",  size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
+            <% end %>
+            <div class="team-header">
+                <%= team.name %><br>
+                <%= team.level %>
+            </div>
+            <span class="btn-right btn-navy">
+                        <%= link_to "スケジュール詳細", detail_schedule_event_path(team) %> 
+            </span>
+            <div class="team-body">
+                活動エリア: <%= Prefecture.find(team.prefecture_id).name %><br>
+                活動曜日:
+                <% weekly_columns.each_with_index do |day,i| %>
+                    <% if team[day] == true %>
+                        <%= ["月","火","水","木","金","土","日"][i] %>
+                    <% end %>
+                <% end %><br>
+                <% if team.homepage_url.present? %>
+                    チームHP等: <%= link_to team.homepage_url, team.homepage_url, target: :_blank, rel: "noopener noreferrer" %>
+                <% end %>
+                <% team.events.each do |event| %>
+                <% end %>
+            </div>
+        </li>
+    <% end %>
+<% end %>

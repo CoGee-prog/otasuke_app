@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_07_082912) do
+ActiveRecord::Schema.define(version: 2021_08_25_115920) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -70,17 +70,15 @@ ActiveRecord::Schema.define(version: 2021_08_07_082912) do
 
   create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "team_id", null: false
-    t.date "day", null: false
-    t.time "time", null: false
+    t.datetime "day_time", null: false
     t.string "ground"
     t.string "opponent_team_name"
     t.string "tournament_name"
     t.string "other"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["day"], name: "index_events_on_day"
+    t.index ["day_time"], name: "index_events_on_day_time"
     t.index ["team_id"], name: "index_events_on_team_id"
-    t.index ["time"], name: "index_events_on_time"
   end
 
   create_table "member_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

@@ -16,11 +16,10 @@
                     <th nowrap><%= User.find(member.user_id).name %></th>
             <% end %>
         </tr>
-        <% @events.sort_by {|events| [events.day, events.time]}.each do |event| %>
+        <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
             <tr>
                 <th nowrap class="fixed" id="event">
-                <%= event.day.strftime('%m/%d') %> 
-                <%= event.time.strftime('%H:%M') %> 
+                <%= event.day_time.strftime('%m/%d %H:%M') %> 
                 <%= event.ground %>
                 <% if event.opponent_team_name.present? %>
                 VS<%= event.opponent_team_name %>
@@ -75,11 +74,13 @@
 </div>
 
 <% else %>
-<span class="no-event">
-スケジュールが登録されていません
-</span>
+    <span class="no-event">
+        スケジュールが登録されていません
+    </span>
 <% end %>
 
-<span class="btn-event btn-orange">
-<%= link_to '新しいスケジュールを登録する', new_event_path %>
-</span>
+<% if current_team.admin_user_id == current_user.id %>
+    <span class="btn-event btn-orange">
+        <%= link_to '新しいスケジュールを登録する', new_event_path %>
+    </span>
+<% end %>

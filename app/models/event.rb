@@ -1,9 +1,9 @@
+require 'date'
 class Event < ApplicationRecord
   belongs_to :team
   has_many :event_entries, dependent: :destroy
   has_one :event_option, dependent: :destroy
-  validates :day, presence: true
-  validates :time, presence: true
+  validates :day_time, presence: true
   validates :ground, length: { maximum: 50 }
   validates :opponent_team_name, length: { maximum: 50 }
   validates :tournament_name, length: { maximum: 50 }

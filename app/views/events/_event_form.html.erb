@@ -1,18 +1,7 @@
 <%= form_with(model:@event,local:true) do |f|%>
-
-<span class="day-time">
-    <span class="day">
-        <%= f.label :day,'日付' %>
-        <%= f.date_field :day , min: Date.today %>
-        <%= render 'shared/form_error_messages', object: f.object, attribute: :day %>
-    </span>
-
-    <span class="time">
-        <%= f.label :time ,'時間'%>
-        <%= f.time_select :time , :minute_step => 5 %>
-        <%= render 'shared/form_error_messages', object: f.object, attribute: :time %>
-    </span>
-</span>
+    <%= f.label :day_time,'日時' %>
+    <%= f.datetime_field :day_time , min: Date.today %>
+    <%= render 'shared/form_error_messages', object: f.object, attribute: :day_time %>
 
     <%= f.label :ground,'グラウンド名' %>
     <%= f.text_field :ground %>
