@@ -1,19 +1,27 @@
 <% provide(:title, 'チーム切り替え') %>
 <%= render 'shared/error_messages' %>
 <h2>チーム切り替え</h2>
-<div class="teams">
-    <div class="team-change">
-        <span>
-            <% @current_user.team_members.each do |team_member| %>
-                <div class="list">
-                    <% if team_member.team.image.attached? %>
-                        <%= image_tag(team_member.team.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
-                    <% else %>
-                        <%= image_tag("default_team_image.png",  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
-                    <% end %>
-                    <%= link_to team_member.team.name, switch_team_path(team_member.team), method: :post %>
-                </div>
-            <% end %>
-        </span>
+<% if @team_members.present? %>
+    <div class="teams">
+        <div class="team-change">
+            <span>
+                <% @team_members.each do |team_member| %>
+                    <div class="list">
+                        <% if team_member.team.image.attached? %>
+                            <%= image_tag(team_member.team.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
+                        <% else %>
+                            <%= image_tag("default_team_image.png",  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
+                        <% end %>
+                        <%= link_to team_member.team.name, switch_team_path(team_member.team), method: :post %>
+                    </div>
+                <% end %>
+            </span>
+        </div>
     </div>
-</div>
+<% else %>
+    <span class="center">
+        <span class="no-team">
+            チームに所属していません
+        </span>
+    </span>
+<% end %>

@@ -4,8 +4,6 @@ class EventsController < ApplicationController
   before_action :event_team_admin_user, only: %i[new create edit update destroy]
   before_action :set_event, only: %i[edit update]
 
-  def index; end
-
   def new
     @event = Event.new
   end
@@ -21,8 +19,9 @@ class EventsController < ApplicationController
   end
 
   def show
-    @events = Team.find(params[:id]).events
-    @members = Team.find(params[:id]).team_members
+    @team = Team.find(params[:id])
+    @events = @team.events
+    @members = @team.team_members
   end
 
   def edit; end
@@ -42,10 +41,15 @@ class EventsController < ApplicationController
     redirect_to event_path(current_team)
   end
 
+  def detail_schedule
+    @team = Team.find(params[:id])
+    @events = @team.events
+  end
+
   private
 
   def event_params
-    params.require(:event).permit(:day, :time, :ground, :opponent_team_name, :tournament_name, :other)
+    params.require(:event).permit(:day_time, :ground, :opponent_team_name, :tournament_name, :other)
   end
 
   # チーム管理者かどうか確認

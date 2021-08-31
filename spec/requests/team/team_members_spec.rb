@@ -5,7 +5,7 @@ RSpec.describe 'Team::TeamMembers', type: :request do
   let!(:other_user) { FactoryBot.create(:other_user) }
   let!(:not_admin_user) { FactoryBot.create(:not_admin_user) }
   let!(:team) { FactoryBot.create(:team) }
-  let!(:other_team) { FactoryBot.create(:other_team) }
+  let!(:other_team1) { FactoryBot.create(:other_team1) }
   let!(:member_request1) { FactoryBot.create(:member_request1, team: team, user: other_user) }
   let!(:team_member1) { FactoryBot.create(:team_member1, team: team, user: not_admin_user) }
 

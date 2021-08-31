@@ -13,17 +13,17 @@
                 所属済み
         </div>
         <% elsif current_user.already_requested?(team) %>
-            <span class="btn-apply btn-red">
+            <span class="btn-right btn-red">
                 <%= link_to "申請を取り消す", user_member_request_path(team.id), method: :delete %>
             </span>
         <% else %>
-            <span class="btn-apply btn-orange">
+            <span class="btn-right btn-orange">
                 <%= link_to "所属申請をする", user_member_requests_path(team_id: team.id), method: :post %> 
             </span>
-        <% end %>
+    <% end %>
     <div class="team-body">
         活動エリア: <%= Prefecture.find(team.prefecture_id).name %><br>
-        <% if team.admin_user_id? && admin = User.find_by(id: team.admin_user_id) %>
+        <% if team.admin_user_id? && admin = User.find(team.admin_user_id) %>
             チーム管理者: <%= admin.name %>
         <% end %>
     </div>

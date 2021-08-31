@@ -35,8 +35,7 @@ ja:
         homepage_url: チームHP等
         other: その他
       event:
-        day: 日付
-        time: 時間
+        day_time: 日時
         ground: グラウンド名
         opponent_team_name: 対戦チーム名
         tournament_name: 大会名

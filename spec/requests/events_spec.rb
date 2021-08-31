@@ -6,9 +6,9 @@ RSpec.describe 'Events', type: :request do
   let!(:team) { FactoryBot.create(:team) }
   let!(:event) { FactoryBot.create(:event) }
   let!(:not_admin_user) { FactoryBot.create(:not_admin_user) }
-  let!(:other_team) { FactoryBot.create(:other_team) }
+  let!(:other_team1) { FactoryBot.create(:other_team1) }
   let!(:team_member1) { FactoryBot.create(:team_member1, team: team, user: not_admin_user) }
-  let!(:team_member2) { FactoryBot.create(:team_member2, team: other_team, user: other_user) }
+  let!(:team_member2) { FactoryBot.create(:team_member2, team: other_team1, user: other_user) }
 
   describe 'ログインしてないユーザーのスケジュールアクションのテスト' do
     it 'スケジュール作成からリダイレクトされる' do
@@ -18,7 +18,7 @@ RSpec.describe 'Events', type: :request do
     end
 
     it 'スケジュール登録からリダイレクトされる' do
-      post events_path, params: { event: { day: event.day, time: event.time, ground: event.ground,\
+      post events_path, params: { event: { day_time: event.day_time, ground: event.ground,\
                                            opponent_team_name: event.opponent_team_name, other: event.other } }
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
@@ -31,13 +31,13 @@ RSpec.describe 'Events', type: :request do
     end
 
     it 'スケジュール更新からリダイレクトされる' do
-      patch team_path(team), params: { event: { day: event.day, time: event.time, ground: event.ground,\
+      patch team_path(team), params: { event: { day_time: event.day_time, ground: event.ground,\
                                                 opponent_team_name: event.opponent_team_name, other: event.other } }
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
 
-    xit 'スケジュール一覧からリダイレクトされる' do
+    it 'スケジュール一覧からリダイレクトされる' do
       get teams_path
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
@@ -56,6 +56,12 @@ RSpec.describe 'Events', type: :request do
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
+
+    it 'スケジュールから対戦相手検索詳細からリダイレクトされる' do
+      get detail_schedule_event_path(team)
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
   end
 
   describe 'チーム管理者ユーザー以外からのスケジュール作成、登録、編集、更新、削除が失敗する' do
@@ -68,7 +74,7 @@ RSpec.describe 'Events', type: :request do
     it 'スケジュール登録からリダイレクトされる' do
       post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       expect do
-        post events_path, params: { event: { day: event.day, time: event.time, ground: event.ground,\
+        post events_path, params: { event: { day_time: event.day_time, ground: event.ground,\
                                              opponent_team_name: event.opponent_team_name, other: event.other } }
       end.not_to change(Event, :count)
       expect(flash[:success]).not_to eq 'スケジュールを登録しました'
@@ -83,7 +89,7 @@ RSpec.describe 'Events', type: :request do
 
     it 'スケジュール更新からリダイレクトされる' do
       post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
-      patch event_path(event), params: { event: { day: event.day, time: event.time, ground: event.ground,\
+      patch event_path(event), params: { event: { day_time: event.day_time, ground: event.ground,\
                                                   opponent_team_name: event.opponent_team_name, other: event.other } }
       expect(flash[:success]).not_to eq 'スケジュールを更新しました'
       expect(response).to redirect_to root_path

@@ -8,13 +8,8 @@ RSpec.describe Event, type: :model do
       expect(event).to be_valid
     end
 
-    it '日付のないスケジュールの場合、無効である' do
-      event.day = ''
-      expect(event).not_to be_valid
-    end
-
-    it '時間のないスケジュールの場合、無効である' do
-      event.time = ''
+    it '日時のないスケジュールの場合、無効である' do
+      event.day_time = ''
       expect(event).not_to be_valid
     end
 

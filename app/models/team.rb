@@ -1,3 +1,4 @@
+require 'date'
 class Team < ApplicationRecord
   has_one_attached :image
   belongs_to :user
@@ -34,9 +35,34 @@ class Team < ApplicationRecord
   end
 
   # 検索機能
-  def self.search(search)
-    search ? where('name LIKE ?', "%#{search}%") : all
-  end
+  scope :belong_team_search, ->(search) { where('name LIKE ?', "%#{search}%") }
+
+  scope :event_team_search, lambda { |event_search_params|
+    return if event_search_params.blank?
+
+    event_time_from_to(event_search_params[:day_time])
+      .event_day_of_week(event_search_params[:day_time])
+      .team_prefecture(event_search_params[:prefecture_id])
+      .team_level(event_search_params[:level])
+  }
+
+  scope :event_time_from_to, lambda { |time|
+    return if time.blank?
+
+    exclude_ids = includes(:events).references(:events).where(events: \
+    { day_time: DateTime.parse("#{time} JST") - 2.hours..DateTime.parse("#{time} JST") + 2.hours }).uniq.pluck(:id)
+    where.not(id: exclude_ids)
+  }
+  scope :event_day_of_week, lambda { |day_of_week|
+                              if day_of_week.present?
+                                where("activity_#{DateTime.parse(day_of_week).strftime('%A').downcase} = ?", true)
+                              end
+                            }
+  scope :event_time_from, ->(time) { includes(:events).references(:events).merge(Event.time_from(time)) if time.present? }
+  scope :event_time_to, ->(time) { includes(:events).references(:events).merge(Event.time_to(time)) if time.present? }
+  scope :team_prefecture, ->(area) { where(prefecture_id: area) if area.present? }
+  scope :team_level, ->(level) { where(level: level) if level.present? }
+  scope :no_event, -> { where.missing(:events) }
 
   private
 

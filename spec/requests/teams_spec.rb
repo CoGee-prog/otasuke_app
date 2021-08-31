@@ -3,6 +3,7 @@ RSpec.describe 'Teams', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
   let!(:team) { FactoryBot.create(:team) }
+  let!(:team_member1) { FactoryBot.create(:team_member1, team: team, user: user) }
 
   describe 'ログインしてないユーザーのチームアクションのテスト' do
     it 'チーム作成からリダイレクトされる' do
@@ -68,6 +69,12 @@ RSpec.describe 'Teams', type: :request do
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
+
+    it 'スケジュールから対戦相手検索からリダイレクトされる' do
+      get search_schedule_teams_path
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
   end
 
   describe 'チーム管理者ユーザー以外からのチームプロフィール編集、更新、削除が失敗する' do
@@ -93,6 +100,21 @@ RSpec.describe 'Teams', type: :request do
       expect do
         delete team_path(team)
       end.not_to change(Team, :count)
+      expect(response).to redirect_to root_path
+    end
+  end
+
+  describe '他のユーザーの所属チーム一覧からリダイレクトされる' do
+    it '間違ったユーザーがログインした時、所属チーム一覧からリダイレクトされる' do
+      post login_path params: { session: { email: other_user.email, password: other_user.password } }
+      get list_team_path(user)
+      expect(response).to redirect_to list_team_path(other_user)
+    end
+
+    it '所属していないチームへのチーム切り替えからリダイレクトされる' do
+      post login_path params: { session: { email: other_user.email, password: other_user.password } }
+      post switch_team_path(team)
+      expect(flash[:success]).not_to eq 'チームを切り替えました'
       expect(response).to redirect_to root_path
     end
   end
