@@ -3,9 +3,9 @@
     <%= f.label :image,'チームプロフィール画像' %>
     <div class="team_image">
         <% if @team.image.attached? && @team.image.present? %>
-            <%= image_tag(@team.image, id:"preview" ) %>
+            <%= image_tag(@team.image, id:"preview", class:"team_preview" ) %>
         <% else %>  
-            <%= image_tag("default_team_image.png", id:"preview" ) %>
+            <%= image_tag("default_team_image.png", id:"preview", class:"team_preview" ) %>
         <% end %>
     </div>
     <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png",id: "team_image" %>
@@ -45,7 +45,7 @@
     <%= render 'shared/form_error_messages', object: f.object, attribute: :homepage_url %>
 
     <%= f.label :other,'その他' %>
-    <%= f.text_area :other %>
+    <%= f.text_area :other, rows: 5 %>
     <%= render 'shared/form_error_messages', object: f.object, attribute: :other %>
 
     <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>

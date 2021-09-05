@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :logged_in_user
+  before_action :logged_in_user, except: %i[search_schedule detail_schedule]
   before_action :team_admin_user, only: %i[edit update destroy]
   before_action :set_team, only: %i[edit update switch]
   before_action :currect_list_user, only: :list
@@ -28,12 +28,12 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_params)
-    @team.admin_user_id = @current_user.id
+    @team.admin_user_id = current_user.id
     if @team.save
       @team.image.attach(params[:team][:image]) if params[:team][:image]
-      @current_user.team_members.new(team_id: @team.id, user_id: current_user.id)
-      @current_user.current_team_id = @team.id
-      @current_user.save
+      current_user.team_members.new(team_id: @team.id, user_id: current_user.id)
+      current_user.current_team_id = @team.id
+      current_user.save
       flash[:success] = 'チームを作成しました'
       redirect_to root_path
     else
@@ -60,8 +60,8 @@ class TeamsController < ApplicationController
   end
 
   def switch
-    @current_user.current_team_id = Team.find(params[:id]).id
-    @current_user.save
+    current_user.current_team_id = Team.find(params[:id]).id
+    current_user.save
     flash[:success] = 'チームを切り替えました'
     redirect_to event_path(current_team)
   end
@@ -69,6 +69,12 @@ class TeamsController < ApplicationController
   def search_schedule
     @event_search_params = event_search_params
     @teams = Team.event_team_search(@event_search_params).distinct.page(params[:page])
+  end
+
+  def detail_schedule
+    @team = Team.find(params[:id])
+    @events = @team.events
+    @game_request = GameRequest.new
   end
 
   private

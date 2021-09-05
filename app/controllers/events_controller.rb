@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :logged_in_user
-  before_action :current_team_user, only: :show
-  before_action :event_team_admin_user, only: %i[new create edit update destroy]
+  before_action :event_current_team_page, only: :show
+  before_action :current_team_admin_user, only: %i[new create edit update destroy]
   before_action :set_event, only: %i[edit update]
 
   def new
@@ -41,27 +41,13 @@ class EventsController < ApplicationController
     redirect_to event_path(current_team)
   end
 
-  def detail_schedule
-    @team = Team.find(params[:id])
-    @events = @team.events
-  end
-
   private
 
   def event_params
     params.require(:event).permit(:day_time, :ground, :opponent_team_name, :tournament_name, :other)
   end
 
-  # チーム管理者かどうか確認
-  def event_team_admin_user
-    if (team = Team.find(current_team.id))
-      redirect_to(root_path) unless team.admin_user_id == current_user.id
-    else
-      redirect_to(root_path)
-    end
-  end
-
-  def current_team_user
+  def event_current_team_page
     return if current_team.id == params[:id].to_i
 
     redirect_to event_path(current_team.id)

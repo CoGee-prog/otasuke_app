@@ -1,8 +1,8 @@
 <li class="team">
     <% if team.image.attached? && team.image.present? %>
-            <%= image_tag(team.image,  size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
+            <%= image_tag(team.image, size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
     <% else %>  
-            <%= image_tag("default_team_image.png",  size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
+            <%= image_tag("default_team_image.png", size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon") %>
     <% end %>
     <div class="team-header">
         <%= link_to team.name, team %><br>

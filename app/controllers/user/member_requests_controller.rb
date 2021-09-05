@@ -2,13 +2,13 @@ class User::MemberRequestsController < ApplicationController
   before_action :logged_in_user
 
   def create
-    team = Team.find(params[:team_id])
-    if TeamMember.find_by(team_id: team.id, user_id: current_user.id)
+    @team = Team.find(params[:team_id])
+    if TeamMember.find_by(team_id: @team.id, user_id: current_user.id)
       flash[:danger] = '既にチームに所属しています'
       redirect_to teams_path
     else
-      request = current_user.member_requests.new(team_id: team.id, user_id: current_user.id)
-      if request.save
+      @request = current_user.member_requests.new(team_id: @team.id, user_id: current_user.id)
+      if @request.save
         flash[:success] = 'チーム所属申請を送信しました'
         redirect_to teams_path
       else
@@ -18,10 +18,10 @@ class User::MemberRequestsController < ApplicationController
   end
 
   def destroy
-    team = Team.find(params[:id])
-    request = current_user.member_requests.find_by(team_id: team.id, user_id: current_user.id)
-    if request
-      request.destroy
+    @team = Team.find(params[:id])
+    @request = current_user.member_requests.find_by(team_id: @team.id, user_id: current_user.id)
+    if @request
+      @request.destroy
       flash[:success] = 'チーム所属申請を取り消しました'
     else
       flash[:danger] = 'チーム所属申請がありません'
@@ -29,5 +29,3 @@ class User::MemberRequestsController < ApplicationController
     redirect_to teams_path
   end
 end
-
-private

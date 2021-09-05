@@ -30,6 +30,9 @@
         <%= f.submit '検索', class: "btn-event-search btn-navy" %>
         <% end %>
     </div>
+<span class="instruction">
+※入力した日付を活動曜日とし、入力した時間の前後2時間に予定が入っていないチームが表示されます。
+</span>
 <ul class="teams">
     <%= render 'search_team' %>
 </ul>

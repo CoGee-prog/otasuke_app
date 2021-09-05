@@ -3,7 +3,7 @@
 
 <%= render 'teams/team_profile' %>
 <div class="center">
-    <% if @team.admin_user_id == current_user.id %>
+    <% if @team.admin_user_id == current_user.id && @team == current_team %>
         <span class="btn btn-orange">
             <%= link_to "編集する",edit_team_path(@team) %>
         </span>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_25_115920) do
+ActiveRecord::Schema.define(version: 2021_09_01_150241) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -81,6 +81,18 @@ ActiveRecord::Schema.define(version: 2021_08_25_115920) do
     t.index ["team_id"], name: "index_events_on_team_id"
   end
 
+  create_table "game_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "requesting_team_id"
+    t.bigint "requested_team_id"
+    t.string "contact_address"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requested_team_id"], name: "index_game_requests_on_requested_team_id"
+    t.index ["requesting_team_id", "requested_team_id"], name: "index_game_requests_on_requesting_team_id_and_requested_team_id", unique: true
+    t.index ["requesting_team_id"], name: "index_game_requests_on_requesting_team_id"
+  end
+
   create_table "member_requests", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "team_id"
     t.bigint "user_id"
@@ -149,6 +161,8 @@ ActiveRecord::Schema.define(version: 2021_08_25_115920) do
   add_foreign_key "event_option_entries", "event_options"
   add_foreign_key "event_options", "events"
   add_foreign_key "events", "teams"
+  add_foreign_key "game_requests", "teams", column: "requested_team_id"
+  add_foreign_key "game_requests", "teams", column: "requesting_team_id"
   add_foreign_key "member_requests", "teams"
   add_foreign_key "member_requests", "users"
   add_foreign_key "team_members", "teams"

@@ -183,7 +183,7 @@ h2{
         .tab1{
             position: absolute;
             display: block;
-            width: 33.3%;
+            width: 50%;
             float: left;
             text-align:center;
             left: 0;
@@ -191,7 +191,7 @@ h2{
         }
         .tab1#lamp{
             position: absolute;
-            width: 33.3%;
+            width: 50%;
             top: 30px;
             height: 2px;
             background-color: #FFB450;
@@ -202,38 +202,20 @@ h2{
         .tab2{
             position: absolute;
             display:block;
-            width: 33.3%;
+            width: 50%;
             float:left;
             text-align:center;
-            left: 33.3%;
+            left: 50%;
             cursor: pointer;
         }
         .tab2#lamp{
             position: absolute;
-            width: 33.3%;
+            width: 50%;
             top: 30px;
             height: 2px;
             background-color: #FFB450;
             display: block;
-            left: 33.3%;
-        }
-        .tab3{
-            position: absolute;
-            display:block;
-            width: 33.3%;
-            float:left;
-            text-align:center;
-            left: 66.6%;
-            cursor: pointer;
-        }
-        .tab3#lamp{
-            position: absolute;
-            width: 33.3%;
-            top: 30px;
-            height: 2px;
-            background-color: #FFB450;
-            display: block;
-            left: 66.6%;
+            left: 50%;
         }
        :hover{
            font-weight: bold;
@@ -500,11 +482,11 @@ input.form-btn{
 
 }
 
-#preview{
+.team_preview{
     height: 100px;
     width: 100px;
     border-radius: 50%;
-    object-fit:cover;
+    object-fit: cover;
 }
 
 // チームプロフィール
@@ -697,13 +679,11 @@ input.form-btn{
     }
 }
 
-.no-team{
+.no-content{
     font-size: x-large;
     margin: 0 auto;
     margin-top: 10px;
 }
-
-
 
 // ページネーション
 
@@ -954,7 +934,7 @@ input.form-btn{
 
 .event-search{
     width: 450px;
-    margin: 15px auto;
+    margin: 0 auto;
     background-color: #efefef;
     border-radius: 10px;
     position: relative;
@@ -1019,10 +999,18 @@ input.form-btn{
     }
 }
 
+.instruction{
+    display: block;
+    width: 450px;
+    margin: 0 auto;
+    padding-left:1em;
+    text-indent:-1em;
+}
 
 .detail-schedules{
     display: inline-block;
     margin-top: 20px;
+    margin-bottom: 40px;
     text-align: center;
     position: relative;
     >p{
@@ -1045,4 +1033,15 @@ input.form-btn{
         font-weight: normal;
         text-align: left;
     }
+}
+
+.qr-preview{
+    width: 150px;
+    height: auto;
+}
+
+.btn-center{
+    display: block;
+    margin-top: 15px;
+    text-align: center;
 }

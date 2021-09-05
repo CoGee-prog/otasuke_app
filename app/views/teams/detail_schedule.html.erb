@@ -1,0 +1,64 @@
+<% provide(:title, 'スケジュールから対戦相手検索') %>
+<%= render 'shared/error_messages' %>
+<h2>スケジュールから対戦相手検索</h2>
+
+<%= render 'teams/team_profile' %>
+
+<div class="center">
+    <div class="detail-schedules">
+        <b class="center"><%= @team.name %> | スケジュール</b>
+        <% if @events.present? %>
+            <table>
+                <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
+                    <tr>
+                        <th nowrap class="detail-schedule">
+                        <%= event.day_time.strftime('%m/%d %H:%M') %> 
+                        <%= event.ground %>
+                        <% if event.opponent_team_name.present? %>
+                        VS<%= event.opponent_team_name %>
+                        <% end %> 
+                        <%= event.tournament_name %>
+                        <%= event.other%>
+                        </th>
+                    </tr>
+                <% end %>
+            </table>
+
+        <% else %>
+            <span class="no-event">
+                スケジュールが登録されていません
+            </span>
+        <% end %>
+    </div><br>
+    
+</div>
+<% if logged_in? %>
+    <% if current_user.id == current_team.admin_user_id %>
+        <% if current_team.already_game_requested?(@team) %>
+            <div class="center">
+                <span class="btn btn-red">
+                    <% game_request = GameRequest.find_by(requesting_team_id: current_team.id, requested_team_id: @team.id) %>
+                    <%= link_to "対戦申込を取り消す", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                </span>
+            </div>
+            <% else %>
+                <div class="form">
+                    <h2>対戦申し込みフォーム</h2>
+                    <%= render 'game_requests/game_request_form' %>
+                </div>
+        <% end %>
+    <% else %>
+        <span class="center">
+            ※対戦申込はチーム管理者のみ行うことができます。
+        </span>
+    <% end %>
+<% else %>
+    <span class="center">
+        ※対戦申込はログイン後、チーム管理者のみ行うことができます。<br>
+        <span class="btn btn-navy">
+            <%= link_to "ログインする",login_path %>
+        </span>
+    </span>
+<% end %>
+
+
