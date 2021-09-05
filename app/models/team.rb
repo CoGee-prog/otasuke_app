@@ -6,10 +6,15 @@ class Team < ApplicationRecord
   has_many :member_requests, dependent: :destroy
   has_many :team_members, dependent: :destroy
   has_many :events, dependent: :destroy
+  has_many :requesting_team, class_name: 'GameRequest', foreign_key: 'requesting_team_id', dependent: :destroy,
+                             inverse_of: 'requesting_team'
+  has_many :requested_team, class_name: 'GameRequest', foreign_key: 'requested_team_id', dependent: :destroy,
+                            inverse_of: 'requested_team'
   validates :name, presence: true, length: { maximum: 50 }
   validates :level, presence: true
-  validates :prefecture_id, presence: true,
-                            numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 47 }
+  validates :prefecture_id, presence: true
+  validates :prefecture_id, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 47 },
+                            allow_blank: true
   with_options inclusion: { in: [true, false] } do
     validates :activity_monday
     validates :activity_tuesday
@@ -54,15 +59,18 @@ class Team < ApplicationRecord
     where.not(id: exclude_ids)
   }
   scope :event_day_of_week, lambda { |day_of_week|
-                              if day_of_week.present?
-                                where("activity_#{DateTime.parse(day_of_week).strftime('%A').downcase} = ?", true)
-                              end
+                              where("activity_#{DateTime.parse(day_of_week).strftime('%A').downcase} = ?", true) if day_of_week.present?
                             }
   scope :event_time_from, ->(time) { includes(:events).references(:events).merge(Event.time_from(time)) if time.present? }
   scope :event_time_to, ->(time) { includes(:events).references(:events).merge(Event.time_to(time)) if time.present? }
   scope :team_prefecture, ->(area) { where(prefecture_id: area) if area.present? }
   scope :team_level, ->(level) { where(level: level) if level.present? }
   scope :no_event, -> { where.missing(:events) }
+
+  # 対戦リクエストを送っているかどうか
+  def already_game_requested?(team)
+    requesting_team.exists?(requested_team: team.id)
+  end
 
   private
 

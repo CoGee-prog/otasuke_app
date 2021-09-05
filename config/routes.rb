@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member do
       get 'list'
       post 'switch' 
+      get 'detail_schedule'
     end
     collection do
       get 'search_schedule'
@@ -27,11 +28,8 @@ Rails.application.routes.draw do
     resources :team_members, only: [:show, :create, :destroy]
   end
 
-  resources :events, only:[:new, :create, :show, :edit, :update, :destroy] do
-    member do
-      get 'detail_schedule'
-    end
-  end
+  resources :events, only:[:new, :create, :show, :edit, :update, :destroy]
   resources :event_entries, only: [:edit, :update]
+  resources :game_requests, only:[:create, :destroy, :show]
   
 end

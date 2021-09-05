@@ -28,9 +28,9 @@ RSpec.describe 'チーム登録テスト', type: :system do
       fill_in 'team[homepage_url]', with: 'https//giants.com'
       fill_in 'team[other]', with: '精一杯頑張ります'
       click_on '登録する'
-      expect(page).to have_selector('.alert-success', text: 'チームを作成しました')
-      expect(current_path).to eq root_path
     end.to change(Team, :count).by(1)
+    expect(page).to have_selector('.alert-success', text: 'チームを作成しました')
+    expect(current_path).to eq root_path
     expect(page).to have_selector('.menu', text: 'ジャイアンツ')
   end
 end

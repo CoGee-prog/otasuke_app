@@ -31,14 +31,8 @@ RSpec.describe 'Events', type: :request do
     end
 
     it 'スケジュール更新からリダイレクトされる' do
-      patch team_path(team), params: { event: { day_time: event.day_time, ground: event.ground,\
-                                                opponent_team_name: event.opponent_team_name, other: event.other } }
-      expect(flash[:danger]).to eq 'ログインしてください'
-      expect(response).to redirect_to login_path
-    end
-
-    it 'スケジュール一覧からリダイレクトされる' do
-      get teams_path
+      patch event_path(event), params: { event: { day_time: event.day_time, ground: event.ground,\
+                                                  opponent_team_name: event.opponent_team_name, other: event.other } }
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
@@ -46,19 +40,13 @@ RSpec.describe 'Events', type: :request do
     it 'スケジュール削除からリダイレクトされる' do
       expect do
         delete event_path(event)
-      end.not_to change(Team, :count)
+      end.not_to change(Event, :count)
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
 
-    it 'スケジュール詳細からリダイレクトされる' do
-      get team_path(team)
-      expect(flash[:danger]).to eq 'ログインしてください'
-      expect(response).to redirect_to login_path
-    end
-
-    it 'スケジュールから対戦相手検索詳細からリダイレクトされる' do
-      get detail_schedule_event_path(team)
+    it 'スケジュール管理からリダイレクトされる' do
+      get event_path(team)
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
@@ -66,7 +54,7 @@ RSpec.describe 'Events', type: :request do
 
   describe 'チーム管理者ユーザー以外からのスケジュール作成、登録、編集、更新、削除が失敗する' do
     it 'スケジュール作成からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: other_user.password } }
+      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       get new_event_path
       expect(response).to redirect_to root_path
     end
@@ -82,7 +70,7 @@ RSpec.describe 'Events', type: :request do
     end
 
     it 'スケジュール編集からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: other_user.password } }
+      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       get edit_event_path(event)
       expect(response).to redirect_to root_path
     end

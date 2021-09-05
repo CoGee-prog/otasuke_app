@@ -12,7 +12,16 @@ class ApplicationController < ActionController::Base
 
   # チーム管理者かどうか確認
   def team_admin_user
-    if (team = Team.find_by(params[:id]))
+    if (team = Team.find_by(id: params[:id]))
+      redirect_to root_path unless team.admin_user_id == current_user.id
+    else
+      redirect_to root_path
+    end
+  end
+
+  # チーム管理者かどうか確認
+  def current_team_admin_user
+    if (team = Team.find(current_team.id))
       redirect_to(root_path) unless team.admin_user_id == current_user.id
     else
       redirect_to(root_path)
