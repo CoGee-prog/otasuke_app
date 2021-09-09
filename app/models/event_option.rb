@@ -5,6 +5,7 @@ class EventOption < ApplicationRecord
 
   attr_accessor :count_ng, :count_neither, :count_ok
 
+  # 出欠内容をカウントする
   def calc_event_option_entry
     feeling_counts = event_option_entries.group(:feeling).order(feeling: :asc).count
     self.count_ok      = feeling_counts['OK'] || 0

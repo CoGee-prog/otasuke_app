@@ -1,6 +1,6 @@
 class EventEntriesController < ApplicationController
   before_action :logged_in_user
-  before_action :event_entry_correct_user_team
+  before_action :event_entry_correct_user_team_page
 
   def edit
     @event_entry = EventEntry.find(params[:id])
@@ -24,7 +24,10 @@ class EventEntriesController < ApplicationController
     params.require(:event_entry).permit(event_option_entry_attributes: %i[id feeling])
   end
 
-  def event_entry_correct_user_team
+  # beforeアクション
+
+  # 正しいユーザーの出欠変更画面か確認し、違う場合はそのユーザーのチームのスケジュール管理画面にリダイレクトする
+  def event_entry_correct_user_team_page
     @event_entry = EventEntry.find_by(id: params[:id])
     return if @event_entry && @event_entry.user_id == current_user.id && Event.find(@event_entry.event_id).team_id == current_team.id
 

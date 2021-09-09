@@ -33,6 +33,17 @@ FactoryBot.define do
     current_team_id { 1 }
   end
 
+  factory :unrelated_user, class: User do
+    id { 4 }
+    name { 'シロー' }
+    email { 'shiro@example.com' }
+    password { 'password' }
+    password_confirmation { 'password' }
+    activated { 'true' }
+    activated_at { Time.zone.now }
+    current_team_id { 2 }
+  end
+
   factory :users, class: User do
     sequence(:id) { |n| n + 1 }
     name { Faker::Name.name }

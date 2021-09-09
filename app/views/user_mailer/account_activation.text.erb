@@ -1,6 +1,4 @@
 <%= @user.name %>様
-
 草野球スケジュール調整サービス「おたスケ」へようこそ！
 新規登録をするには、下記のリンクをクリックしてください。
-
 <%= edit_account_activation_url(@user.activation_token, email: @user.email) %>

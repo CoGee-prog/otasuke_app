@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe SessionsHelper, type: :helper do
   describe 'current_user' do
     let(:user) { FactoryBot.create(:user) }

@@ -2,11 +2,10 @@
 <%= render 'shared/error_messages' %>
 <h2>所属チーム検索</h2>
 <ul class="teams">
-    <%= form_with(url: teams_path, method: :get) do %>
-        <%= text_field_tag :search, params[:search], placeholder: "チーム名" %>
-        <%= submit_tag '検索',name: nil, class: "btn-search btn-navy" %>
-    <% end %>
-    <%= render @teams %>
+  <%= form_with(url: teams_path, method: :get) do %>
+    <%= text_field_tag :search, params[:search], placeholder: "チーム名" %>
+    <%= submit_tag '検索',name: nil, class: "btn-search btn-navy" %>
+  <% end %>
+  <%= render @teams %>
 </ul>
-
 <%= paginate @teams %>

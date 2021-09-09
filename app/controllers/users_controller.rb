@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[edit update destroy]
-  before_action :correct_user, only: %i[edit update]
+  before_action :correct_user, only: :update
+  before_action :edit_correct_user, only: :edit
   before_action :admin_user, only: %i[index destroy]
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[edit update]
 
   def index
     @users = User.all.page(params[:page])
@@ -13,8 +14,6 @@ class UsersController < ApplicationController
     flash[:success] = 'ユーザーを削除しました'
     redirect_to users_path
   end
-
-  def show; end
 
   def new
     @user = User.new
@@ -52,15 +51,21 @@ class UsersController < ApplicationController
 
   # beforeアクション
 
-  # 正しいユーザーかどうか確認
+  # 正しいユーザーかどうか確認する
   def correct_user
     @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)
+    redirect_to root_path unless current_user?(@user)
   end
 
-  # 管理者ユーザーかどうか確認
+  # 正しいユーザーの編集か確認し、違う場合はそのユーザーの編集画面にリダイレクトする
+  def edit_correct_user
+    @user = User.find(params[:id])
+    redirect_to edit_user_path(current_user) unless current_user?(@user)
+  end
+
+  # 管理者ユーザーかどうか確認する
   def admin_user
-    redirect_to(root_path) unless current_user.admin?
+    redirect_to root_path unless current_user.admin?
   end
 
   def set_user

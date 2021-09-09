@@ -2,18 +2,16 @@
 <%= render 'shared/error_messages' %>
 <h2>ユーザー一覧</h2>
 <ul class="users">
-    <% @users.each do |user| %>
-      <li class="user">
-          <%= user.name %>
-          <% if !current_user?(user) %>
-          <span class="btn-destroy btn-red">
+  <% @users.each do |user| %>
+    <li class="user">
+      <%= user.name %>
+      <% if !current_user?(user) %>
+        <span class="btn-destroy btn-red">
           <%= link_to "削除", user, method: :delete,
-                                      data: { confirm: "本当に削除しますか？" } %> 
-          </span>
-          <% end %>
-      </li>
-    <% end %>
+                                      data: { confirm: "本当に削除しますか？" } %>
+        </span>
+      <% end %>
+    </li>
+  <% end %>
 </ul>
-
-
 <%= paginate @users %>

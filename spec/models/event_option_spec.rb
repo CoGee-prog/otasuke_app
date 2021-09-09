@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe EventOption, type: :model do
   let!(:user) { FactoryBot.create(:user) }
   let!(:team) { FactoryBot.create(:team) }

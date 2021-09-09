@@ -39,9 +39,10 @@ class Team < ApplicationRecord
     image.variant(gravity: :center, resize: '100x100^', crop: '100x100+0+0')
   end
 
-  # 検索機能
+  # 所属チーム検索機能
   scope :belong_team_search, ->(search) { where('name LIKE ?', "%#{search}%") }
 
+  # スケジュールから対戦相手検索機能
   scope :event_team_search, lambda { |event_search_params|
     return if event_search_params.blank?
 

@@ -47,10 +47,13 @@ class EventsController < ApplicationController
     params.require(:event).permit(:day_time, :ground, :opponent_team_name, :tournament_name, :other)
   end
 
+  # beforeアクション
+
+  # 現在のチームのスケジュール管理か確認し、違う場合は現在のチームのスケジュール管理画面にリダイレクトする
   def event_current_team_page
     return if current_team.id == params[:id].to_i
 
-    redirect_to event_path(current_team.id)
+    redirect_to event_path(current_team)
   end
 
   def set_event

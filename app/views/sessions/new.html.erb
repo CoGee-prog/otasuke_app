@@ -1,31 +1,25 @@
 <%provide(:title, 'ログイン')%>
 <div class="form">
-    <h2>ログイン</h2>
-    <%= render 'shared/error_messages' %>
-    <%= form_with(url:login_path,scope: :session,local:true) do |f| %>
-
-        <%= f.label :email, 'メールアドレス' %>
-        <%= f.email_field :email %>
-
-        <%= f.label :password, 'パスワード' %>
-        <%= f.password_field :password %>
-
-        <%= f.label :remember_me, class: "login-checkbox" do %>
-            <%= f.check_box :remember_me, id: "login-checkbox" %>
-            ログイン状態を保持する
-        <% end %>
-        <div class="password-forgot">
-        <%= link_to "パスワードをお忘れですか？", new_password_reset_path %>
-        </div>
-
-        <%= f.submit "ログイン", class: "form-btn btn-navy", id: "login-btn" %>
+  <h2>ログイン</h2>
+  <%= render 'shared/error_messages' %>
+  <%= form_with(url:login_path,scope: :session,local:true) do |f| %>
+    <%= f.label :email, 'メールアドレス' %>
+    <%= f.email_field :email %>
+    <%= f.label :password, 'パスワード' %>
+    <%= f.password_field :password %>
+    <%= f.label :remember_me, class: "login-checkbox" do %>
+      <%= f.check_box :remember_me, id: "login-checkbox" %>
+      ログイン状態を保持する
     <% end %>
-    <div class ="other">
-        <p>アカウントをお持ちでない方</p>
-        <%= link_to (signup_path) do %>
-            <div class="form-btn btn-orange">新規登録</div> 
-        <% end %>
+    <div class="password-forgot">
+      <%= link_to "パスワードをお忘れですか？", new_password_reset_path %>
     </div>
+    <%= f.submit "ログイン", class: "form-btn btn-navy", id: "login-btn" %>
+  <% end %>
+  <div class="other">
+    <p>アカウントをお持ちでない方</p>
+    <%= link_to (signup_path) do %>
+      <div class="form-btn btn-orange">新規登録</div>
+    <% end %>
+  </div>
 </div>
-
-

@@ -1,7 +1,5 @@
-require 'rails_helper'
-
 RSpec.describe 'パスワードの再設定', type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
   before do
     ActionMailer::Base.deliveries.clear
   end

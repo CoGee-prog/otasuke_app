@@ -1,23 +1,18 @@
 <%= form_with(model:@event,local:true) do |f|%>
-    <%= f.label :day_time,'日時' %>
-    <%= f.datetime_field :day_time , min: Date.today %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :day_time %>
-
-    <%= f.label :ground,'グラウンド名' %>
-    <%= f.text_field :ground %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :ground %>
-
-    <%= f.label :opponent_team_name,'対戦チーム名' %>
-    <%= f.text_field :opponent_team_name %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :opponent_team_name %>
-    
-    <%= f.label :tournament_name,'大会名' %>
-    <%= f.text_field :tournament_name %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :tournament_name %>
-
-    <%= f.label :other,'その他' %>
-    <%= f.text_field :other %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :other %>
-
-    <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+  <%= f.label :day_time,'日時' %>
+  <%= f.datetime_field :day_time , min: Date.today %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :day_time %>
+  <%= f.label :ground,'グラウンド名' %>
+  <%= f.text_field :ground %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :ground %>
+  <%= f.label :opponent_team_name,'対戦チーム名' %>
+  <%= f.text_field :opponent_team_name %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :opponent_team_name %>
+  <%= f.label :tournament_name,'大会名' %>
+  <%= f.text_field :tournament_name %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :tournament_name %>
+  <%= f.label :other,'その他' %>
+  <%= f.text_field :other %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :other %>
+  <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
 <% end %>

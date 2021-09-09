@@ -1,25 +1,19 @@
 <%= form_with(model:@game_request,local:true) do |f| %>
-
-    <%= f.label :contact_address, '連絡先' %>
-    <%= f.text_field :contact_address %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :contact_address %>
-
-    <%= f.label :comment,'コメント' %>
-    <%= f.text_area :comment, rows: 5 %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :comment %>
-
-    <%= f.label :image,'LINEQRコード等' %>
-    <div class="team_image">
-        <% if @game_request.image.attached? && @game_request.image.present? %>
-            <%= image_tag(@game_request.image, id: "preview", class: "qr-preview" ) %>
-        <% end %>
-    </div>
-    <img id="preview", class="qr-preview">
-    
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", id: "team_image" %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :image %>
-
-    <%= f.hidden_field :requested_team_id, value: @team.id %>
-
-    <%= f.submit "対戦を申し込む", class: "form-btn btn-orange" %>
+  <%= f.label :contact_address, '連絡先' %>
+  <%= f.text_field :contact_address %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :contact_address %>
+  <%= f.label :comment,'コメント' %>
+  <%= f.text_area :comment, rows: 5 %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :comment %>
+  <%= f.label :image,'LINEQRコード等' %>
+  <div class="team_image">
+    <% if @game_request.image.attached? && @game_request.image.present? %>
+      <%= image_tag(@game_request.image, id: "preview", class: "qr-preview" ) %>
+    <% end %>
+  </div>
+  <img id="preview" , class="qr-preview">
+  <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", id: "team_image" %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :image %>
+  <%= f.hidden_field :requested_team_id, value: @team.id %>
+  <%= f.submit "対戦を申し込む", class: "form-btn btn-orange" %>
 <% end %>

@@ -19,12 +19,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # チーム管理者かどうか確認
+  # 現在のチームの管理者かどうか確認
   def current_team_admin_user
     if (team = Team.find(current_team.id))
-      redirect_to(root_path) unless team.admin_user_id == current_user.id
+      redirect_to root_path unless team.admin_user_id == current_user.id
     else
-      redirect_to(root_path)
+      redirect_to root_path
     end
   end
 end

@@ -1,0 +1,16 @@
+{
+	"json.schemas": [],
+	"launch": {
+		"configurations": [],
+		"compounds": []
+	},
+	"[erb]": {
+		"editor.defaultFormatter": "aliariff.vscode-erb-beautify"
+	},
+	"[json]": {
+		"editor.quickSuggestions": {
+			"strings": true
+		},
+		"editor.suggest.insertMode": "replace"
+	}
+}

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe UserMailer, type: :mailer do
   describe 'アカウント有効化テスト' do
     let(:mail) { UserMailer.account_activation(user) }
