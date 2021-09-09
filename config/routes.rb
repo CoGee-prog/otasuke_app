@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  resources :users
+  resources :users, except: :show
   resources :account_activations, only:[:edit]
   resources :password_resets, only:[:new, :create, :edit, :update]
   resources :teams do
@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :team_members, only: [:show, :create, :destroy]
   end
 
-  resources :events, only:[:new, :create, :show, :edit, :update, :destroy]
+  resources :events, except: :index
   resources :event_entries, only: [:edit, :update]
   resources :game_requests, only:[:create, :destroy, :show]
   

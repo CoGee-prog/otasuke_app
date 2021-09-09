@@ -46,6 +46,7 @@ h2{
 .container{
     width: 1200px;
     margin: 0 auto;
+    padding-bottom: 45px;
 }
 
 .btn{
@@ -71,6 +72,9 @@ h2{
 .center{
     display: block;
     text-align: center;
+    p{
+        font-weight: bold;
+    }
 }
 
 // ロゴ

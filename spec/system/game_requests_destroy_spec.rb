@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'スケジュールから対戦相手検索テスト', type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }

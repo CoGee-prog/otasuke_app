@@ -1,27 +1,25 @@
 <% provide(:title, '所属申請一覧') %>
 <%= render 'shared/error_messages' %>
 <h2>所属申請一覧</h2>
-
 <% if !@requests.present? %>
-    <span class="center">
-        <span class="no-content">所属リクエストはありません</span>
-    </span>
+  <span class="center">
+    <span class="no-content">所属リクエストはありません</span>
+  </span>
 <% else %>
-    <ul class="users">
-        <% @requests.each do |request| %>
-        <li class="user">
-            <%= User.find(request.user_id).name %>
-            <div class="btns">
-                <span class="btn btn-navy">
-                    <%= link_to "所属承認をする", team_team_members_path(id: request.id), method: :post %>
-                </span>
-                <span class="btn btn-red">
-                    <%= link_to "拒否する", team_member_request_path(id: request.id), method: :delete %>
-                </span>
-            </div>
-        </li>
-        <% end %>
-    </ul>
+  <ul class="users">
+    <% @requests.each do |request| %>
+      <li class="user">
+        <%= User.find(request.user_id).name %>
+        <div class="btns">
+          <span class="btn btn-navy">
+            <%= link_to "所属承認をする", team_team_members_path(id: request.id), method: :post %>
+          </span>
+          <span class="btn btn-red">
+            <%= link_to "拒否する", team_member_request_path(id: request.id), method: :delete %>
+          </span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
-
 <%= paginate @requests %>

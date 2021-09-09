@@ -1,6 +1,8 @@
 class TeamsController < ApplicationController
   before_action :logged_in_user, except: %i[search_schedule detail_schedule]
-  before_action :team_admin_user, only: %i[edit update destroy]
+  before_action :current_team_admin_user, only: :edit
+  before_action :team_edit_current_team_page, only: :edit
+  before_action :team_admin_user, only: %i[update destroy]
   before_action :set_team, only: %i[edit update switch]
   before_action :currect_list_user, only: :list
   before_action :currect_switch_user, only: :switch
@@ -90,19 +92,30 @@ class TeamsController < ApplicationController
     params.fetch(:event_team_search, {}).permit(:day_time, :prefecture_id, :level)
   end
 
+  # beforeアクション
+
   def set_team
     @team = Team.find(params[:id])
   end
 
+  # 正しいユーザーのチーム切り替え一覧か確認し、そのユーザーのチーム切り替え一覧画面にリダイレクトする
   def currect_list_user
-    return if @current_user.id == params[:id].to_i
+    return if current_user.id == params[:id].to_i
 
-    redirect_to list_team_path(@current_user.id)
+    redirect_to list_team_path(current_user.id)
   end
 
+  # 既に所属しているチームのチーム切り替えか確認する
   def currect_switch_user
-    return if @current_user.already_belong?(Team.find(params[:id]))
+    return if current_user.already_belong?(Team.find(params[:id]))
 
     redirect_to root_path
+  end
+
+  # 正しいチームの編集か確認し、現在のチームのチーム編集画面にリダイレクトする
+  def team_edit_current_team_page
+    return if current_team.id == params[:id].to_i
+
+    redirect_to edit_team_path(current_team)
   end
 end

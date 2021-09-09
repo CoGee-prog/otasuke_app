@@ -1,13 +1,12 @@
 <% provide(:title, '新規登録') %>
 <% provide(:button_text, '登録する') %>
 <div class="form">
-    <h2>新規登録</h2>
-    <%= render 'form' %>
-    <div class ="other">
-        <p>既に登録済みの方はログインしてください</p>
-        <%= link_to (login_path) do %>
-            <div class= "form-btn btn-navy">ログイン</div> 
-        <% end %>
-    </div>
+  <h2>新規登録</h2>
+  <%= render 'form' %>
+  <div class ="other">
+    <p>既に登録済みの方はログインしてください</p>
+    <%= link_to (login_path) do %>
+      <div class= "form-btn btn-navy">ログイン</div>
+    <% end %>
+  </div>
 </div>
-

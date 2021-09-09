@@ -1,20 +1,15 @@
 <%= form_with(model:@user,local:true) do |f|%>
-
-    <%= f.label :name,'ニックネーム' %>
-    <%= f.text_field :name %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :name %>
-
-    <%= f.label :email,'メールアドレス' %>
-    <%= f.email_field :email %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :email %>
-
-    <%= f.label :password,'パスワード' %>
-    <%= f.password_field :password %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :password %>
-
-    <%= f.label :password_confirmation,'パスワード再入力' %>
-    <%= f.password_field :password_confirmation %>
-    <%= render 'shared/form_error_messages', object: f.object, attribute: :password_confirmation %>
-
-    <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+  <%= f.label :name,'ニックネーム' %>
+  <%= f.text_field :name %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :name %>
+  <%= f.label :email,'メールアドレス' %>
+  <%= f.email_field :email %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :email %>
+  <%= f.label :password,'パスワード' %>
+  <%= f.password_field :password %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :password %>
+  <%= f.label :password_confirmation,'パスワード再入力' %>
+  <%= f.password_field :password_confirmation %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :password_confirmation %>
+  <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
 <% end %>

@@ -1,8 +1,8 @@
-require 'rails_helper'
 RSpec.describe 'Teams', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
   let!(:team) { FactoryBot.create(:team) }
+  let!(:other_team1) { FactoryBot.create(:other_team1) }
   let!(:team_member1) { FactoryBot.create(:team_member1, team: team, user: user) }
 
   describe 'ログインしてないユーザーのチームアクションのテスト' do
@@ -85,7 +85,7 @@ RSpec.describe 'Teams', type: :request do
     it 'チーム編集からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_team_path(team)
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to edit_team_path(other_team1)
     end
 
     it 'チーム更新からリダイレクトされる' do

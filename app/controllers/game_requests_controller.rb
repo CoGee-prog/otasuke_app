@@ -44,6 +44,9 @@ class GameRequestsController < ApplicationController
     params.require(:game_request).permit(:contact_address, :comment, :image, :requested_team_id)
   end
 
+  # beforeアクション
+
+  # 試合リクエストが正しいチーム管理者のものか確認する
   def game_request_correct_team_admin_user
     @game_request = GameRequest.find_by(id: params[:id])
     return if @game_request && Team.find(@game_request.requesting_team_id).admin_user_id == current_user.id \
@@ -52,9 +55,10 @@ class GameRequestsController < ApplicationController
     redirect_to root_path
   end
 
+  # 現在のチームの試合リクエスト一覧か確認し、違う場合は現在のチームの試合リクエスト一覧画面にリダイレクトする
   def game_request_current_team_page
     return if current_team.id == params[:id].to_i
 
-    redirect_to game_request_path(current_team.id)
+    redirect_to game_request_path(current_team)
   end
 end

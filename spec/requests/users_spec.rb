@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'Users', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
@@ -22,7 +20,7 @@ RSpec.describe 'Users', type: :request do
     it '間違ったユーザーがログインした時、ユーザー編集からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_user_path(user)
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to edit_user_path(other_user)
     end
 
     it '間違ったユーザーがログインした時、ユーザー更新からリダイレクトされる' do

@@ -86,6 +86,11 @@ class User < ApplicationRecord
     team_members.exists?(team_id: team.id)
   end
 
+  # どこかのチームに所属しているかどうか
+  def any_team_belong?
+    team_members.present?
+  end
+
   private
 
   # メールアドレスをすべて小文字にする

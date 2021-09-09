@@ -1,16 +1,19 @@
-require 'rails_helper'
-
 RSpec.describe 'ユーザー編集テスト', type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
+
   describe 'ユーザープロフィールの編集' do
     it 'ユーザープロフィールの編集が失敗する' do
       log_in_as(user)
       visit edit_user_path(user)
       fill_in 'user[name]', with: ''
-      fill_in 'user[email]', with: 'hoge@example.com'
+      fill_in 'user[email]', with: ''
       fill_in 'user[password]', with: 'hoge'
       fill_in 'user[password_confirmation]', with: 'fuga'
       click_on '更新する'
+      expect(page).to have_selector('.form-alert-danger', text: 'ニックネームを入力してください')
+      expect(page).to have_selector('.form-alert-danger', text: 'メールアドレスを入力してください')
+      expect(page).to have_selector('.form-alert-danger', text: 'パスワードは6文字以上で入力してください')
+      expect(page).to have_selector('.form-alert-danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
       expect(current_path).to eq user_path(user)
     end
 

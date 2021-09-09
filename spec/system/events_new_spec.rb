@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe 'スケジュール登録テスト', type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let!(:team) { FactoryBot.create(:team) }

@@ -1,7 +1,5 @@
-require 'rails_helper'
-
 RSpec.describe 'ユーザーログインテスト', type: :system do
-  let(:user) { FactoryBot.create(:user) }
+  let!(:user) { FactoryBot.create(:user) }
 
   describe '無効な情報でのログイン' do
     it '空の情報でのログイン' do

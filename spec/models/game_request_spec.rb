@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe GameRequest, type: :model do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }

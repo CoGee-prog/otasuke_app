@@ -14,10 +14,12 @@ class Event < ApplicationRecord
 
   private
 
+  # イベントの出欠カウントを作成する
   def create_options
     create_event_option
   end
 
+  # イベントの出欠を作成する
   def create_event_entries
     team.team_members.each do |member|
       User.find(member.user_id).event_entries.create(event_id: id)
