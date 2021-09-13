@@ -1,6 +1,6 @@
-<% provide(:title, 'スケジュールから対戦相手検索') %>
+<% provide(:title, '対戦相手検索') %>
 <%= render 'shared/error_messages' %>
-<h2>スケジュールから対戦相手検索</h2>
+<h2>対戦相手検索</h2>
 <%= render 'teams/team_profile' %>
 <div class="center">
   <div class="detail-schedules">
@@ -11,7 +11,7 @@
       <table>
         <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
           <tr>
-            <th nowrap class="detail-schedule">
+            <th class="detail-schedule">
               <%= event.day_time.strftime('%m/%d %H:%M') %>
               <%= event.ground %>
               <% if event.opponent_team_name.present? %>

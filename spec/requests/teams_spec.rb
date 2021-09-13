@@ -70,12 +70,12 @@ RSpec.describe 'Teams', type: :request do
       expect(response).to redirect_to login_path
     end
 
-    it 'スケジュールから対戦相手検索にアクセスできる' do
+    it '対戦相手検索にアクセスできる' do
       get search_schedule_teams_path
       expect(response).to have_http_status(200)
     end
 
-    it 'スケジュールから対戦相手検索詳細にアクセスできる' do
+    it '対戦相手検索詳細にアクセスできる' do
       get detail_schedule_team_path(team)
       expect(response).to have_http_status(200)
     end

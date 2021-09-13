@@ -1,6 +1,6 @@
-<% provide(:title, 'スケジュールから対戦相手検索') %>
+<% provide(:title, '対戦相手検索') %>
 <%= render 'shared/error_messages' %>
-<h2>スケジュールから対戦相手検索</h2>
+<h2>対戦相手検索</h2>
 <div class="event-search">
   <%= form_with(scope: :event_team_search, url: search_schedule_teams_path, method: :get, local: true) do |f|%>
     <span class="event-time">
