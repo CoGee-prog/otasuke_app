@@ -1,4 +1,4 @@
-RSpec.describe 'スケジュールから対戦相手検索テスト', type: :system do
+RSpec.describe '対戦相手検索テスト', type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
   let!(:team) { FactoryBot.create(:team) }
@@ -10,10 +10,10 @@ RSpec.describe 'スケジュールから対戦相手検索テスト', type: :sys
   let!(:other_team_event2) { FactoryBot.create(:other_team_event2) }
   let!(:teams) { create_list(:teams, 30) }
 
-  describe 'スケジュールから対戦相手検索のテスト' do
+  describe '対戦相手検索のテスト' do
     it '日時からチームを検索する' do
       log_in_as(user)
-      click_on 'スケジュールから対戦相手検索'
+      click_on '対戦相手検索'
       expect(current_path).to eq search_schedule_teams_path
       expect(page).to have_css('.pagination')
       # 検索日時が完全に被っているスケジュールの検索テスト
@@ -41,7 +41,7 @@ RSpec.describe 'スケジュールから対戦相手検索テスト', type: :sys
 
     it '活動エリアからチームを検索する' do
       log_in_as(user)
-      click_on 'スケジュールから対戦相手検索'
+      click_on '対戦相手検索'
       expect(current_path).to eq search_schedule_teams_path
       expect(page).to have_css('.pagination')
       select '青森県', from: 'event_team_search[prefecture_id]'
@@ -54,7 +54,7 @@ RSpec.describe 'スケジュールから対戦相手検索テスト', type: :sys
 
     it 'チームレベルからチームを検索する' do
       log_in_as(user)
-      click_on 'スケジュールから対戦相手検索'
+      click_on '対戦相手検索'
       expect(current_path).to eq search_schedule_teams_path
       expect(page).to have_css('.pagination')
       select '全国大会上位レベル', from: 'event_team_search[level]'

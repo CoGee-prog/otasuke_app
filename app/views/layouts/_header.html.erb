@@ -9,9 +9,11 @@
     <% if logged_in? %>
       <% if belong_team? %>
         <% if current_team.image.attached? %>
-          <%= image_tag(current_team.image, size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
+          <%= image_tag(current_team.image, size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
+          <%= image_tag(current_team.image, size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
         <% else %>
-          <%= image_tag("default_team_image.png", size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon") %>
+          <%= image_tag("default_team_image.png", size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
+          <%= image_tag("default_team_image.png", size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
         <% end %>
         <%= link_to  current_team.name, team_path(current_team) %>
       <% end %>
@@ -48,7 +50,7 @@
   </ul>
   <div class="tab-area">
     <div class="tab-buttons">
-      <div class="tab tab1"><%= link_to "スケジュールから対戦相手検索", search_schedule_teams_path %></div>
+      <div class="tab tab1"><%= link_to "対戦相手検索", search_schedule_teams_path %></div>
       <div class="tab tab2">
         <% if @current_team != nil %>
           <%= link_to "スケジュール管理", event_path(@current_team) %>

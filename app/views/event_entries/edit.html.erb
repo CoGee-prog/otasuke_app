@@ -7,7 +7,7 @@
       </tr>
       <tr>
         <td>
-          <%= @event.day_time.strftime('%m/%d%H:%M') %>
+          <%= @event.day_time.strftime('%m/%d %H:%M') %>
           <%= @event.ground %>
           <% if @event.opponent_team_name.present? %>
             VS<%= @event.opponent_team_name %>

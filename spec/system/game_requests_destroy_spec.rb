@@ -1,4 +1,4 @@
-RSpec.describe 'スケジュールから対戦相手検索テスト', type: :system do
+RSpec.describe '対戦相手検索テスト', type: :system do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
   let!(:team) { FactoryBot.create(:team) }
@@ -7,10 +7,10 @@ RSpec.describe 'スケジュールから対戦相手検索テスト', type: :sys
   let!(:team_member2) { FactoryBot.create(:team_member1, team: other_team1, user: other_user) }
   let!(:game_request) { FactoryBot.create(:game_request) }
 
-  describe 'スケジュールから対戦相手検索の対戦申込削除のテスト' do
+  describe '対戦相手検索の対戦申込削除のテスト' do
     it 'チームを検索し、スケジュール詳細画面に遷移して対戦申込を削除' do
       log_in_as(user)
-      click_on 'スケジュールから対戦相手検索'
+      click_on '対戦相手検索'
       expect(current_path).to eq search_schedule_teams_path
       fill_in 'event_team_search[day_time]', with: '002021-11-21-12:00'
       click_on '検索'

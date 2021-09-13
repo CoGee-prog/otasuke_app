@@ -10,12 +10,12 @@
         <th>△</th>
         <th>×</th>
         <% @members.sort_by {|members| members.user_id}.each do |member| %>
-          <th nowrap><%= User.find(member.user_id).name %></th>
+          <th><%= User.find(member.user_id).name %></th>
         <% end %>
       </tr>
       <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
         <tr>
-          <th nowrap class="fixed" id="event">
+          <th class="fixed" id="event">
             <%= event.day_time.strftime('%m/%d %H:%M') %>
             <%= event.ground %>
             <% if event.opponent_team_name.present? %>
@@ -24,8 +24,10 @@
             <%= event.tournament_name %>
             <%= event.other%>
             <% if @current_team.admin_user_id == @current_user.id %>
+						<span class="beside">
               <span class="btn btn-navy"><%= link_to "編集", edit_event_path(event) %></span>
               <span class="btn btn-red"><%= link_to "削除", event_path(event), method: :delete, data: {confirm: "このスケジュールを削除しますか？"} %></span>
+						</span>
             <% end %>
           </th>
           <% event_option = event.event_option %>
