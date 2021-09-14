@@ -5,7 +5,7 @@ class TeamMember < ApplicationRecord
   validates :user_id, presence: true
 
   after_create :create_team_event_entries
-  after_destroy_commit :destroy_team_event_entries
+  before_destroy :destroy_team_event_entries
 
   # イベント出欠を作成する
   def create_team_event_entries

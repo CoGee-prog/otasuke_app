@@ -32,7 +32,7 @@
   <br>
 </div>
 <% if logged_in? %>
-  <% if current_user.any_team_belong? %>
+  <% if current_user.any_team_belong? && current_team %>
     <% if current_user.id == current_team.admin_user_id %>
       <% if current_team.already_game_requested?(@team) %>
         <div class="center">
