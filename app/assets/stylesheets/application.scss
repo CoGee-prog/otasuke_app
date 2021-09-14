@@ -310,7 +310,7 @@ h2 {
 		padding: 0px 5px;
 	}
 	input {
-		height: auto !important;
+		height: auto;
 	}
 	input[type="file"] {
 		border: none;
@@ -439,6 +439,7 @@ input.form-btn {
 .form-alert-danger {
 	color: red;
 	margin-top: -15px;
+	margin-bottom: 15px;
 	li {
 		list-style: none;
 	}
@@ -650,7 +651,7 @@ input[type="file"] {
 .btn-right {
 	position: absolute;
 	top: 50%;
-	left: 68%;
+	right: 3%;
 	transform: translateY(-50%);
 	display: inline-block;
 	height: auto;
@@ -700,6 +701,7 @@ input[type="file"] {
 	.list {
 		border: #333 1px solid;
 		width: auto;
+		min-width: 300px;
 		padding: 10px;
 		margin: 0 auto -1px;
 		text-align: center;
@@ -1004,6 +1006,7 @@ input[type="file"] {
 			padding: 0px 5px;
 			margin-bottom: 10px;
 			width: 100%;
+			height: 28px;
 		}
 	}
 	.area-level {
@@ -1165,6 +1168,7 @@ input[type="file"] {
 		}
 		> a {
 			margin-right: 10px;
+			width: 150px;
 		}
 	}
 
@@ -1200,16 +1204,16 @@ input[type="file"] {
 	// ホーム画像
 	.home-image {
 		p {
-			font-size: 0.6rem;
+			font-size: 0.8rem;
 			.title {
-				font-size: 1.5rem;
+				font-size: 1.8rem;
 			}
 		}
 	}
 
 	// 入力フォーム
 	.form {
-		width: 100%;
+		width: 90%;
 		max-width: 400px;
 		#login-checkbox {
 			transform: scale(0.8);
@@ -1249,6 +1253,13 @@ input[type="file"] {
 		display: inline-block;
 	}
 
+	// チーム切り替え
+	.team-change {
+		.list{
+			width: 250px;
+		}
+	}
+
 	// スケジュール
 	.events {
 		table {
@@ -1277,6 +1288,7 @@ input[type="file"] {
 			width: 160px;
 			input {
 				padding: 1px;
+				height: 19px;
 			}
 			select {
 				padding: 3px;
