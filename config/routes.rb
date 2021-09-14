@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :password_resets, only:[:new, :create, :edit, :update]
   resources :teams do
     member do
+			patch 'destroy_image'
       get 'list'
       post 'switch' 
       get 'detail_schedule'

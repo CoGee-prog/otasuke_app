@@ -3,7 +3,7 @@ class TeamsController < ApplicationController
   before_action :current_team_admin_user, only: :edit
   before_action :team_edit_current_team_page, only: :edit
   before_action :team_admin_user, only: %i[update destroy]
-  before_action :set_team, only: %i[edit update switch]
+  before_action :set_team, only: %i[edit update switch destroy_image]
   before_action :currect_list_user, only: :list
   before_action :currect_switch_user, only: :switch
 
@@ -45,6 +45,11 @@ class TeamsController < ApplicationController
   end
 
   def edit; end
+
+  def destroy_image
+    @team.image.purge
+    render 'edit'
+  end
 
   def update
     if @team.update(team_params)
