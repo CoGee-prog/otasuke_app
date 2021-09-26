@@ -6,7 +6,7 @@ RSpec.describe UserMailer, type: :mailer do
     it 'ヘッダーのレンダリング' do
       expect(mail.subject).to eq('おたスケ メールアドレス認証')
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(['no-reply@otasuke.com'])
+      expect(mail.from).to eq(['no-reply@otasuke-app.com'])
     end
 
     it '本文のレンダリング' do
@@ -29,7 +29,7 @@ RSpec.describe UserMailer, type: :mailer do
     it 'ヘッダーのレンダリング' do
       expect(mail.subject).to eq('おたスケ パスワード再設定')
       expect(mail.to).to eq([user.email])
-      expect(mail.from).to eq(['no-reply@otasuke.com'])
+      expect(mail.from).to eq(['no-reply@otasuke-app.com'])
     end
 
     it '本文のレンダリング' do
