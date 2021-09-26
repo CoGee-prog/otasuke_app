@@ -394,11 +394,14 @@ input.form-btn {
 	min-height: 30px;
 	line-height: 30px;
 	text-align: center;
-	width: 30%;
+	width: auto;
+	max-width: 324px;
 	border-radius: 5px;
 	margin: 0 auto 15px;
 	font-size: 0.8rem;
 }
+
+
 
 .alert-success {
 	color: #46b446;
