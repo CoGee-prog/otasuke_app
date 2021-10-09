@@ -13,6 +13,8 @@ COPY . /myapp
 
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
+RUN git config --global user.email　"bb.sca.ksk1@gmail.com"
+RUN git config --global user.name "CoGee-prog"
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
