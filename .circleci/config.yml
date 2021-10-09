@@ -21,6 +21,7 @@ jobs:
           command: |
             gem install bundler -v 2.2.29
             bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
       - save_cache:
           paths:
             - ./vendor/bundle
