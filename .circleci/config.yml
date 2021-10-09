@@ -9,7 +9,7 @@ jobs:
       # specify the version you desire here
       - image: circleci/ruby:2.6.7-node-browsers
         environment:
-          - BUNDLER_VERSION: 2.0.2
+          - BUNDLER_VERSION: 2.2.29
           - RAILS_ENV: 'test'
       - image: circleci/mysql:8.0
         environment:
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            gem install bundler -v 2.0.2
+            gem install bundler -v 2.2.29
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:
