@@ -73,5 +73,6 @@ gem 'enum_attributes_validation'
 gem 'faker'
 gem 'kaminari'
 gem 'rails-i18n', '~> 6.0.0'
+gem 'rspec_junit_formatter'
 gem 'rubocop', '~> 1.16', require: false
 gem 'rubocop-rails', '~> 2.10', require: false
