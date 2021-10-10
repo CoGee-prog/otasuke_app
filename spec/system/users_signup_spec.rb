@@ -7,7 +7,7 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
     it '無効なユーザー登録' do
       visit root_path
       click_on '新規登録'
-      expect(current_path).to eq signup_path
+      expect(page).to have_current_path signup_path, ignore_query: true
       expect do
         fill_in 'user[name]', with: ''
         fill_in 'user[email]', with: ''
@@ -19,13 +19,13 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
       expect(page).to have_selector('.form-alert-danger', text: 'メールアドレスを入力してください')
       expect(page).to have_selector('.form-alert-danger', text: 'パスワードは6文字以上で入力してください')
       expect(page).to have_selector('.form-alert-danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
-      expect(current_path).to eq users_path
+      expect(page).to have_current_path users_path, ignore_query: true
     end
 
     it '有効なユーザー登録' do
       visit root_path
       click_on '新規登録'
-      expect(current_path).to eq signup_path
+      expect(page).to have_current_path signup_path, ignore_query: true
       expect do
         fill_in 'user[name]', with: 'hoge'
         fill_in 'user[email]', with: 'hoge@example.com'
@@ -37,7 +37,7 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
         mail = ActionMailer::Base.deliveries.last
         token = mail.text_part.body.encoded[%r{(?<=account_activations/)[^/]+}]
         visit edit_account_activation_path(token, email: user.email)
-        expect(current_path).to eq root_path
+        expect(page).to have_current_path root_path, ignore_query: true
       end.to change(User, :count).by(1)
       expect(page).to have_selector('.dropdown', text: '設定')
       expect(page).to have_selector('.alert-success', text: 'ユーザー登録が完了しました')

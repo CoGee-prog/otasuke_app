@@ -24,10 +24,10 @@ class GameRequestsController < ApplicationController
       if game_request_correct_team_admin_user(@game_request)
         @game_request.destroy
         flash[:success] = if @game_request.requesting_team_id == current_team.id
-                            '対戦申込を取り消しました'
+          '対戦申込を取り消しました'
                           else
                             '試合リクエストを削除しました'
-                          end
+        end
       else
         redirect_to root_path
         return

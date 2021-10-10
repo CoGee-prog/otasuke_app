@@ -12,26 +12,26 @@ RSpec.describe '対戦相手検索テスト', type: :system do
     it 'チームを検索し、スケジュール詳細画面に遷移して有効な対戦申込を作成' do
       log_in_as(user)
       click_on '対戦相手検索'
-      expect(current_path).to eq search_schedule_teams_path
+      expect(page).to have_current_path search_schedule_teams_path, ignore_query: true
       fill_in 'event_team_search[day_time]', with: '002021-11-21-12:00'
       click_on '検索'
       expect(page).to have_content('イーグルス', count: 1)
       expect(page).not_to have_content('ジャイアンツ', count: 1)
       click_on 'スケジュール詳細'
-      expect(current_path).to eq detail_schedule_team_path(other_team1)
+      expect(page).to have_current_path detail_schedule_team_path(other_team1), ignore_query: true
       expect do
         fill_in 'game_request[contact_address]', with: '000-0000-0000'
         fill_in 'game_request[comment]', with: 'よろしくお願いします！'
         click_on '対戦を申し込む'
       end.to change(GameRequest, :count).by(1)
       expect(page).to have_selector('.alert-success', text: '対戦を申し込みました')
-      expect(current_path).to eq detail_schedule_team_path(other_team1)
+      expect(page).to have_current_path detail_schedule_team_path(other_team1), ignore_query: true
     end
 
     it '無効な対戦申込' do
       log_in_as(user)
       visit detail_schedule_team_path(other_team1)
-      expect(current_path).to eq detail_schedule_team_path(other_team1)
+      expect(page).to have_current_path detail_schedule_team_path(other_team1), ignore_query: true
       expect do
         fill_in 'game_request[comment]', with: 'よろしくお願いします！'
         click_on '対戦を申し込む'

@@ -5,11 +5,11 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
     it '空の情報でのログイン' do
       visit root_path
       click_on 'ログイン'
-      expect(current_path).to eq login_path
+      expect(page).to have_current_path login_path, ignore_query: true
       fill_in 'session[email]', with: ''
       fill_in 'session[password]', with: ''
       find('#login-btn').click
-      expect(current_path).to eq login_path
+      expect(page).to have_current_path login_path, ignore_query: true
       expect(page).to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
       visit root_path
       expect(page).not_to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
@@ -18,11 +18,11 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
     it 'メールアドレスは正しいが、パスワードが間違っている' do
       visit root_path
       click_on 'ログイン'
-      expect(current_path).to eq login_path
+      expect(page).to have_current_path login_path, ignore_query: true
       fill_in 'session[email]', with: user.email
       fill_in 'session[password]', with: 'hogehoge'
       find('#login-btn').click
-      expect(current_path).to eq login_path
+      expect(page).to have_current_path login_path, ignore_query: true
       expect(page).to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
       visit root_path
       expect(page).not_to have_selector('.alert-danger', text: 'メールアドレスまたはパスワードが間違っています')
@@ -32,14 +32,14 @@ RSpec.describe 'ユーザーログインテスト', type: :system do
   describe '有効な情報でのログイン' do
     it '有効な情報でのログイン' do
       log_in_as(user)
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.alert-success', text: 'ログインしました')
       expect(page).to have_selector('.dropdown', text: '設定')
     end
 
     it '有効な情報でログインし、その後にログアウトする' do
       log_in_as(user)
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).not_to have_link '新規登録'
       expect(page).not_to have_link 'ログイン'
       expect(page).to have_selector('.dropdown', text: '設定')

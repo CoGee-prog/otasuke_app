@@ -11,7 +11,7 @@ RSpec.describe 'ユーザー検索テスト', type: :system do
       expect do
         click_link('削除', match: :first)
       end.to change(User, :count).from(31).to(30)
-      expect(current_path).to eq users_path
+      expect(page).to have_current_path users_path, ignore_query: true
       expect(page).to have_selector('.alert-success', text: 'ユーザーを削除しました')
     end
   end

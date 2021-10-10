@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user, class: User do
+  factory :user, class: 'User' do
     id { 1 }
     name { 'イチロー' }
     email { 'ichiro@example.com' }
@@ -11,7 +11,7 @@ FactoryBot.define do
     current_team_id { 1 }
   end
 
-  factory :other_user, class: User do
+  factory :other_user, class: 'User' do
     id { 2 }
     name { 'ジロー' }
     email { 'jiro@example.com' }
@@ -22,7 +22,7 @@ FactoryBot.define do
     current_team_id { 2 }
   end
 
-  factory :not_admin_user, class: User do
+  factory :not_admin_user, class: 'User' do
     id { 3 }
     name { 'サブロー' }
     email { 'saburo@example.com' }
@@ -33,7 +33,7 @@ FactoryBot.define do
     current_team_id { 1 }
   end
 
-  factory :unrelated_user, class: User do
+  factory :unrelated_user, class: 'User' do
     id { 4 }
     name { 'シロー' }
     email { 'shiro@example.com' }
@@ -44,7 +44,7 @@ FactoryBot.define do
     current_team_id { 2 }
   end
 
-  factory :users, class: User do
+  factory :users, class: 'User' do
     sequence(:id) { |n| n + 1 }
     name { Faker::Name.name }
     email { Faker::Internet.email }

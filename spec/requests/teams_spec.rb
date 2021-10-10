@@ -72,12 +72,12 @@ RSpec.describe 'Teams', type: :request do
 
     it '対戦相手検索にアクセスできる' do
       get search_schedule_teams_path
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
 
     it '対戦相手検索詳細にアクセスできる' do
       get detail_schedule_team_path(team)
-      expect(response).to have_http_status(200)
+      expect(response).to have_http_status(:ok)
     end
   end
 

@@ -14,13 +14,13 @@ RSpec.describe 'ユーザー編集テスト', type: :system do
       expect(page).to have_selector('.form-alert-danger', text: 'メールアドレスを入力してください')
       expect(page).to have_selector('.form-alert-danger', text: 'パスワードは6文字以上で入力してください')
       expect(page).to have_selector('.form-alert-danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
-      expect(current_path).to eq user_path(user)
+      expect(page).to have_current_path user_path(user), ignore_query: true
     end
 
     it 'editのフレンドリーフォワーディングが成功し、ユーザープロフィールの編集が成功する' do
       visit edit_user_path(user)
       log_in_as(user)
-      expect(current_path).to eq edit_user_path(user)
+      expect(page).to have_current_path edit_user_path(user), ignore_query: true
       name = 'hoge'
       email = 'hoge@example.com'
       fill_in 'user[name]', with: name
@@ -28,7 +28,7 @@ RSpec.describe 'ユーザー編集テスト', type: :system do
       fill_in 'user[password]', with: ''
       fill_in 'user[password_confirmation]', with: ''
       click_on '更新する'
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.alert-success', text: 'ユーザープロフィールを更新しました')
       user.reload
       expect(user.name).to eq name
@@ -38,11 +38,11 @@ RSpec.describe 'ユーザー編集テスト', type: :system do
     it 'editのフレンドリーフォワーディングが成功した後、session[:forwarding_url]の値が削除されている' do
       visit edit_user_path(user)
       log_in_as(user)
-      expect(current_path).to eq edit_user_path(user)
+      expect(page).to have_current_path edit_user_path(user), ignore_query: true
       click_on 'ログアウト'
       expect(page).to have_selector('.alert-success', text: 'ログアウトしました')
       log_in_as(user)
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.alert-success', text: 'ログインしました')
     end
   end
