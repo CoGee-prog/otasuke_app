@@ -14,7 +14,7 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'script/**/*'
-    - 'vendor/'
+    - 'vendor/**/*'
     - !ruby/regexp /old_and_unused\.rb$/
   Rails:
     enabled: true
