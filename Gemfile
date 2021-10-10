@@ -49,6 +49,11 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   # gem 'spring'
+  gem 'capistrano'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano3-unicorn'
 end
 
 group :test do
@@ -77,3 +82,4 @@ gem 'rspec_junit_formatter'
 gem 'rubocop', '~> 1.16', require: false
 gem 'rubocop-rails', '~> 2.10', require: false
 gem 'rubocop-discourse'
+gem 'dotenv-rails'
