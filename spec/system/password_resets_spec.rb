@@ -9,7 +9,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       visit root_path
       click_on 'ログイン'
       click_on 'パスワードをお忘れですか？'
-      expect(current_path).to eq new_password_reset_path
+      expect(page).to have_current_path new_password_reset_path, ignore_query: true
     end
 
     it 'メールアドレスが無効な場合' do
@@ -23,7 +23,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       password_reset_as(user)
       expect(user.reset_digest).not_to eq user.reload.reset_digest
       expect(ActionMailer::Base.deliveries.size).to eq 1
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.alert-info', text: 'パスワード再設定のメールを送信しました')
     end
   end
@@ -37,23 +37,23 @@ RSpec.describe 'パスワードの再設定', type: :system do
 
     it 'メールアドレスが無効' do
       visit edit_password_reset_path(reset_token, email: '')
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
     end
 
     it '無効なユーザー' do
       user.update(activated: false)
       visit edit_password_reset_path(reset_token, email: user.email)
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
     end
 
     it 'メールアドレスが有効で、トークンが無効' do
       visit edit_password_reset_path('wrong_token', email: user.email)
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
     end
 
     it 'メールアドレスもトークンも有効' do
       visit edit_password_reset_path(reset_token, email: user.email)
-      expect(current_path).to eq edit_password_reset_path(reset_token)
+      expect(page).to have_current_path edit_password_reset_path(reset_token), ignore_query: true
       expect(find('input[name=email][type=hidden]', visible: false).value).to eq user.email
     end
 
@@ -78,7 +78,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       fill_in 'user[password]', with: 'hogehoge'
       fill_in 'user[password_confirmation]', with: 'hogehoge'
       click_on 'パスワードを更新する'
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.dropdown', text: '設定')
       expect(page).to have_selector('.alert-success', text: 'パスワードの再設定が完了しました')
     end

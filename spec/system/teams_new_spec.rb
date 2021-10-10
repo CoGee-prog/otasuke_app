@@ -5,7 +5,7 @@ RSpec.describe 'チーム登録テスト', type: :system do
     it '無効なチーム登録' do
       log_in_as(user)
       click_on 'チーム作成'
-      expect(current_path).to eq new_team_path
+      expect(page).to have_current_path new_team_path, ignore_query: true
       expect do
         fill_in 'team[name]', with: ''
         click_on '登録する'
@@ -14,13 +14,13 @@ RSpec.describe 'チーム登録テスト', type: :system do
       expect(page).to have_selector('.form-alert-danger', text: 'チームレベルを入力してください')
       expect(page).to have_selector('.form-alert-danger', text: '活動エリアを入力してください')
       expect(page).to have_selector('.form-alert-danger', text: '活動曜日を1つ以上選択してください')
-      expect(current_path).to eq teams_path
+      expect(page).to have_current_path teams_path, ignore_query: true
     end
 
     it '有効なチーム登録' do
       log_in_as(user)
       click_on 'チーム作成'
-      expect(current_path).to eq new_team_path
+      expect(page).to have_current_path new_team_path, ignore_query: true
       expect do
         fill_in 'team[name]', with: 'ジャイアンツ'
         select '全国大会上位レベル', from: 'team[level]'
@@ -33,7 +33,7 @@ RSpec.describe 'チーム登録テスト', type: :system do
         click_on '登録する'
       end.to change(Team, :count).by(1)
       expect(page).to have_selector('.alert-success', text: 'チームを作成しました')
-      expect(current_path).to eq root_path
+      expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.menu', text: 'ジャイアンツ')
     end
   end

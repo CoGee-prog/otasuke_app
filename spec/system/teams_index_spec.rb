@@ -10,7 +10,7 @@ RSpec.describe '所属チーム検索テスト', type: :system do
     it 'チームを検索する' do
       log_in_as(user)
       click_on '所属チーム検索'
-      expect(current_path).to eq teams_path
+      expect(page).to have_current_path teams_path, ignore_query: true
       expect(page).to have_css('.pagination')
       fill_in 'search', with: 'イーグルス'
       click_on '検索'

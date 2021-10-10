@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :team, class: Team do
+  factory :team, class: 'Team' do
     id { 1 }
     name { 'ファイターズ' }
     admin_user_id { 1 }
@@ -15,7 +15,7 @@ FactoryBot.define do
     activity_frequency { '週2回' }
   end
 
-  factory :other_team1, class: Team do
+  factory :other_team1, class: 'Team' do
     id { 2 }
     name { 'イーグルス' }
     admin_user_id { 2 }
@@ -31,7 +31,7 @@ FactoryBot.define do
     activity_frequency { '週2回' }
   end
 
-  factory :other_team2, class: Team do
+  factory :other_team2, class: 'Team' do
     id { 3 }
     name { 'ジャイアンツ' }
     admin_user_id { 2 }
@@ -47,7 +47,7 @@ FactoryBot.define do
     activity_frequency { '週2回' }
   end
 
-  factory :other_team3, class: Team do
+  factory :other_team3, class: 'Team' do
     id { 4 }
     name { 'ドラゴンズ' }
     admin_user_id { 2 }
@@ -63,7 +63,7 @@ FactoryBot.define do
     activity_frequency { '週2回' }
   end
 
-  factory :other_team4, class: Team do
+  factory :other_team4, class: 'Team' do
     id { 5 }
     name { 'ホークス' }
     admin_user_id { 3 }
@@ -79,7 +79,7 @@ FactoryBot.define do
     activity_frequency { '週2回' }
   end
 
-  factory :teams, class: Team do
+  factory :teams, class: 'Team' do
     name { Faker::Name.name }
     admin_user_id { 1 }
     level { '試合経験はほぼない' }

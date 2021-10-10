@@ -11,9 +11,9 @@ RSpec.describe 'チーム切り替えテスト', type: :system do
       log_in_as(user)
       expect(page).to have_selector('.menu', text: 'ファイターズ')
       click_on 'チーム切り替え'
-      expect(current_path).to eq list_team_path(user)
+      expect(page).to have_current_path list_team_path(user), ignore_query: true
       click_on 'イーグルス'
-      expect(current_path).to eq event_path(other_team1)
+      expect(page).to have_current_path event_path(other_team1), ignore_query: true
       expect(page).to have_selector('.menu', text: 'イーグルス')
     end
   end

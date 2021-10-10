@@ -14,7 +14,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
     it '日時からチームを検索する' do
       log_in_as(user)
       click_on '対戦相手検索'
-      expect(current_path).to eq search_schedule_teams_path
+      expect(page).to have_current_path search_schedule_teams_path, ignore_query: true
       expect(page).to have_css('.pagination')
       # 検索日時が完全に被っているスケジュールの検索テスト
       fill_in 'event_team_search[day_time]', with: '002021-11-21-12:00'
@@ -42,7 +42,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
     it '活動エリアからチームを検索する' do
       log_in_as(user)
       click_on '対戦相手検索'
-      expect(current_path).to eq search_schedule_teams_path
+      expect(page).to have_current_path search_schedule_teams_path, ignore_query: true
       expect(page).to have_css('.pagination')
       select '青森県', from: 'event_team_search[prefecture_id]'
       click_on '検索'
@@ -55,7 +55,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
     it 'チームレベルからチームを検索する' do
       log_in_as(user)
       click_on '対戦相手検索'
-      expect(current_path).to eq search_schedule_teams_path
+      expect(page).to have_current_path search_schedule_teams_path, ignore_query: true
       expect(page).to have_css('.pagination')
       select '全国大会上位レベル', from: 'event_team_search[level]'
       click_on '検索'

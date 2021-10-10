@@ -9,13 +9,13 @@ RSpec.describe 'スケジュール出欠編集テスト', type: :system do
     it '有効なスケジュール出欠編集' do
       log_in_as(user)
       click_on 'スケジュール管理'
-      expect(current_path).to eq event_path(team)
+      expect(page).to have_current_path event_path(team), ignore_query: true
       expect(page).to have_selector('#event', text: '08/03 13:00 札幌ドーム VSイーグルス パ・リーグトーナメント 三塁側 編集 削除')
       click_on ' - '
-      expect(current_path).to eq edit_event_entry_path(event_entry)
+      expect(page).to have_current_path edit_event_entry_path(event_entry), ignore_query: true
       choose '◯'
       click_on '更新する'
-      expect(current_path).to eq event_path(team)
+      expect(page).to have_current_path event_path(team), ignore_query: true
       expect(page).to have_selector('.alert-success', text: '出欠を更新しました')
       expect(page).to have_selector('.entry', text: ' ◯ ')
     end

@@ -6,19 +6,19 @@ RSpec.describe 'スケジュール登録テスト', type: :system do
   it '無効なスケジュール登録' do
     log_in_as(user)
     click_on 'スケジュール管理'
-    expect(current_path).to eq event_path(team)
+    expect(page).to have_current_path event_path(team), ignore_query: true
     click_on '新しいスケジュールを登録する'
     expect do
       click_on '登録する'
     end.not_to change(Event, :count)
     expect(page).to have_selector('.form-alert-danger', text: '日時を入力してください')
-    expect(current_path).to eq events_path
+    expect(page).to have_current_path events_path, ignore_query: true
   end
 
   it '有効なスケジュール登録' do
     log_in_as(user)
     click_on 'スケジュール管理'
-    expect(current_path).to eq event_path(team)
+    expect(page).to have_current_path event_path(team), ignore_query: true
     click_on '新しいスケジュールを登録する'
     expect do
       fill_in 'event[day_time]', with: '002021-11-01-10:00'
@@ -29,7 +29,7 @@ RSpec.describe 'スケジュール登録テスト', type: :system do
       click_on '登録する'
     end.to change(Event, :count).by(1)
     expect(page).to have_selector('.alert-success', text: 'スケジュールを登録しました')
-    expect(current_path).to eq event_path(team)
+    expect(page).to have_current_path event_path(team), ignore_query: true
     expect(page).to have_selector('#event', text: '11/01 10:00 札幌ドーム VSイーグルス パ・リーグトーナメント 三塁側 編集 削除')
   end
 end

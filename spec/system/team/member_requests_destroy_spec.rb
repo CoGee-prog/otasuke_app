@@ -11,11 +11,11 @@ RSpec.describe 'チームのメンバーリクエスト削除テスト', type: :
       log_in_as(user)
       click_on '所属リクエスト'
       expect(page).to have_css('.pagination')
-      expect(current_path).to eq team_member_request_path(team.id)
+      expect(page).to have_current_path team_member_request_path(team.id), ignore_query: true
       expect do
         click_link('拒否する', match: :first)
       end.to change(MemberRequest, :count).by(-1)
-      expect(current_path).to eq team_member_request_path(team.id)
+      expect(page).to have_current_path team_member_request_path(team.id), ignore_query: true
       expect(page).to have_selector('.alert-success', text: 'チーム所属申請を拒否しました')
     end
   end
