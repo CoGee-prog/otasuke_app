@@ -2,23 +2,23 @@
 lock "~> 3.16.0"
 
 set :application, "otasuke_app"
-set :deploy_to, '/var/www/rails/otasuke_app'
+set :deploy_to, '/var/www/otasuke_app'
 
-set :repo_url, "git@example.com:CoGee-prog/otasuke_app.git"
+set :repo_url, "git@github.com:CoGee-prog/otasuke_app.git"
 
 append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
 
 set :ssh_options, {
   auth_methods: ['publickey'], 
-  keys: ['~/.ssh/otasuke.pem'] 
+  keys: ['~/.ssh/otasuke.pem'],
+	forward_agent: true
 }
 
 set :keep_releases, 5
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.7'
-# set :rbenv_path, '/home/ec2-user/.rbenv'
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 
