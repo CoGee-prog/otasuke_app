@@ -18,6 +18,7 @@ set :keep_releases, 5
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.7'
+# set :rbenv_path, '/home/ec2-user/.rbenv'
 
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 
