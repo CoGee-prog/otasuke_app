@@ -15,7 +15,7 @@ set :ssh_options, {
 	forward_agent: true
 }
 
-set :keep_releases, 5
+set :keep_releases, 3
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.6.7'
