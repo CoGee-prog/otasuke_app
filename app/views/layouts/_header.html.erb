@@ -10,10 +10,10 @@
       <% if belong_team? %>
         <% if current_team.image.attached? %>
           <%= image_tag(current_team.image, size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
-          <%= image_tag(current_team.image, size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
+          <%= image_tag(current_team.image, size: "15x15", gravity: :center, crop: "15x15+0+0", class: "icon sp") %>
         <% else %>
           <%= image_tag("default_team_image.png", size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
-          <%= image_tag("default_team_image.png", size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
+          <%= image_tag("default_team_image.png", size: "15x15", gravity: :center, crop: "15x15+0+0", class: "icon sp") %>
         <% end %>
         <%= link_to  current_team.name, team_path(current_team) %>
       <% end %>
