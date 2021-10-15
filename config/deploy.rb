@@ -1,4 +1,3 @@
-# config valid for current version and patch releases of Capistrano
 lock "~> 3.16.0"
 
 set :application, "otasuke_app"
@@ -8,8 +7,6 @@ set :repo_url, "git@github.com:CoGee-prog/otasuke_app.git"
 
 append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
-
-
 
 set :keep_releases, 3
 
