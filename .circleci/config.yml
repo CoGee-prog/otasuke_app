@@ -55,4 +55,5 @@ jobs:
       - deploy:
           name: Capistrano deploy
           command: |
-            bundle exec cap production deploy
+            # bundle exec cap production deploy
+            ssh kosuke@13.114.166.139
