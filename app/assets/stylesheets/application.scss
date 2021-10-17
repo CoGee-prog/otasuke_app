@@ -4,6 +4,10 @@
 
 // フォント
 
+* {
+	font-family: sans-serif;
+}
+
 @font-face {
 	font-family: “RocknRollOne-Regular”;
 	src: url("/assets/RocknRollOne-Regular.ttf") format("truetype");
@@ -1146,7 +1150,7 @@ input[type="file"] {
 
 	// 共通
 	* {
-		font-size: 0.75rem;
+		font-size: 0.8rem;
 	}
 	.container {
 		width: 95%;
@@ -1194,6 +1198,11 @@ input[type="file"] {
 		height: 28px;
 		line-height: 24px;
 		margin-bottom: 5px;
+		.tab{
+			a{
+				font-size: 1.0rem;
+			}
+		}
 		.tab-buttons {
 			width: 100%;
 			.tab1#lamp {
