@@ -13,7 +13,7 @@ class TeamsController < ApplicationController
 
   def destroy
     Team.find(params[:id]).destroy
-    flash.now[:success] = 'チームを削除しました'
+    flash[:success] = 'チームを削除しました'
     redirect_to root_path
   end
 

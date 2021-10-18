@@ -72,7 +72,6 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
 gem 'active_hash', '~> 2.3.0'
 gem 'enum_attributes_validation'
 gem 'faker'
