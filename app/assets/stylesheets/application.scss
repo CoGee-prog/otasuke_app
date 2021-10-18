@@ -822,7 +822,7 @@ input[type="file"] {
 			border: 1px solid #333;
 			text-align: center;
 			padding: 5px;
-			min-width: 42px;
+			min-width: 47px;
 		}
 		td {
 			padding: 10px;
@@ -1301,6 +1301,10 @@ input[type="file"] {
 					min-width: 160px;
 				}
 			}
+		}
+		th,
+		td {
+			min-width: 42px;
 		}
 	}
 
