@@ -5,9 +5,12 @@
 https://otasuke-app.com/  
 
 <img width="1426" alt="ホーム画面" src="https://user-images.githubusercontent.com/80146722/137755877-c5d5c167-0a31-4ed9-b36b-72eeed4c637f.png">  
-
+　　
+  
 <img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/138394106-dda03690-98f7-43af-8050-e0b7815dc14f.gif">  
-
+　　
+  
+<img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/138395344-5a696697-a3a4-43f7-ae57-d872e92114b2.gif">  
 
 # 使用技術  
 * Ruby 2.6.7  
@@ -61,10 +64,10 @@ https://otasuke-app.com/
 	* 出欠回答機能  
 	* 出欠合計計算機能  
 * 対戦相手検索機能  
-	* 指定した日時が空いているチーム検索機能
+	* 指定した日時のスケジュールが空いているチーム検索機能
 	* 活動エリア検索機能
 	* チームレベル検索機能  
-	* スケジュール詳細閲覧機能
+	* スケジュール詳細閲覧機能  
 * 対戦申込機能  
 	* 連絡先、コメント送信機能
 	* 画像送信機能(QRコード等)
