@@ -4,8 +4,10 @@
 レスポンシブ対応しているため、スマホからもご確認いただけます。  
 https://otasuke-app.com/  
 
-<img width="1426" alt="スクリーンショット 2021-10-18 23 32 08" src="https://user-images.githubusercontent.com/80146722/137755877-c5d5c167-0a31-4ed9-b36b-72eeed4c637f.png">  
-![おたスケ スケジュール管理](https://user-images.githubusercontent.com/80146722/138393189-716bfb80-e346-496f-8ac7-0dabdbdb5248.gif)
+<img width="1426" alt="ホーム画面" src="https://user-images.githubusercontent.com/80146722/137755877-c5d5c167-0a31-4ed9-b36b-72eeed4c637f.png">  
+
+<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/138393791-5b6870bc-e796-45f4-9492-f75465f68dca.gif">  
+
 
 # 使用技術  
 * Ruby 2.6.7  
