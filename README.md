@@ -7,7 +7,7 @@ https://otasuke-app.com/
 <img width="1426" alt="ホーム画面" src="https://user-images.githubusercontent.com/80146722/137755877-c5d5c167-0a31-4ed9-b36b-72eeed4c637f.png">  
 　　
   
-<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/138394106-dda03690-98f7-43af-8050-e0b7815dc14f.gif">  
+<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/138408013-cab5e57a-0f65-4d42-afd6-eaae19b883c0.gif">  
 　　
   
 <img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/138395344-5a696697-a3a4-43f7-ae57-d872e92114b2.gif">  
