@@ -33,7 +33,7 @@ RSpec.describe 'スケジュール編集テスト', type: :system do
       click_on '更新する'
       expect(page).to have_selector('.alert-success', text: 'スケジュールを更新しました')
       expect(page).to have_current_path event_path(team), ignore_query: true
-      expect(page).to have_selector('#event', text: '12/01 10:00 東京ドーム VSジャイアンツ 交流戦 三塁側 編集 削除')
+      expect(page).to have_selector('#event', text: '12/01(水) 10:00 東京ドーム VSジャイアンツ 交流戦 三塁側 編集 削除')
     end
   end
 end

@@ -30,6 +30,6 @@ RSpec.describe 'スケジュール登録テスト', type: :system do
     end.to change(Event, :count).by(1)
     expect(page).to have_selector('.alert-success', text: 'スケジュールを登録しました')
     expect(page).to have_current_path event_path(team), ignore_query: true
-    expect(page).to have_selector('#event', text: '11/01 10:00 札幌ドーム VSイーグルス パ・リーグトーナメント 三塁側 編集 削除')
+    expect(page).to have_selector('#event', text: '11/01(月) 10:00 札幌ドーム VSイーグルス パ・リーグトーナメント 三塁側 編集 削除')
   end
 end

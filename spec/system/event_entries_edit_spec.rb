@@ -10,7 +10,7 @@ RSpec.describe 'スケジュール出欠編集テスト', type: :system do
       log_in_as(user)
       click_on 'スケジュール管理'
       expect(page).to have_current_path event_path(team), ignore_query: true
-      expect(page).to have_selector('#event', text: '08/03 13:00 札幌ドーム VSイーグルス パ・リーグトーナメント 三塁側 編集 削除')
+      expect(page).to have_selector('#event', text: '08/03(火) 13:00 札幌ドーム VSイーグルス パ・リーグトーナメント 三塁側 編集 削除')
       click_on ' - '
       expect(page).to have_current_path edit_event_entry_path(event_entry), ignore_query: true
       choose '◯'
