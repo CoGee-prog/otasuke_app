@@ -10,7 +10,7 @@
         <th>△</th>
         <th>×</th>
         <% @members.sort_by {|members| members.user_id}.each do |member| %>
-          <th><%= User.find(member.user_id).name %></th>
+          <th nowrap><%= User.find(member.user_id).name %></th>
         <% end %>
       </tr>
       <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
