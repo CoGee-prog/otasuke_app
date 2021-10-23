@@ -75,7 +75,11 @@ class TeamsController < ApplicationController
 
   def search_schedule
     @event_search_params = event_search_params
-    @teams = Team.event_team_search(@event_search_params).distinct.page(params[:page])
+    if logged_in? && current_team
+      @teams = Team.where.not(id: current_team.id).event_team_search(@event_search_params).distinct.page(params[:page])
+    else
+      @teams = Team.event_team_search(@event_search_params).distinct.page(params[:page])
+    end
   end
 
   def detail_schedule
