@@ -1253,6 +1253,9 @@ input[type="file"] {
 			justify-content: flex-start;
 			margin-top: -15px;
 		}
+		input, textarea{
+			height: 25px;
+		}
 	}
 
 	.alert {
