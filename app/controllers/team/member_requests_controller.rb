@@ -10,7 +10,7 @@ class Team::MemberRequestsController < ApplicationController
   def destroy
     if (@request = MemberRequest.find_by(id: params[:id]))
       @team = Team.find(@request.team_id)
-      if @team.admin_user_id == current_user.id
+      if (@team.admin_user_id == current_user.id)
         @request.destroy
         flash[:success] = 'チーム所属申請を拒否しました'
         redirect_to team_member_request_path(@team)
@@ -26,7 +26,7 @@ class Team::MemberRequestsController < ApplicationController
   private
 
   def member_request_current_team_page
-    return if current_team.id == params[:id].to_i
+    return if (current_team.id == params[:id].to_i)
 
     redirect_to team_member_request_path(current_team)
   end

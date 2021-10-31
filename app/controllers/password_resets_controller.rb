@@ -6,8 +6,7 @@ class PasswordResetsController < ApplicationController
   def new; end
 
   def create
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
-    if @user
+    if @user = User.find_by(email: params[:password_reset][:email].downcase)
       @user.create_reset_digest
       @user.send_password_reset_email
       flash[:info] = 'パスワード再設定のメールを送信しました'

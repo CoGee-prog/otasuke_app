@@ -2,9 +2,9 @@ require 'date'
 class Team < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  has_many :team_members, dependent: :destroy
   has_many :users, through: :team_members
   has_many :member_requests, dependent: :destroy
-  has_many :team_members, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :requesting_team, class_name: 'GameRequest', foreign_key: 'requesting_team_id', dependent: :destroy,
                              inverse_of: 'requesting_team'

@@ -9,11 +9,11 @@
         <th>◯</th>
         <th>△</th>
         <th>×</th>
-        <% @members.sort_by {|members| members.user_id}.each do |member| %>
-          <th nowrap><%= User.find(member.user_id).name %></th>
+        <% @team.users.sort_by(&:id).each do |member| %>
+          <th nowrap><%= member.name %></th>
         <% end %>
       </tr>
-      <% @events.sort_by {|events| [events.day_time]}.each do |event| %>
+      <% @events.sort_by(&:day_time).each do |event| %>
         <tr>
           <th class="fixed" id="event">
             <%= event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event.day_time.wday] %>)

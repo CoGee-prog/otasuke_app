@@ -19,11 +19,10 @@ class GameRequestsController < ApplicationController
   end
 
   def destroy
-    @game_request = GameRequest.find_by(id: params[:id])
-    if @game_request
+    if (@game_request = GameRequest.find_by(id: params[:id]))
       if game_request_correct_team_admin_user(@game_request)
         @game_request.destroy
-        flash[:success] = if @game_request.requesting_team_id == current_team.id
+        flash[:success] = if (@game_request.requesting_team_id == current_team.id)
           '対戦申込を取り消しました'
                           else
                             '試合リクエストを削除しました'
@@ -58,7 +57,7 @@ class GameRequestsController < ApplicationController
 
   # 現在のチームの試合リクエスト一覧か確認し、違う場合は現在のチームの試合リクエスト一覧画面にリダイレクトする
   def game_request_current_team_page
-    return if current_team.id == params[:id].to_i
+    return if (current_team.id == params[:id].to_i)
 
     redirect_to game_request_path(current_team)
   end
