@@ -12,7 +12,7 @@ class GameRequest < ApplicationRecord
 
   # 連絡先か画像のどちらかが入力されていること
   def required_contact_address_or_image
-    return if contact_address.present? || image.present?
+    return if (contact_address.present? || image.present?)
 
     errors.add(:contact_address, '、LINEQRコード等はどちらか1つは必ず入力してください')
   end

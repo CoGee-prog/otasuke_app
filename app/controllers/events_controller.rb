@@ -21,7 +21,7 @@ class EventsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @events = @team.events
-    @members = @team.team_members
+    # @members = @team.team_members
   end
 
   def edit
@@ -35,19 +35,18 @@ class EventsController < ApplicationController
     if @event
       if @event.update(event_params)
         flash[:success] = 'スケジュールを更新しました'
-        redirect_to event_path(current_team)
       else
         render 'edit'
+        return
       end
     else
       flash[:danger] = 'スケジュールは既に削除されています'
-      redirect_to event_path(current_team)
     end
+    redirect_to event_path(current_team)
   end
 
   def destroy
-    event = Event.find_by(id: params[:id])
-    if event
+    if (event = Event.find_by(id: params[:id]))
       event.destroy
       flash[:success] = 'スケジュールを削除しました'
     else

@@ -5,22 +5,21 @@ class User::MemberRequestsController < ApplicationController
     @team = Team.find(params[:team_id])
     if TeamMember.find_by(team_id: @team.id, user_id: current_user.id)
       flash[:danger] = '既にチームに所属しています'
-      redirect_to teams_path
     else
       @request = current_user.member_requests.new(team_id: @team.id)
       if @request.save
         flash[:success] = 'チーム所属申請を送信しました'
-        redirect_to teams_path
       else
         redirect_to root_path
+        return
       end
     end
+    redirect_to teams_path
   end
 
   def destroy
     @team = Team.find(params[:id])
-    @request = current_user.member_requests.find_by(team_id: @team.id)
-    if @request
+    if (@request = current_user.member_requests.find_by(team_id: @team.id))
       @request.destroy
       flash[:success] = 'チーム所属申請を取り消しました'
     else
