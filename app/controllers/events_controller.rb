@@ -21,7 +21,6 @@ class EventsController < ApplicationController
   def show
     @team = Team.find(params[:id])
     @events = @team.events
-    # @members = @team.team_members
   end
 
   def edit
