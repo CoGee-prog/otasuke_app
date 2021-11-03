@@ -32,6 +32,21 @@ gem 'bcrypt', '~> 3.1.13'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'active_hash', '~> 2.3.0'
+gem 'enum_attributes_validation'
+gem 'faker'
+gem 'kaminari'
+gem 'rails-i18n', '~> 6.0.0'
+gem 'rspec_junit_formatter'
+gem 'rubocop', '~> 1.16', require: false
+gem 'rubocop-rails', '~> 2.10', require: false
+gem 'rubocop-discourse'
+gem 'dotenv-rails'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry-byebug'
@@ -69,16 +84,3 @@ end
 group :production, :staging do
   gem 'unicorn'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'active_hash', '~> 2.3.0'
-gem 'enum_attributes_validation'
-gem 'faker'
-gem 'kaminari'
-gem 'rails-i18n', '~> 6.0.0'
-gem 'rspec_junit_formatter'
-gem 'rubocop', '~> 1.16', require: false
-gem 'rubocop-rails', '~> 2.10', require: false
-gem 'rubocop-discourse'
-gem 'dotenv-rails'

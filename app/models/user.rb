@@ -90,7 +90,28 @@ class User < ApplicationRecord
   def any_team_belong?
     team_members.present?
   end
+	
+	class << self		
+		# Googleログイン処理
+		def find_or_create_from_auth_hash(auth_hash)
+      user_params = user_params_from_auth_hash(auth_hash)
+      find_or_create_by(email: user_params[:email]) do |user|
+        user.update(user_params)
+      end
+		end
 
+		private
+
+		# Googleログイン処理
+		def user_params_from_auth_hash(auth_hash)
+				{
+					name: auth_hash.info.name,
+					email: auth_hash.info.email,
+				}
+		end
+
+	end
+		
   private
 
   # メールアドレスをすべて小文字にする
@@ -103,4 +124,6 @@ class User < ApplicationRecord
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
+
+
 end
