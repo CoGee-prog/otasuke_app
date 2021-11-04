@@ -20,13 +20,22 @@ class SessionsController < ApplicationController
     end
   end
 
-	def create_google
-		if (user = User.find_or_create_from_auth_hash(auth_hash))
+  def create_google
+    google_user = User.from_omniauth(request.env["omniauth.auth"])
+    if (user = User.find_by(email: google_user.email))
       log_in user
-			flash[:success] = 'ログインしました'
+      flash[:success] = 'ログインしました'
+    else
+      if user.save
+        log_in user
+        flash[:success] = 'Googleアカウントから新規登録しました'
+      else
+        flash[:danger] = 'Googleアカウントからの登録に失敗しました'
+        redirect_to new_user_path
+      end
     end
     redirect_to root_path
-	end
+  end
 
   def destroy
     log_out if logged_in?
@@ -34,9 +43,9 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
-	private
-	
-	def auth_hash
+  private
+
+  def auth_hash
     request.env['omniauth.auth']
   end
 end
