@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   root 'static_pages#home'
-  get 'no_event' => 'static_pages#event'
+  get 'no_event', to: 'static_pages#event'
   get '/signup', to: 'users#new'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
+	get 'auth/:provider/callback', to: 'sessions#create_google'
+  get 'auth/failure', to: redirect('/')
   delete '/logout', to: 'sessions#destroy'
   resources :users, except: :show
   resources :account_activations, only:[:edit]
