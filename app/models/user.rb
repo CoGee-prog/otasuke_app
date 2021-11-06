@@ -93,12 +93,11 @@ class User < ApplicationRecord
 
   # Googleログイン処理
   def self.from_omniauth(auth)
-    where(email: auth.email).first_or_initialize.tap do |user|
+    where(email: auth.email).first_or_initialize do |user|
       user.name = auth.info.name
       user.email = auth.info.email
       user.password = SecureRandom.urlsafe_base64
       user.activate
-      return user
     end
   end
 

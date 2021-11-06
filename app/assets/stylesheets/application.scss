@@ -10,10 +10,19 @@
 
 @font-face {
 	font-family: “RocknRollOne-Regular”;
-	src: url("/assets/RocknRollOne-Regular.ttf") format("truetype");
+	src: url("/assets/fonts/RocknRollOne-Regular.ttf") format("truetype");
 	font-weight: normal;
 	font-style: normal;
 }
+
+@font-face {
+  font-family: “Roboto-Medium”;
+  src: url("/assets/fonts/Roboto-Medium.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 // mixin
 
@@ -78,6 +87,7 @@ h2 {
 	border-radius: 5px;
 	cursor: pointer;
 	z-index: 1;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 	> a {
 		display: inline-block;
@@ -86,6 +96,28 @@ h2 {
 		padding: 1px 6px;
 		width: 100%;
 	}
+}
+
+.btn-google{
+	color: #5f6368;
+	font-weight: normal;
+	width: auto;
+	border-radius: 5px;
+	border: #5f6368;
+	padding: 3px 0px;
+	margin-top: 5px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+	>svg{
+		margin-right: 5px;
+	}
+}
+
+#google{
+	font-family: "Roboto-Medium";
 }
 
 .center {
@@ -266,7 +298,6 @@ h2 {
 		padding: 0;
 		top: 50%;
 		left: 50%;
-		font-weight: lighter;
 		font-size: 2rem;
 		.title {
 			font-size: 5rem;
@@ -278,6 +309,7 @@ h2 {
 }
 
 // チームアイコン
+
 .icon {
 	border-radius: 50%;
 }
@@ -348,6 +380,7 @@ h2 {
 	font-weight: bold;
 	border-radius: 5px;
 	cursor: pointer;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 }
 
@@ -517,6 +550,7 @@ input[type="file"] {
 	cursor: pointer;
 	color: #fff;
 	cursor: pointer;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 }
 
 .team_preview {
@@ -590,6 +624,7 @@ input[type="file"] {
 	font-weight: bold;
 	border-radius: 5px;
 	cursor: pointer;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 	> a {
 		display: block;
@@ -667,6 +702,7 @@ input[type="file"] {
 	font-weight: bold;
 	border-radius: 5px;
 	cursor: pointer;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 	> a {
 		color: white;
@@ -692,6 +728,7 @@ input[type="file"] {
 	border-radius: 5px;
 	cursor: pointer;
 	color: white;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 }
 
@@ -905,6 +942,7 @@ input[type="file"] {
 	font-weight: bold;
 	border-radius: 5px;
 	cursor: pointer;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 	> a {
 		display: block;
@@ -1049,6 +1087,7 @@ input[type="file"] {
 		border-radius: 5px;
 		cursor: pointer;
 		color: white;
+		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 		@include box_sizing;
 	}
 }

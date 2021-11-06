@@ -3,7 +3,6 @@
 <div class="form">
   <h2>新規登録</h2>
   <%= render 'form' %>
-	<%= link_to "Googleから新規登録", "/auth/google_oauth2", method: :post %>
   <div class ="other">
     <p>既に登録済みの方はログインしてください</p>
     <%= link_to (login_path) do %>
