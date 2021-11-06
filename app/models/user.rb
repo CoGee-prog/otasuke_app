@@ -91,6 +91,16 @@ class User < ApplicationRecord
     team_members.present?
   end
 
+  # Googleログイン処理
+  def self.from_omniauth(auth)
+    where(email: auth.email).first_or_initialize do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.password = SecureRandom.urlsafe_base64
+      user.activate
+    end
+  end
+
   private
 
   # メールアドレスをすべて小文字にする
@@ -103,4 +113,5 @@ class User < ApplicationRecord
     self.activation_token  = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
+
 end

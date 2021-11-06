@@ -1,6 +1,6 @@
 <div class="wrapper">
   <li class="nav">
-    <%= link_to "おたスケ",root_path,id:"logo" %>
+    <%= link_to "おたスケ", root_path, id:"logo" %>
     <% if current_user && current_user.admin?  %>
       <%= link_to "ユーザー一覧", users_path %>
     <% end %>
