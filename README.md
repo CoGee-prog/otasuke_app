@@ -32,6 +32,7 @@ https://otasuke-app.com
 * Capistrano3  
 * RSpec  
 * Rubocop  
+* Google+ API
 
 # ER図  
 ![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/137756606-f43ce450-4778-4704-b003-492531202657.png)
@@ -45,7 +46,8 @@ https://otasuke-app.com
 
 # 機能一覧  
 * ユーザー登録、ログイン機能  
-	* パスワードを忘れてログインできなくなった際のパスワード変更機能  
+	* Googleアカウントからのログイン機能
+	* パスワードを忘れてログインできなくなった際のパスワード変更機能 
 * ユーザープロフィール編集機能
 * チーム作成機能
 	* チームプロフィール画像設定機能
