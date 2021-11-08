@@ -6,7 +6,7 @@
 
 対戦相手検索では、指定した日時のスケジュールが空いているチームを検索することができます。  
 レスポンシブ対応しているため、スマホからもご確認いただけます。  
-また、Googleアカウントからログインすることも可能です。
+また、Googleアカウントからログインすることも可能です。  
 https://otasuke-app.com
 
 <img width="1426" alt="ホーム画面" src="https://user-images.githubusercontent.com/80146722/137755877-c5d5c167-0a31-4ed9-b36b-72eeed4c637f.png">  
