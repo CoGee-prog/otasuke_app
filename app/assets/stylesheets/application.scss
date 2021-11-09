@@ -660,6 +660,10 @@ input[type="file"] {
 		padding: 1px 6px;
 		width: 100%;
 	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		top: calc(50% + 2px);
+	}
 }
 
 // チーム一覧表示
@@ -734,6 +738,10 @@ input[type="file"] {
 	> a {
 		color: white;
 	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		top: calc(50% + 2px);
+	}
 }
 
 .belonged {
@@ -757,6 +765,11 @@ input[type="file"] {
 	color: white;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
+	}
 }
 
 // チーム切り替え
@@ -984,6 +997,11 @@ input[type="file"] {
 		padding: 1px 6px;
 		width: 100%;
 	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
+	}
 }
 
 .no-event {
@@ -1124,7 +1142,12 @@ input[type="file"] {
 		color: white;
 		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 		@include box_sizing;
+		&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		top: calc(50% + 2px);
 	}
+	}
+	
 }
 
 .instruction {
