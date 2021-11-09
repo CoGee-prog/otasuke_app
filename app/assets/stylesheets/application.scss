@@ -6,6 +6,7 @@
 
 * {
 	font-family: sans-serif;
+	color: #172b4d;
 }
 
 @font-face {
@@ -59,7 +60,6 @@ body {
 
 a {
 	text-decoration: none;
-	color: black;
 }
 
 h2 {
@@ -79,6 +79,10 @@ h2 {
 	padding-bottom: 45px;
 }
 
+table{
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+}
+
 .btn {
 	display: inline-block;
 	height: auto;
@@ -96,10 +100,14 @@ h2 {
 		padding: 1px 6px;
 		width: 100%;
 	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
+	}
 }
 
 .btn-google{
-	color: #5f6368;
 	font-weight: normal;
 	width: auto;
 	border-radius: 5px;
@@ -111,8 +119,16 @@ h2 {
 	justify-content: center;
 	align-items: center;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
+	#google{
+		color: #5f6368;
+	}
 	>svg{
 		margin-right: 5px;
+	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
 	}
 }
 
@@ -189,15 +205,15 @@ h2 {
 	width: 6px;
 	height: 6px;
 	margin: 0 0 3px 3px;
-	border-right: 1px solid black;
-	border-bottom: 1px solid black;
+	border-right: 1px solid;
+	border-bottom: 1px solid;
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
 }
 
 .dropdown-menu {
-	border: solid 1px black;
+	border: solid 1px;
 	visibility: hidden;
 	opacity: 0;
 	z-index: 2;
@@ -220,8 +236,8 @@ h2 {
 // タブ
 
 .tab-area {
-	border-top: 2px #444 solid;
-	border-bottom: 2px #444 solid;
+	border-top: 2px solid;
+	border-bottom: 2px solid;
 	width: 100%;
 	margin: 5px 0px 15px;
 	height: 34px;
@@ -275,7 +291,7 @@ h2 {
 		}
 		:hover {
 			font-weight: bold;
-			background-color: #f1f1f1;
+			background-color: #f5f5f5;
 		}
 	}
 }
@@ -288,7 +304,6 @@ h2 {
 	position: relative;
 	p {
 		position: absolute;
-		color: black;
 		-ms-transform: translate(-50%, -50%);
 		-webkit-transform: translate(-50%, -50%);
 		transform: translate(-50%, -50%);
@@ -331,8 +346,9 @@ h2 {
 .form {
 	width: 400px;
 	margin: 0 auto;
-	border: 2px black solid;
+	border: 1px solid;
 	padding: 20px;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 	h2 {
 		text-align: center;
 		margin-bottom: 15px;
@@ -382,6 +398,11 @@ h2 {
 	cursor: pointer;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
+	}
 }
 
 input.form-btn {
@@ -441,19 +462,23 @@ input.form-btn {
 
 
 .alert-success {
-	color: #46b446;
 	background-color: #b9e6b9;
 	li {
 		list-style: none;
 	}
+	p{
+		color: #46b446;
+	}
 }
 
 .alert-info {
-	color: #0044a2;
 	background-color: #50afff;
 	width: 500px;
 	li {
 		list-style: none;
+	}
+	p{
+		color: #0044a2;
 	}
 }
 .alert-long {
@@ -461,28 +486,35 @@ input.form-btn {
 }
 
 .alert-danger {
-	color: red;
 	background-color: #ffafaf;
 	li {
 		list-style: none;
 	}
+	p{
+		color: red;
+	}
 }
 
 .alert-warning {
-	color: #f0be00;
 	background-color: #f0f087;
 	width: 500px;
 	li {
 		list-style: none;
 	}
+	p{
+		color: #f0be00;
+	}
 }
 
 .form-alert-danger {
-	color: red;
 	margin-top: -15px;
 	margin-bottom: 15px;
 	li {
 		list-style: none;
+		color: red;
+	}
+	p{
+		color: red;
 	}
 }
 
@@ -515,8 +547,8 @@ input.form-btn {
 	position: absolute;
 	right: 5%;
 	top: 20%;
-	border-bottom: #333 2px solid;
-	border-right: #333 2px solid;
+	border-bottom: 2px solid;
+	border-right: 2px solid;
 	transform: rotate(45deg) translateY(-30%);
 }
 
@@ -570,7 +602,7 @@ input[type="file"] {
 	table {
 		width: 400px;
 		border-collapse: collapse;
-		border: 1px solid #333;
+		border: 1px solid;
 		margin: 0 auto 10px auto;
 		table-layout: fixed;
 	}
@@ -578,8 +610,8 @@ input[type="file"] {
 	td,
 	th {
 		border-collapse: collapse;
-		border-top: 1px solid #333;
-		border-bottom: 1px solid #333;
+		border-top: 1px solid;
+		border-bottom: 1px solid;
 		text-align: left;
 		padding: 10px;
 		a {
@@ -606,7 +638,7 @@ input[type="file"] {
 .user {
 	position: relative;
 	align-items: center;
-	border: #333 1px solid;
+	border: 1px solid;
 	width: 450px;
 	padding: 10px;
 	margin: 0 auto -1px;
@@ -633,6 +665,10 @@ input[type="file"] {
 		padding: 1px 6px;
 		width: 100%;
 	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		top: calc(50% + 2px);
+	}
 }
 
 // チーム一覧表示
@@ -652,11 +688,11 @@ input[type="file"] {
 .team {
 	position: relative;
 	align-items: center;
-	border: #333 1px solid;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 	width: 450px;
 	padding: 10px;
 	margin: 0 auto;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	text-align: left;
 	img {
 		vertical-align: top;
@@ -707,6 +743,10 @@ input[type="file"] {
 	> a {
 		color: white;
 	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		top: calc(50% + 2px);
+	}
 }
 
 .belonged {
@@ -730,6 +770,11 @@ input[type="file"] {
 	color: white;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
+	}
 }
 
 // チーム切り替え
@@ -744,12 +789,18 @@ input[type="file"] {
 		margin-right: -5px;
 	}
 	.list {
-		border: #333 1px solid;
-		width: auto;
+		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 		min-width: 300px;
-		padding: 10px;
-		margin: 0 auto -1px;
+		margin: 0 auto;
+		margin-bottom: 5px;
 		text-align: center;
+		border-radius: 5px;
+		cursor: pointer;
+		padding: 10px;
+		@include box_sizing;	
+		&:hover{
+			background-color: #f5f5f5;
+		}
 		> img {
 			vertical-align: middle;
 		}
@@ -825,7 +876,7 @@ input[type="file"] {
 					left: -1px;
 					width: 100%;
 					height: 100%;
-					border: 1px solid #333;
+					border: 1px solid;
 					box-sizing: content-box;
 				}
 			}
@@ -849,14 +900,14 @@ input[type="file"] {
 					left: -1px;
 					width: 100%;
 					height: 100%;
-					border: 1px solid #333;
+					border: 1px solid;
 					box-sizing: content-box;
 				}
 			}
 		}
 		th,
 		td {
-			border: 1px solid #333;
+			border: 1px solid;
 			text-align: center;
 			padding: 5px;
 			min-width: 47px;
@@ -897,14 +948,14 @@ input[type="file"] {
 	td {
 		margin: 0 auto;
 		border-collapse: collapse;
-		border: 1px solid #333;
+		border: 1px solid;
 		text-align: center;
 		padding: 10px;
 		position: relative;
 	}
 	th {
 		border-collapse: collapse;
-		border: 1px solid #333;
+		border: 1px solid;
 		text-align: center;
 		padding: 5px;
 	}
@@ -950,6 +1001,11 @@ input[type="file"] {
 		height: auto;
 		padding: 1px 6px;
 		width: 100%;
+	}
+	&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		position: relative;
+		top: 2px;
 	}
 }
 
@@ -1028,10 +1084,12 @@ input[type="file"] {
 .event-search {
 	width: 450px;
 	margin: 0 auto;
+	margin-bottom: 5px;
 	background-color: #efefef;
 	border-radius: 10px;
 	position: relative;
 	padding: 15px 75px 0px 5px;
+	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 	label {
 		display: inline-block;
 		font-weight: bold;
@@ -1089,7 +1147,12 @@ input[type="file"] {
 		color: white;
 		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 		@include box_sizing;
+		&:active{
+		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+		top: calc(50% + 2px);
 	}
+	}
+	
 }
 
 .instruction {
@@ -1121,7 +1184,7 @@ input[type="file"] {
 
 	th,
 	td {
-		border: 1px solid #333;
+		border: 1px solid;
 		padding: 5px;
 	}
 	.detail-schedule {
@@ -1164,27 +1227,24 @@ input[type="file"] {
 			}
 		}
 	}
-	.alert {
-		width: 400px;
-	}
-}
-
-// スケジュール
-.events {
-	table {
-		tr:nth-child(even) {
-			.fixed {
-				min-width: 300px;
+	
+	// スケジュール
+	.events {
+		table {
+			tr:nth-child(even) {
+				.fixed {
+					min-width: 300px;
+				}
 			}
-		}
-		tr:nth-child(odd) {
-			.fixed {
-				min-width: 300px;
+			tr:nth-child(odd) {
+				.fixed {
+					min-width: 300px;
+				}
 			}
 		}
 	}
 }
-
+	
 @media screen and (max-width: 599px) {
 	// スマホ用
 
@@ -1402,7 +1462,7 @@ input[type="file"] {
 		}
 		th,
 		td {
-			border: 1px solid #333;
+			border: 1px solid;
 			padding: 5px;
 		}
 		.detail-schedule {
