@@ -15,7 +15,7 @@ https://otasuke-app.com
 <img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/141122377-ca7a143e-7d2c-4acf-9a36-a715e847d5db.gif">  
 
   
-<img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/138395344-5a696697-a3a4-43f7-ae57-d872e92114b2.gif">  
+<img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/141124401-c40aad17-ffb1-47fb-982e-5b973507a954.gif">  
 
 # 使用技術  
 * Ruby 2.6.7  
