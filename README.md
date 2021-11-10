@@ -9,7 +9,7 @@
 また、Googleアカウントからログインすることも可能です。  
 https://otasuke-app.com
 
-<img width="1426" alt="ホーム画面" src="https://user-images.githubusercontent.com/80146722/137755877-c5d5c167-0a31-4ed9-b36b-72eeed4c637f.png">  
+<img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
 
   
 <img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/141122377-ca7a143e-7d2c-4acf-9a36-a715e847d5db.gif">  
