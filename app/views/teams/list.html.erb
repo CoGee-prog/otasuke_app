@@ -6,16 +6,16 @@
     <div class="team-change">
       <span>
         <% @team_members.each do |team_member| %>
-          <%= link_to (switch_team_path(team_member.team)), method: :post do %>
+          <%= link_to (switch_team_path(team_member)), method: :post do %>
             <div class="list">
-              <% if team_member.team.image.attached? %>
-                <%= image_tag(team_member.team.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
-                <%= image_tag(team_member.team.image,  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
+              <% if team_member.image.attached? %>
+                <%= image_tag(team_member.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
+                <%= image_tag(team_member.image,  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
               <% else %>
                 <%= image_tag("default_team_image.webp",  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
                 <%= image_tag("default_team_image.webp",  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
               <% end %>
-              <%= team_member.team.name %>
+              <%= team_member.name %>
             </div>
           <% end %>
         <% end %>
