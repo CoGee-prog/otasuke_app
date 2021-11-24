@@ -1401,12 +1401,14 @@ input[type="file"] {
 		table {
 			tr:nth-child(even) {
 				.fixed {
-					min-width: 160px;
+					min-width: 180px;
+					font-size: 0.8rem;
 				}
 			}
 			tr:nth-child(odd) {
 				.fixed {
-					min-width: 160px;
+					min-width: 180px;
+					font-size: 0.8rem;
 				}
 			}
 		}

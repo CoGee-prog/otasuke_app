@@ -1,7 +1,7 @@
 <% provide(:title, '所属申請一覧') %>
 <%= render 'shared/error_messages' %>
 <h2>所属申請一覧</h2>
-<% if !@requests.present? %>
+<% if @requests.empty? %>
   <span class="center">
     <span class="no-content">所属リクエストはありません</span>
   </span>

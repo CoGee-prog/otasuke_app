@@ -1,7 +1,7 @@
 <% provide(:title, '試合リクエスト一覧') %>
 <%= render 'shared/error_messages' %>
 <h2>試合リクエスト一覧</h2>
-<% if !@game_requests.present? %>
+<% if @game_requests.empty? %>
   <span class="center">
     <span class="no-content">試合リクエストはありません</span>
   </span>

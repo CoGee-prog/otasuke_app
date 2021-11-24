@@ -63,7 +63,7 @@ class TeamsController < ApplicationController
   end
 
   def list
-    @team_members = User.find(params[:id]).team_members
+    @team_members = User.find(params[:id]).teams
   end
 
   def switch
