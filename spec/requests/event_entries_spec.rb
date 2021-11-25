@@ -9,6 +9,7 @@ RSpec.describe 'EventEntries', type: :request do
   let!(:event) { FactoryBot.create(:event) }
   let!(:other_team_event1) { FactoryBot.create(:other_team_event1) }
   let!(:event_entry) { EventEntry.find_by(user_id: user, event_id: event) }
+  let!(:other_user_event_entry) { EventEntry.find_by(user_id: other_user, event_id: event) }
   let!(:other_team_event_entry) { EventEntry.find_by(user_id: user, event_id: other_team_event1) }
 
   describe 'ログインしてないユーザーのスケジュール出欠アクションのテスト' do
@@ -37,6 +38,16 @@ RSpec.describe 'EventEntries', type: :request do
       patch event_entry_path(event_entry), params: { event_entry: { event_option_entry: { feeling: 1 } } }
       expect(flash[:success]).not_to eq '出欠を更新しました'
       expect(response).to redirect_to event_path(other_team1)
+    end
+  end
+
+  describe 'チーム管理者の場合、他のチームメンバーのスケジュール出欠の編集、更新に成功する' do
+    it 'スケジュール出欠編集、更新が成功する' do
+      post login_path params: { session: { email: user.email, password: user.password } }
+      get edit_event_entry_path(other_user_event_entry)
+      patch event_entry_path(other_user_event_entry), params: { event_entry: { event_option_entry: { feeling: 1 } } }
+      expect(flash[:success]).to eq '出欠を更新しました'
+      expect(response).to redirect_to event_path(team)
     end
   end
 
