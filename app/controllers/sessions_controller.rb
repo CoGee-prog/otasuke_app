@@ -8,11 +8,11 @@ class SessionsController < ApplicationController
         log_in user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = 'ログインしました'
-        redirect_back_or root_path
+        current_team ? (redirect_back_or event_path(@current_team)) : (redirect_back_or root_path)
       else
         flash[:warning] = "アカウントが有効ではありません。<br>
         メールに記載されたURLをクリックしてください。".html_safe
-        redirect_to root_url
+        redirect_to root_path
       end
     else
       flash.now[:danger] = 'メールアドレスまたはパスワードが間違っています'
