@@ -29,7 +29,8 @@ class EventEntriesController < ApplicationController
   # 正しいユーザーの出欠変更画面か確認し、違う場合はそのユーザーのチームのスケジュール管理画面にリダイレクトする
   def event_entry_correct_user_team_page
     @event_entry = EventEntry.find_by(id: params[:id])
-    return if (@event_entry && @event_entry.user_id == current_user.id && Event.find(@event_entry.event_id).team_id == current_team.id)
+    return if (@event_entry && @event_entry.user_id == current_user.id && Event.find(@event_entry.event_id).team_id == current_team.id \
+              || @event_entry && Team.find(Event.find(@event_entry.event_id).team_id).admin_user_id == current_user.id)
 
     redirect_to event_path(current_team)
   end

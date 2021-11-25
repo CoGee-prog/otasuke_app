@@ -38,7 +38,7 @@
           <td><%= event_option.count_ng %></td>
           <% event.event_entries.sort_by {|event_entries| event_entries.user_id}.each do |event_entry| %>
             <% event_option_entry = event_entry.event_option_entry %>
-            <%if event_option_entry.event_entry.user_id == current_user.id %>
+            <%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
               <% if event_option_entry.None? %>
                 <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></td>
               <% else %>

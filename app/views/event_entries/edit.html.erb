@@ -3,7 +3,7 @@
     <table>
       <tr>
         <th></th>
-        <th><%= current_user.name %> </th>
+        <th><%= User.find(@event_entry.user_id).name %> </th>
       </tr>
       <tr>
         <td>
