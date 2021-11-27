@@ -31,8 +31,9 @@ Rails.application.routes.draw do
     resources :team_members, only: [:show, :create, :destroy]
   end
 
+	resources :team_member, only: [:edit, :update]
   resources :events, except: :index
   resources :event_entries, only: [:edit, :update]
-  resources :game_requests, only:[:create, :destroy, :show]
-  
+  resources :game_requests, only: [:create, :destroy, :show]
+
 end

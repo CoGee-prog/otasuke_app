@@ -3,6 +3,7 @@ class TeamMember < ApplicationRecord
   belongs_to :user
   validates :team_id, presence: true, uniqueness: { scope: :user_id }
   validates :user_id, presence: true
+  validates :display_name, length: { maximum: 50 }
 
   after_create :create_team_event_entries
   before_destroy :destroy_team_event_entries
