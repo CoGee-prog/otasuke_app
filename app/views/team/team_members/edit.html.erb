@@ -1,0 +1,7 @@
+<%provide(:title, 'メンバー表示名編集')%>
+<%provide(:button_text, '更新する')%>
+<div class="form">
+  <h2>メンバー表示名編集</h2>
+	メンバー名: <%= User.find(@team_member.user_id).name %>
+  <%= render 'display_name_form' %>
+</div>

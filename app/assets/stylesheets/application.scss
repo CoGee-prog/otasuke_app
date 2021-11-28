@@ -912,6 +912,11 @@ input[type="file"] {
 			padding: 5px;
 			min-width: 47px;
 		}
+		th {
+				a {
+				text-decoration: underline;
+			}
+		}
 		td {
 			padding: 10px;
 			position: relative;
