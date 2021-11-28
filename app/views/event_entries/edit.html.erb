@@ -2,8 +2,14 @@
   <%= form_with(model:@event_entry, local:true) do |f|%>
     <table>
       <tr>
-        <th></th>
-        <th><%= User.find(@event_entry.user_id).name %> </th>
+        <th>
+				<% team_member = TeamMember.find_by(user_id: @event_entry.user_id, team_id: @event_entry.event.team_id) %>
+					<% if team_member.display_name.present? %>
+						<th nowrap><%=team_member.display_name %></th>
+					<% else %>
+						<th><%= User.find(@event_entry.user_id).name %></th>
+					<% end %>
+				</th>
       </tr>
       <tr>
         <td>
