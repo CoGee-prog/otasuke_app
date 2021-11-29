@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   delete '/logout', to: 'sessions#destroy'
   resources :users, except: :show
-  resources :account_activations, only:[:edit]
-  resources :password_resets, only:[:new, :create, :edit, :update]
+  resources :account_activations, only: [:edit]
+  resources :password_resets, only: [:new, :create, :edit, :update]
   resources :teams do
     member do
 			patch 'destroy_image'
@@ -28,11 +28,11 @@ Rails.application.routes.draw do
 
   namespace :team do
     resources :member_requests, only: [:show, :destroy]
-    resources :team_members, only: [:show, :create, :destroy]
+    resources :team_members, only: [:show, :create, :edit, :update, :destroy]
   end
 
   resources :events, except: :index
   resources :event_entries, only: [:edit, :update]
-  resources :game_requests, only:[:create, :destroy, :show]
-  
+  resources :game_requests, only: [:create, :destroy, :show]
+
 end

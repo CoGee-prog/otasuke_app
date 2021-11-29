@@ -12,7 +12,7 @@ RSpec.describe 'Team::TeamMembers', type: :request do
   let!(:team_member3) { FactoryBot.create(:team_member3, team: other_team1, user: other_user) }
   let!(:team_member4) { FactoryBot.create(:team_member4, team: other_team2, user: user) }
 
-  describe 'ログインしてないユーザーのチーム所属のテスト' do
+  describe 'ログインしてないユーザーのチームメンバーのテスト' do
     it 'メンバー一覧からリダイレクトされる' do
       get team_team_member_path(team)
       expect(flash[:danger]).to eq 'ログインしてください'
@@ -20,19 +20,31 @@ RSpec.describe 'Team::TeamMembers', type: :request do
     end
 
     it 'メンバーリクエスト承認からリダイレクトされる' do
-      post team_team_members_path(id: member_request1.id)
+      post team_team_members_path(member_request1.id)
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
 
     it 'メンバー削除からリダイレクトされる' do
-      delete team_team_member_path(id: team_member1.id)
+      delete team_team_member_path(team_member1.id)
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
+
+    it 'メンバー表示名編集からリダイレクトされる' do
+      get edit_team_team_member_path(team_member1.id)
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
+
+    it 'メンバー表示名更新からリダイレクトされる' do
+      patch team_team_member_path(team_member1.id)
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
   end
 
-  describe 'チーム管理者ではないユーザーのチーム所属のテスト' do
+  describe 'チーム管理者ではないユーザーのチームメンバーのテスト' do
     it 'メンバー一覧からリダイレクトされる' do
       post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       get team_team_member_path(team)
@@ -54,12 +66,24 @@ RSpec.describe 'Team::TeamMembers', type: :request do
       end.not_to change(TeamMember, :count)
       expect(response).to redirect_to root_path
     end
+
+    it 'メンバー表示名編集からリダイレクトされる' do
+      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
+      get edit_team_team_member_path(team_member1.id)
+      expect(response).to redirect_to event_path(not_admin_user.current_team_id)
+    end
+
+    it 'メンバー表示名更新からリダイレクトされる' do
+      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
+      patch team_team_member_path(team_member1.id)
+      expect(response).to redirect_to event_path(not_admin_user.current_team_id)
+    end
   end
 
   describe 'メンバーリクエストがない場合' do
     it 'チームメンバー承認からリダイレクトされる' do
       post login_path params: { session: { email: user.email, password: user.password } }
-      post team_team_members_path(id: 2)
+      post team_team_members_path(2)
       expect(flash[:danger]).to eq '既に削除されているか存在しないメンバーリクエストです'
       expect(response).to redirect_to team_member_request_path(team)
     end
@@ -74,7 +98,7 @@ RSpec.describe 'Team::TeamMembers', type: :request do
     end
   end
 
-  describe '別のチームの管理者のメンバーリクエストのテスト' do
+  describe '別のチームの管理者のチームメンバーのテスト' do
     it 'メンバーリクエスト承認からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       expect do
@@ -95,6 +119,18 @@ RSpec.describe 'Team::TeamMembers', type: :request do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get team_team_member_path(team)
       expect(response).to redirect_to team_team_member_path(other_user.current_team_id)
+    end
+
+    it 'メンバー表示名編集から現在のチームのスケジュール管理にリダイレクトされる' do
+      post login_path params: { session: { email: other_user.email, password: other_user.password } }
+      get edit_team_team_member_path(team_member1.id)
+      expect(response).to redirect_to event_path(other_user.current_team_id)
+    end
+
+    it 'メンバー表示名更新から現在のチームのスケジュール管理にリダイレクトされる' do
+      post login_path params: { session: { email: other_user.email, password: other_user.password } }
+      patch team_team_member_path(team_member1.id)
+      expect(response).to redirect_to event_path(other_user.current_team_id)
     end
   end
 end

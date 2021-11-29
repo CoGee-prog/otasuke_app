@@ -18,6 +18,11 @@ RSpec.describe TeamMember, type: :model do
       expect(team_member1).not_to be_valid
     end
 
+    it '表示名が長すぎる場合、無効である' do
+      team_member1.display_name = 'a' * 51
+      expect(team_member1).not_to be_valid
+    end
+
     it '1つのチームに同じユーザーが2回以上保存されないこと' do
       team_member = build(:team_member1, user: user, team: team)
       expect(team_member).not_to be_valid

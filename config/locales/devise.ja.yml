@@ -44,6 +44,8 @@ ja:
         contact_address: 連絡先
         comment: コメント
         image: LINEQRコード等
+      team_member:
+        display_name: 表示名
     models:
       user: ユーザー
   devise:
