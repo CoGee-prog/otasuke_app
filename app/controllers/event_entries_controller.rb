@@ -1,14 +1,13 @@
 class EventEntriesController < ApplicationController
   before_action :logged_in_user
+  before_action :set_event_entry
   before_action :event_entry_correct_user_team_page
 
   def edit
-    @event_entry = EventEntry.find(params[:id])
     @event = Event.find(@event_entry.event_id)
   end
 
   def update
-    @event_entry = EventEntry.find(params[:id])
     @event = Event.find(@event_entry.event_id)
     if @event_entry.update(entries_params)
       flash[:success] = '出欠を更新しました'
@@ -28,6 +27,11 @@ class EventEntriesController < ApplicationController
 
   # 正しいユーザーの出欠変更画面か確認し、違う場合はそのユーザーのチームのスケジュール管理画面にリダイレクトする
   # またはチーム管理者の場合は、チームメンバーの出欠を更新できる
+
+  def set_event_entry
+    @event_entry = EventEntry.find(params[:id])
+  end
+
   def event_entry_correct_user_team_page
     @event_entry = EventEntry.find_by(id: params[:id])
     return if (@event_entry && @event_entry.user_id == current_user.id && Event.find(@event_entry.event_id).team_id == current_team.id \
