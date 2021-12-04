@@ -1,14 +1,12 @@
 class EventEntriesController < ApplicationController
   before_action :logged_in_user
   before_action :set_event_entry
+  before_action :set_event
   before_action :event_entry_correct_user_team_page
 
-  def edit
-    @event = Event.find(@event_entry.event_id)
-  end
+  def edit; end
 
   def update
-    @event = Event.find(@event_entry.event_id)
     if @event_entry.update(entries_params)
       flash[:success] = '出欠を更新しました'
       redirect_to event_path(current_team)
@@ -30,6 +28,10 @@ class EventEntriesController < ApplicationController
 
   def set_event_entry
     @event_entry = EventEntry.find(params[:id])
+  end
+
+  def set_event
+    @event = Event.find(@event_entry.event_id)
   end
 
   def event_entry_correct_user_team_page
