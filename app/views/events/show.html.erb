@@ -1,104 +1,106 @@
 <% provide(:title, 'スケジュール管理') %>
 <%= render 'shared/error_messages' %>
-<%= current_team.name %> | スケジュール管理
-<% if current_team.events.present? %>
-  <div class="events">
-    <table>
-      <tr>
-        <th class="fixed"></th>
-        <th>◯</th>
-        <th>△</th>
-        <th>×</th>
-        <% @team.users.sort_by(&:id).each do |member| %>
-					<% if @current_team.admin_user_id == @current_user.id || member.id == current_user.id %>
-						<% team_member = TeamMember.find_by(user_id: member.id, team_id: @team.id) %>
-						<% if team_member.display_name.present? %>
-							<th nowrap><%= link_to team_member.display_name, edit_team_team_member_path(team_member) %></th>
-						<% else %>
-							<th nowrap><%= link_to member.name, edit_team_team_member_path(team_member) %></th>
-						<% end %>
-					<% else %>
-						<% team_member = TeamMember.find_by(user_id: member.id, team_id: @team.id) %>
-						<% if team_member.display_name.present? %>
-							<th nowrap><%=team_member.display_name %></th>
-						<% else %>
-          		<th nowrap><%= member.name %></th>
-						<% end %>
-					<% end %>
-        <% end %>
-      </tr>
-      <% @events.sort_by(&:day_time).each do |event| %>
+<div class="event-area">
+  <%= current_team.name %> | スケジュール管理
+  <% if current_team.events.present? %>
+    <div class="events">
+      <table>
         <tr>
-          <th class="fixed" id="event">
-            <%= event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event.day_time.wday] %>)
-            <%= event.day_time.strftime('%H:%M') %>
-            <%= event.ground %>
-            <% if event.opponent_team_name.present? %>
-              VS<%= event.opponent_team_name %>
-            <% end %>
-            <%= event.tournament_name %>
-            <%= event.other%>
-            <% if @current_team.admin_user_id == @current_user.id %>
-						<span class="beside">
-              <span class="btn btn-navy"><%= link_to "編集", edit_event_path(event) %></span>
-              <span class="btn btn-red"><%= link_to "削除", event_path(event), method: :delete, data: {confirm: "このスケジュールを削除しますか？"} %></span>
-						</span>
-            <% end %>
-          </th>
-          <% event_option = event.event_option %>
-          <% event_option.calc_event_option_entry %>
-          <td><%= event_option.count_ok %></td>
-          <td><%= event_option.count_neither %></td>
-          <td><%= event_option.count_ng %></td>
-          <% event.event_entries.sort_by {|event_entries| event_entries.user_id}.each do |event_entry| %>
-            <% event_option_entry = event_entry.event_option_entry %>
-            <%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
-              <% if event_option_entry.None? %>
-                <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></td>
+          <th class="fixed"></th>
+          <th>◯</th>
+          <th>△</th>
+          <th>×</th>
+          <% @team.users.sort_by(&:id).each do |member| %>
+            <% if @current_team.admin_user_id == @current_user.id || member.id == current_user.id %>
+              <% team_member = TeamMember.find_by(user_id: member.id, team_id: @team.id) %>
+              <% if team_member.display_name.present? %>
+                <th nowrap><%= link_to team_member.display_name, edit_team_team_member_path(team_member) %></th>
               <% else %>
-                <td nowrap class="entry">
-                  <% if event_option_entry.NG? %>
-                    <span class="bg-red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
-                  <% elsif event_option_entry.Neither? %>
-                    <span class="bg-yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
-                  <% elsif event_option_entry.OK? %>
-                    <span class="bg-green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
-                  <% end %>
-                </td>
+                <th nowrap><%= link_to member.name, edit_team_team_member_path(team_member) %></th>
               <% end %>
             <% else %>
-              <% if event_option_entry.None? %>
-                <td nowrap class="entry">&nbsp; - &nbsp;</td>
+              <% team_member = TeamMember.find_by(user_id: member.id, team_id: @team.id) %>
+              <% if team_member.display_name.present? %>
+                <th nowrap><%=team_member.display_name %></th>
               <% else %>
-                <td nowrap class="entry">
-                  <% if event_option_entry.NG? %>
-                    <span class="bg-red">
-                      <p>&nbsp; × &nbsp;</p>
-                    </span>
-                  <% elsif event_option_entry.Neither? %>
-                    <span class="bg-yellow">
-                      <p>&nbsp; △ &nbsp;</p>
-                    </span>
-                  <% elsif event_option_entry.OK? %>
-                    <span class="bg-green">
-                      <p>&nbsp; ◯ &nbsp;</p>
-                    </span>
-                  <% end %>
-                </td>
+                <th nowrap><%= member.name %></th>
               <% end %>
             <% end %>
           <% end %>
         </tr>
-      <% end %>
-    </table>
-  </div>
-<% else %>
-  <span class="no-event">
-    スケジュールが登録されていません
-  </span>
-<% end %>
-<% if current_team.admin_user_id == current_user.id %>
-  <span class="btn-event btn-orange">
-    <%= link_to '新しいスケジュールを登録する', new_event_path %>
-  </span>
-<% end %>
+        <% @events.sort_by(&:day_time).each do |event| %>
+          <tr>
+            <th class="fixed" id="event">
+              <%= event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event.day_time.wday] %>)
+              <%= event.day_time.strftime('%H:%M') %>
+              <%= event.ground %>
+              <% if event.opponent_team_name.present? %>
+                VS<%= event.opponent_team_name %>
+              <% end %>
+              <%= event.tournament_name %>
+              <%= event.other%>
+              <% if @current_team.admin_user_id == @current_user.id %>
+                <span class="beside">
+                  <span class="btn btn-navy"><%= link_to "編集", edit_event_path(event) %></span>
+                  <span class="btn btn-red"><%= link_to "削除", event_path(event), method: :delete, data: {confirm: "このスケジュールを削除しますか？"} %></span>
+                </span>
+              <% end %>
+            </th>
+            <% event_option = event.event_option %>
+            <% event_option.calc_event_option_entry %>
+            <td><%= event_option.count_ok %></td>
+            <td><%= event_option.count_neither %></td>
+            <td><%= event_option.count_ng %></td>
+            <% event.event_entries.sort_by {|event_entries| event_entries.user_id}.each do |event_entry| %>
+              <% event_option_entry = event_entry.event_option_entry %>
+              <%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
+                <% if event_option_entry.None? %>
+                  <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></td>
+                <% else %>
+                  <td nowrap class="entry">
+                    <% if event_option_entry.NG? %>
+                      <span class="bg-red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
+                    <% elsif event_option_entry.Neither? %>
+                      <span class="bg-yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
+                    <% elsif event_option_entry.OK? %>
+                      <span class="bg-green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
+                    <% end %>
+                  </td>
+                <% end %>
+              <% else %>
+                <% if event_option_entry.None? %>
+                  <td nowrap class="entry">&nbsp; - &nbsp;</td>
+                <% else %>
+                  <td nowrap class="entry">
+                    <% if event_option_entry.NG? %>
+                      <span class="bg-red">
+                        <p>&nbsp; × &nbsp;</p>
+                      </span>
+                    <% elsif event_option_entry.Neither? %>
+                      <span class="bg-yellow">
+                        <p>&nbsp; △ &nbsp;</p>
+                      </span>
+                    <% elsif event_option_entry.OK? %>
+                      <span class="bg-green">
+                        <p>&nbsp; ◯ &nbsp;</p>
+                      </span>
+                    <% end %>
+                  </td>
+                <% end %>
+              <% end %>
+            <% end %>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  <% else %>
+    <span class="no-event">
+      スケジュールが登録されていません
+    </span>
+  <% end %>
+  <% if current_team.admin_user_id == current_user.id %>
+    <span class="btn-event btn-orange">
+      <%= link_to '新しいスケジュールを登録する', new_event_path %>
+    </span>
+  <% end %>
+</div>
