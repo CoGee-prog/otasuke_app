@@ -1,6 +1,7 @@
 class Team::TeamMembersController < ApplicationController
   before_action :logged_in_user
   before_action :current_team_admin_user, except: %i[edit update]
+  before_action :team_member_set, only: %i[edit update]
   before_action :team_member_current_team_page, only: :show
   before_action :team_member_display_name_correct_user, only: %i[edit update]
 
@@ -32,12 +33,9 @@ class Team::TeamMembersController < ApplicationController
     end
   end
 
-  def edit
-    @team_member = TeamMember.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @team_member = TeamMember.find(params[:id])
     if @team_member.update(team_member_params)
       flash[:success] = 'メンバーの表示名を更新しました'
       redirect_to event_path(current_team)
@@ -67,15 +65,15 @@ class Team::TeamMembersController < ApplicationController
 
   private
 
+  def team_member_set
+    @team_member = TeamMember.find(params[:id])
+  end
+
+  # 正しいチームメンバー一覧のページか確認し、違う場合は現在のチームのチームメンバー一覧ページにリダイレクトする
   def team_member_current_team_page
     return if (current_team.id == params[:id].to_i)
 
     redirect_to team_team_member_path(current_team)
-  end
-
-  def team_member_team_admin_user
-    @request = MemberRequest.find_by(id: params[:id])
-    @team = Team.find(@request.team_id)
   end
 
   def team_member_params
