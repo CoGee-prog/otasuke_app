@@ -21,8 +21,8 @@ class Event < ApplicationRecord
 
   # イベントの出欠を作成する
   def create_event_entries
-    team.team_members.each do |member|
-      User.find(member.user_id).event_entries.create(event_id: id)
+    team.users.each do |user|
+      User.find(user.id).event_entries.create(event_id: id)
     end
   end
 end
