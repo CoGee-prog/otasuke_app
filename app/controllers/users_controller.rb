@@ -1,18 +1,24 @@
 class UsersController < ApplicationController
   before_action :logged_in_user, only: %i[edit update destroy]
-  before_action :correct_user, only: :update
+  before_action :set_user, only: %i[edit update destroy]
+  before_action :update_correct_user, only: :update
   before_action :edit_correct_user, only: :edit
-  before_action :admin_user, only: %i[index destroy]
-  before_action :set_user, only: %i[edit update]
+  before_action :admin_user, only: :index
+  before_action :delete_correct_user, only: :destroy
 
   def index
     @users = User.all.page(params[:page])
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = 'ユーザーを削除しました'
-    redirect_to users_path
+    if @user.have_admin_teams.present?
+      flash[:danger] = "チームの管理者であるためアカウントを削除できません。<br>
+			管理者であるチームを全て削除してから再度行ってください。".html_safe
+    else
+      @user.destroy
+      flash[:success] = 'ユーザーを削除しました'
+    end
+    current_user.admin? ? (redirect_to users_path) : (redirect_to root_path)
   end
 
   def new
@@ -52,15 +58,18 @@ class UsersController < ApplicationController
   # beforeアクション
 
   # 正しいユーザーかどうか確認する
-  def correct_user
-    @user = User.find(params[:id])
+  def update_correct_user
     redirect_to root_path unless current_user?(@user)
   end
 
   # 正しいユーザーの編集か確認し、違う場合はそのユーザーの編集画面にリダイレクトする
   def edit_correct_user
-    @user = User.find(params[:id])
     redirect_to edit_user_path(current_user) unless current_user?(@user)
+  end
+
+  # 正しいユーザーの編集か確認し、違う場合はそのユーザーの編集画面にリダイレクトする
+  def delete_correct_user
+    redirect_to root_path unless current_user.admin? || current_user?(@user)
   end
 
   # 管理者ユーザーかどうか確認する

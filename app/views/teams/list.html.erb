@@ -1,21 +1,21 @@
 <% provide(:title, 'チーム切り替え') %>
 <%= render 'shared/error_messages' %>
 <h2>チーム切り替え</h2>
-<% if @team_members.present? %>
+<% if @belong_teams.present? %>
   <div class="teams">
     <div class="team-change">
       <span>
-        <% @team_members.each do |team_member| %>
-          <%= link_to (switch_team_path(team_member)), method: :post do %>
+        <% @belong_teams.each do |belomg_team| %>
+          <%= link_to (switch_team_path(belomg_team)), method: :post do %>
             <div class="list">
-              <% if team_member.image.attached? %>
-                <%= image_tag(team_member.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
-                <%= image_tag(team_member.image,  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
+              <% if belomg_team.image.attached? %>
+                <%= image_tag(belomg_team.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
+                <%= image_tag(belomg_team.image,  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
               <% else %>
                 <%= image_tag("default_team_image.webp",  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
                 <%= image_tag("default_team_image.webp",  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>
               <% end %>
-              <%= team_member.name %>
+              <%= belomg_team.name %>
             </div>
           <% end %>
         <% end %>
