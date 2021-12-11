@@ -2,7 +2,7 @@ RSpec.describe 'Users', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
 
-  describe 'ユーザー編集のテスト' do
+  describe 'ログインしていないユーザーのアクションテスト' do
     it 'ログインしていない時、ユーザー編集からリダイレクトされる' do
       get edit_user_path(user)
       expect(flash[:danger]).to eq 'ログインしてください'
@@ -11,6 +11,12 @@ RSpec.describe 'Users', type: :request do
 
     it 'ログインしていない時、ユーザー更新からリダイレクトされる' do
       patch user_path(user), params: { user: { name: user.name, email: user.email } }
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
+
+    it 'ログインしていない時、アカウント削除からリダイレクトされる' do
+      delete user_path(user)
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
@@ -29,9 +35,16 @@ RSpec.describe 'Users', type: :request do
       expect(flash[:success]).not_to eq 'ユーザープロフィールを更新しました'
       expect(response).to redirect_to root_path
     end
+
+    it '間違ったユーザーがログインした時、アカウント削除からリダイレクトされる' do
+      post login_path params: { session: { email: other_user.email, password: other_user.password } }
+      delete user_path(user), params: { user: { name: user.name, email: user.email } }
+      expect(flash[:success]).not_to eq 'アカウントを削除しました'
+      expect(response).to redirect_to root_path
+    end
   end
 
-  describe 'ユーザー管理者属性に関するテスト' do
+  describe 'ユーザー管理者に関するテスト' do
     it 'Web上でユーザー管理者属性を編集できない' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       expect(other_user.admin?).to be_falsey
@@ -48,7 +61,7 @@ RSpec.describe 'Users', type: :request do
       expect(response).to redirect_to login_path
     end
 
-    it 'ユーザー管理者ではないユーザーの場合、削除からリダイレクトされる' do
+    it 'ユーザー管理者ではないユーザーの場合、他のユーザー削除からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       expect do
         delete user_path(user)

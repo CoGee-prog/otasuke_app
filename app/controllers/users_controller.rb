@@ -11,12 +11,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user.have_admin_teams.present?
+    if @user.admin_teams.present?
       flash[:danger] = "チームの管理者であるためアカウントを削除できません。<br>
 			管理者であるチームを全て削除してから再度行ってください。".html_safe
     else
       @user.destroy
-      flash[:success] = 'ユーザーを削除しました'
+      @user == current_user	? (flash[:success] = 'アカウントを削除しました') : (flash[:success] = 'ユーザーを削除しました')
     end
     current_user.admin? ? (redirect_to users_path) : (redirect_to root_path)
   end
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
     redirect_to edit_user_path(current_user) unless current_user?(@user)
   end
 
-  # 正しいユーザーの編集か確認し、違う場合はそのユーザーの編集画面にリダイレクトする
+  # 正しいユーザーのアカウント削除か確認し、違う場合はホーム画面にリダイレクトする
   def delete_correct_user
     redirect_to root_path unless current_user.admin? || current_user?(@user)
   end
