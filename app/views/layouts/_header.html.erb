@@ -37,7 +37,6 @@
           <li><%= link_to "所属チーム検索", teams_path %></li>
           <li><%= link_to "チーム作成", new_team_path %></li>
           <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
-          <li><%= link_to "アカウントを消す", user_path(current_user), method: :delete, data: {confirm: "アカウントを削除しますか？"} %></li> 
         </ul>
       </li>
     <% else %>

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :member_requests, dependent: :destroy
   has_many :team_members, dependent: :destroy
   has_many :teams, through: :team_members, dependent: :destroy
-  has_many :have_admin_teams, class_name: 'Team', foreign_key: :admin_user_id
+  has_many :admin_teams, class_name: 'Team', foreign_key: :admin_user_id
   has_many :event_entries, dependent: :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
 
