@@ -23,18 +23,18 @@ class EventEntriesController < ApplicationController
   # beforeアクション
 
   def set_event_entry
-    @event_entries = EventEntry.joins(:event).where(user_id: User.find(params[:id]), event: {team_id: current_team.id}).limit(2)
+    @event_entries = EventEntry.joins(:event).where(user_id: User.find(params[:id]), event: { team_id: current_team.id }).limit(2)
   end
 
   # 正しいユーザーのイベント出欠か、またはチーム管理者か確認し、違う場合は現在のチームのスケジュール管理ページにリダイレクトする
   def event_entry_correct_user_team_page
     @user = User.find_by(id: params[:id])
     return if (@user == current_user.id)
-		@user.teams.each do |team|
-			if team.admin_user_id == current_user.id
-				return
-			end
-		end
+    @user.teams.each do |team|
+      if team.admin_user_id == current_user.id
+        return
+      end
+    end
     redirect_to event_path(current_team)
   end
 end

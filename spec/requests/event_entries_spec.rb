@@ -26,7 +26,7 @@ RSpec.describe 'EventEntries', type: :request do
     end
   end
 
-  describe '他のユーザーのスケジュール出欠の編集、更新が失敗する' do
+  xdescribe '他のユーザーのスケジュール出欠の編集、更新が失敗する' do
     it 'スケジュール出欠編集からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_event_entry_path(event_entry)
@@ -41,7 +41,7 @@ RSpec.describe 'EventEntries', type: :request do
     end
   end
 
-  describe 'チーム管理者の場合、他のチームメンバーのスケジュール出欠の編集、更新に成功する' do
+  xdescribe 'チーム管理者の場合、他のチームメンバーのスケジュール出欠の編集、更新に成功する' do
     it 'スケジュール出欠編集、更新が成功する' do
       post login_path params: { session: { email: user.email, password: user.password } }
       get edit_event_entry_path(other_user_event_entry)
@@ -51,7 +51,7 @@ RSpec.describe 'EventEntries', type: :request do
     end
   end
 
-  describe '現在のチーム以外のスケジュール出欠テスト' do
+  xdescribe '現在のチーム以外のスケジュール出欠テスト' do
     it '他のチームのスケジュール出欠編集からリダイレクトされる' do
       post login_path params: { session: { email: user.email, password: user.password } }
       get edit_event_entry_path(other_team_event_entry)
