@@ -1,7 +1,6 @@
 class EventEntriesController < ApplicationController
   before_action :logged_in_user
   before_action :set_event_entry
-  before_action :set_event
   before_action :event_entry_correct_user_team_page
 
   def edit; end
@@ -23,23 +22,19 @@ class EventEntriesController < ApplicationController
 
   # beforeアクション
 
-  # 正しいユーザーの出欠変更画面か確認し、違う場合はそのユーザーのチームのスケジュール管理画面にリダイレクトする
-  # またはチーム管理者の場合は、チームメンバーの出欠を更新できる
-
   def set_event_entry
-    @event_entry = EventEntry.find(params[:id])
-  end
-
-  def set_event
-    @event = Event.find(@event_entry.event_id)
+    @event_entries = EventEntry.joins(:event).where(user_id: User.find(params[:id]), event: {team_id: current_team.id}).limit(2)
   end
 
   # 正しいユーザーのイベント出欠か、またはチーム管理者か確認し、違う場合は現在のチームのスケジュール管理ページにリダイレクトする
   def event_entry_correct_user_team_page
-    @event_entry = EventEntry.find_by(id: params[:id])
-    return if (@event_entry && @event_entry.user_id == current_user.id && Event.find(@event_entry.event_id).team_id == current_team.id \
-              || @event_entry && Team.find(Event.find(@event_entry.event_id).team_id).admin_user_id == current_user.id)
-
+    @user = User.find_by(id: params[:id])
+    return if (@user == current_user.id)
+		@user.teams.each do |team|
+			if team.admin_user_id == current_user.id
+				return
+			end
+		end
     redirect_to event_path(current_team)
   end
 end
