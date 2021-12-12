@@ -10,20 +10,20 @@
           <th>◯</th>
           <th>△</th>
           <th>×</th>
-          <% @team.users.sort_by(&:id).each do |member| %>
-            <% if @current_team.admin_user_id == @current_user.id || member.id == current_user.id %>
-              <% team_member = TeamMember.find_by(user_id: member.id, team_id: @team.id) %>
+          <% @team.users.sort_by(&:id).each do |user| %>
+            <% if @current_team.admin_user_id == @current_user.id || user.id == current_user.id %>
+              <% team_member = TeamMember.find_by(user_id: user.id, team_id: @team.id) %>
               <% if team_member.display_name.present? %>
                 <th nowrap><%= link_to team_member.display_name, edit_team_team_member_path(team_member) %></th>
               <% else %>
-                <th nowrap><%= link_to member.name, edit_team_team_member_path(team_member) %></th>
+                <th nowrap><%= link_to user.name, edit_team_team_member_path(team_member) %></th>
               <% end %>
             <% else %>
-              <% team_member = TeamMember.find_by(user_id: member.id, team_id: @team.id) %>
+              <% team_member = TeamMember.find_by(user_id: user.id, team_id: @team.id) %>
               <% if team_member.display_name.present? %>
                 <th nowrap><%=team_member.display_name %></th>
               <% else %>
-                <th nowrap><%= member.name %></th>
+                <th nowrap><%= user.name %></th>
               <% end %>
             <% end %>
           <% end %>
@@ -55,15 +55,15 @@
               <% event_option_entry = event_entry.event_option_entry %>
               <%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
                 <% if event_option_entry.None? %>
-                  <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></td>
+                  <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></td>
                 <% else %>
                   <td nowrap class="entry">
                     <% if event_option_entry.NG? %>
-                      <span class="bg-red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
+                      <span class="bg-red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
                     <% elsif event_option_entry.Neither? %>
-                      <span class="bg-yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
+                      <span class="bg-yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
                     <% elsif event_option_entry.OK? %>
-                      <span class="bg-green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry) %></span>
+                      <span class="bg-green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
                     <% end %>
                   </td>
                 <% end %>

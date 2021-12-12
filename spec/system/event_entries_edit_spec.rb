@@ -5,7 +5,7 @@ RSpec.describe 'スケジュール出欠編集テスト', type: :system do
   let!(:event) { FactoryBot.create(:event) }
   let!(:event_entry) { EventEntry.find_by(user_id: user, event_id: event) }
 
-  describe 'ユーザーのスケジュール出欠編集' do
+  xdescribe 'ユーザーのスケジュール出欠編集' do
     it '有効なスケジュール出欠編集' do
       log_in_as(user)
       click_on 'スケジュール管理'
