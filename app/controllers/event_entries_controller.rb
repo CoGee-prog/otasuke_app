@@ -6,24 +6,25 @@ class EventEntriesController < ApplicationController
   def edit; end
 
   def update
-    if @event_entry.update(entries_params)
-      flash[:success] = '出欠を更新しました'
-      redirect_to event_path(current_team)
-    else
-      render 'edit'
+    @event_entries = entries_params.keys.each do |id|
+      event_entry = EventOptionEntry.find(id)
+      event_entry.update(entries_params[id])
+      event_entry
     end
+    flash[:success] = '出欠を更新しました'
+    redirect_to event_path(current_team)
   end
 
   private
 
   def entries_params
-    params.require(:event_entry).permit(event_option_entry_attributes: %i[id feeling])
+    params.permit(event_option_entries: [:feeling])[:event_option_entries]
   end
 
   # beforeアクション
 
   def set_event_entry
-    @event_entries = EventEntry.joins(:event).where(user_id: User.find(params[:id]), event: { team_id: current_team.id }).limit(2)
+    @event_entries = EventEntry.joins(:event).where(user_id: User.find(params[:id]), event: { team_id: current_team.id })
   end
 
   # 正しいユーザーのイベント出欠か、またはチーム管理者か確認し、違う場合は現在のチームのスケジュール管理ページにリダイレクトする
