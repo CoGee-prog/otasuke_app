@@ -9,8 +9,18 @@ FactoryBot.define do
     other { '三塁側' }
   end
 
-  factory :other_team_event1, class: 'Event' do
+  factory :other_event, class: 'Event' do
     id { 2 }
+    team_id { 1 }
+    day_time { '2021-09-10-13:00' }
+    ground { '神宮球場' }
+    opponent_team_name { 'スワローズ' }
+    tournament_name { '交流戦' }
+    other { '三塁側' }
+  end
+
+  factory :other_team_event1, class: 'Event' do
+    id { 3 }
     team_id { 2 }
     day_time { '2021-11-14-10:00' }
     ground { '東京ドーム' }
@@ -20,7 +30,7 @@ FactoryBot.define do
   end
 
   factory :other_team_event2, class: 'Event' do
-    id { 3 }
+    id { 4 }
     team_id { 3 }
     day_time { '2021-11-21-12:00' }
     ground { '東京ドーム' }

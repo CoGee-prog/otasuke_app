@@ -1,48 +1,53 @@
-<div class="event">
-  <%= form_with(model:@event_entry, local:true) do |f|%>
+<%= form_with(url: event_entry_path, method: :put, local: true) do |f| %>
+  <div class="event">
     <table>
-      <tr>
-        <th>
-				<% team_member = TeamMember.find_by(user_id: @event_entry.user_id, team_id: @event_entry.event.team_id) %>
-					<% if team_member.display_name.present? %>
-						<th nowrap><%=team_member.display_name %></th>
-					<% else %>
-						<th><%= User.find(@event_entry.user_id).name %></th>
-					<% end %>
-				</th>
-      </tr>
-      <tr>
-        <td>
-          <%= @event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[@event.day_time.wday] %>)
-          <%= @event.day_time.strftime('%H:%M') %>
-          <%= @event.ground %>
-          <% if @event.opponent_team_name.present? %>
-            VS<%= @event.opponent_team_name %>
-          <% end %>
-          <%= @event.tournament_name %>
-          <%= @event.other%>
-        </td>
-        <td nowrap>
-          <div class="radio-button-group">
-            <%= f.fields_for :event_option_entry do |feeling| %>
-              <div class="input-container">
-                <%= feeling.radio_button :feeling, :OK, class: "radio_button" %>
-                <%= feeling.label :feeling, "◯", class: "radio-tile ok", value: "ok" %>
-              </div>
-              <div class="input-container">
-                <%= feeling.radio_button :feeling, :Neither, class: "radio_button" %>
-                <%= feeling.label :feeling, "△", class: "radio-tile neither", value: "neither" %>
-              </div>
-              <div class="input-container">
-                <%= feeling.radio_button :feeling, :NG, class: "radio_button" %>
-                <%= feeling.label :feeling, "×", class: "radio-tile ng", value: "ng" %>
-              </div>
-              <%= feeling.hidden_field :id, value: feeling.object.id %>
+      <% @event_entries.each_with_index do |event_entry, i| %>
+        <% if i == 0 %>
+          <tr>
+            <th>
+              <% team_member = TeamMember.find_by(user_id: event_entry.user_id, team_id: event_entry.event.team_id) %>
+              <% if team_member.display_name.present? %>
+                <th nowrap><%=team_member.display_name %></th>
+              <% else %>
+                <th><%= User.find(event_entry.user_id).name %></th>
+              <% end %>
+            </th>
+          </tr>
+        <% end %>
+        <tr>
+          <td>
+            <% event = Event.find(event_entry.event_id) %>
+            <%= event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event.day_time.wday] %>)
+            <%= event.day_time.strftime('%H:%M') %>
+            <%= event.ground %>
+            <% if event.opponent_team_name.present? %>
+              VS<%= event.opponent_team_name %>
             <% end %>
-          </div>
-        </td>
-      </tr>
+            <%= event.tournament_name %>
+            <%= event.other%>
+          </td>
+          <td nowrap>
+            <div class="radio-button-group" id=<%=i%>>
+              <%= fields_for "event_option_entries[]", event_entry.event_option_entry do |feeling| %>
+                <div class="input-container">
+                  <%= feeling.radio_button :feeling, :OK, class: "radio_button" %>
+                  <%= feeling.label :feeling, "◯", class: "radio-tile ok", value: "ok" %>
+                </div>
+                <div class="input-container">
+                  <%= feeling.radio_button :feeling, :Neither, class: "radio_button" %>
+                  <%= feeling.label :feeling, "△", class: "radio-tile neither", value: "neither" %>
+                </div>
+                <div class="input-container">
+                  <%= feeling.radio_button :feeling, :NG, class: "radio_button" %>
+                  <%= feeling.label :feeling, "×", class: "radio-tile ng", value: "ng" %>
+                </div>
+                <%= feeling.hidden_field :id, value: feeling.object.id %>
+              <% end %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
     </table>
-    <%= f.submit "更新する", class: "btn-event-edit btn-orange" %>
-  <% end %>
-</div>
+  </div>
+  <%= f.submit "更新する", class: "btn-event-edit btn-orange" %>
+<% end %>
