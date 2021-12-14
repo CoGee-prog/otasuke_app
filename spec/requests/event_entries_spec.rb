@@ -22,6 +22,16 @@ RSpec.describe 'EventEntries', type: :request do
     end
   end
 
+  describe '存在しないスケジュール出欠の更新ができず、スケジュール管理画面にリダイレクトされる' do
+    it 'スケジュール出欠更新からリダイレクトされる' do
+      post login_path params: { session: { email: user.email, password: user.password } }
+      patch event_entry_path(user), params: { event_option_entries: { id: event_entry.event_option_entry.id + 1, feeling: 1 } }
+      expect(flash[:success]).not_to eq '出欠を更新しました'
+      expect(flash[:danger]).to eq 'スケジュールが削除されています'
+      expect(response).to redirect_to event_path(team)
+    end
+  end
+
   describe '他のユーザーのスケジュール出欠の編集、更新が失敗する' do
     it 'スケジュール出欠編集からリダイレクトされる' do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }

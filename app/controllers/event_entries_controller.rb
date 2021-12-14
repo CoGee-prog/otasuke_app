@@ -7,8 +7,13 @@ class EventEntriesController < ApplicationController
 
   def update
     @event_entries = entries_params.keys.each do |id|
-      event_entry = EventOptionEntry.find(id)
-      event_entry.update(entries_params[id])
+      if event_entry = EventOptionEntry.find_by(id: id)
+        event_entry.update(entries_params[id])
+      else
+        flash[:danger] = 'スケジュールが削除されています'
+        redirect_to event_path(current_team)
+        return
+      end
     end
     flash[:success] = '出欠を更新しました'
     redirect_to event_path(current_team)

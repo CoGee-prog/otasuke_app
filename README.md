@@ -7,13 +7,11 @@
 対戦相手検索では、指定した日時のスケジュールが空いているチームを検索することができます。  
 レスポンシブ対応しているため、スマホからもご確認いただけます。  
 また、Googleアカウントからログインすることも可能です。  
-https://otasuke-app.com
+https://otasuke-app.com/
 
 <img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
 
-  
-<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/141122377-ca7a143e-7d2c-4acf-9a36-a715e847d5db.gif">  
-
+<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/145830054-f12f11b7-9e7d-4e17-af56-afc4db865e76.gif">  
   
 <img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/141124401-c40aad17-ffb1-47fb-982e-5b973507a954.gif">  
 
@@ -52,6 +50,7 @@ https://otasuke-app.com
 * ユーザー登録、ログイン機能  
 	* Googleアカウントからのログイン機能
 	* パスワードを忘れてログインできなくなった際のパスワード変更機能 
+	* アカウント削除機能
 * ユーザープロフィール編集機能
 * チーム作成機能
 	* チームプロフィール画像設定機能
@@ -68,8 +67,9 @@ https://otasuke-app.com
 	* スケジュール登録機能
 	* スケジュール編集機能
 	* スケジュール削除機能
-	* 出欠回答機能  
+	* 出欠一括回答機能  
 	* 出欠合計計算機能  
+	* チームメンバー表示名変更機能
 * 対戦相手検索機能  
 	* 指定した日時のスケジュールが空いているチーム検索機能
 	* 活動エリア検索機能
