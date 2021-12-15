@@ -15,11 +15,11 @@
       所属済み
     </div>
   <% elsif current_user.already_requested?(team) %>
-    <span class="btn-right btn-red">
+    <span class="btn__right--red">
       <%= link_to "申請を取り消す", user_member_request_path(team.id), method: :delete %>
     </span>
   <% else %>
-    <span class="btn-right btn-orange">
+    <span class="btn__right--orange">
       <%= link_to "所属申請をする", user_member_requests_path(team_id: team.id), method: :post %>
     </span>
   <% end %>

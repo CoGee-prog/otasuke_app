@@ -11,5 +11,5 @@
   <%= f.label :password_confirmation,'パスワード再入力' %>
   <%= f.password_field :password_confirmation %>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :password_confirmation %>
-  <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+  <%= f.submit yield(:button_text), class: "form__btn btn--orange" %>
 <% end %>

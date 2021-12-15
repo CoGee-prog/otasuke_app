@@ -9,6 +9,6 @@
     <%= f.label :password_confirmation,'パスワード再入力' %>
     <%= f.password_field :password_confirmation %>
     <%= render 'shared/form_error_messages', object: f.object, attribute: :password_confirmation %>
-    <%= f.submit "パスワードを更新する", class: "form-btn btn-navy", id: "login-btn" %>
+    <%= f.submit "パスワードを更新する", class: "form__btn btn--navy", id: "login-btn" %>
   <% end %>
 </div>

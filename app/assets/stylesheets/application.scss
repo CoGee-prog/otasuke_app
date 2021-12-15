@@ -83,17 +83,16 @@ table{
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 }
 
-.btn {
+%btn{
 	display: inline-block;
 	height: auto;
-	margin-left: 10px;
 	font-weight: bold;
 	border-radius: 5px;
 	cursor: pointer;
 	z-index: 1;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
-	> a {
+	>a {
 		display: inline-block;
 		color: white;
 		height: auto;
@@ -107,41 +106,73 @@ table{
 	}
 }
 
-.btn-google{
-	font-weight: normal;
-	width: auto;
-	border-radius: 5px;
-	border: #5f6368;
-	padding: 3px 0px;
-	margin-top: 5px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	#google{
-		color: #5f6368;
-	}
-	>svg{
-		margin-right: 5px;
-	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
+%__right{
+	position: absolute;
+	top: 50%;
+	right: 6%;
+	transform: translateY(-50%);
+	> a {
+		display: block;
 	}
 }
 
-#google{
-	font-family: "Roboto-Medium";
+.btn {
+	&--orange {
+		@extend %btn;
+		background-color: #ff8c00;
+	}
+	&--navy {
+		@extend %btn;
+		background-color: #384878;
+	}
+	&--red {
+		@extend %btn;
+		background-color: #ff5050;
+	}
+	&--google{
+		@extend %btn;
+		font-weight: normal;
+		width: auto;
+		border-radius: 5px;
+		border: #5f6368;
+		padding: 3px 0px;
+		margin-top: 5px;
+		text-align: center;
+		display: flex;	
+		justify-content: center;
+		align-items: center;
+		#google{
+			color: #5f6368;
+			font-family: "Roboto-Medium";
+		}
+		>svg{
+			margin-right: 5px;
+		}
+	}
+	&__right {
+		@extend %btn;
+		@extend %__right;
+		&--orange {
+			@extend %btn;
+			@extend %__right;
+			background-color: #ff8c00;
+		}
+		&--navy {
+			@extend %btn;
+			@extend %__right;
+			background-color: #384878;
+		}
+		&--red {
+			@extend %btn;
+			@extend %__right;
+			background-color: #ff5050;
+		}
+	}
 }
 
 .center {
 	display: block;
 	text-align: center;
-	.btn {
-		margin: 0;
-	}
 	p {
 		font-weight: bold;
 	}
@@ -197,9 +228,7 @@ table{
 		color: #008cff;
 		text-align: center;
 	}
-}
-
-.down-arrow:after {
+	&__down-arrow:after {
 	content: "";
 	display: inline-block;
 	width: 6px;
@@ -210,9 +239,9 @@ table{
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
-}
+	}
 
-.dropdown-menu {
+	&__menu {
 	border: solid 1px;
 	visibility: hidden;
 	opacity: 0;
@@ -222,16 +251,18 @@ table{
 	transition: all 0.2s ease;
 	top: 30px;
 	right: -15px;
-	a:hover {
-		opacity: 0.7;
-		background-color: #f3f3f3;
+		a:hover {
+			opacity: 0.7;
+			background-color: #f3f3f3;
+		}
+	}
+	&:hover &__menu{
+		visibility: visible;
+		opacity: 1;
 	}
 }
 
-.dropdown:hover .dropdown-menu {
-	visibility: visible;
-	opacity: 1;
-}
+
 
 // タブ
 
@@ -242,7 +273,7 @@ table{
 	margin: 5px 0px 15px;
 	height: 34px;
 	line-height: 30px;
-	.tab-buttons {
+	&__tab-buttons {
 		position: relative;
 		width: 50%;
 		height: 30px;
@@ -314,12 +345,12 @@ table{
 		top: 50%;
 		left: 50%;
 		font-size: 2rem;
-		.title {
-			font-size: 5rem;
-		}
 		span {
 			font-weight: bold;
 		}
+	}
+	&__title {
+		font-size: 5rem;
 	}
 }
 
@@ -384,9 +415,8 @@ table{
 		width: 100%;
 		margin-bottom: 15px;
 	}
-}
 
-.form-btn {
+	&__btn {
 	display: inline-block;
 	color: white;
 	margin-top: 5px;
@@ -398,18 +428,16 @@ table{
 	cursor: pointer;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
+		&:active{
+			box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
+			position: relative;
+			top: 2px;
+		}
 	}
+
 }
 
-input.form-btn {
-	color: white;
-	border: none;
-	outline: none;
-}
+
 
 .password-forgot {
 	text-align: center;
@@ -421,17 +449,7 @@ input.form-btn {
 	}
 }
 
-.btn-orange {
-	background-color: #ff8c00;
-}
 
-.btn-navy {
-	background-color: #384878;
-}
-
-.btn-red {
-	background-color: #ff5050;
-}
 
 #error_explanation {
 	color: red;
@@ -645,31 +663,7 @@ input[type="file"] {
 	text-align: left;
 }
 
-.btn-destroy {
-	position: absolute;
-	top: 50%;
-	right: 6%;
-	transform: translateY(-50%);
-	display: inline-block;
-	height: auto;
-	font-size: 15px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	> a {
-		display: block;
-		color: white;
-		height: auto;
-		padding: 1px 6px;
-		width: 100%;
-	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		top: calc(50% + 2px);
-	}
-}
+
 
 // チーム一覧表示
 
@@ -727,27 +721,7 @@ input[type="file"] {
 	transform: translateY(-50%);
 }
 
-.btn-right {
-	position: absolute;
-	top: 50%;
-	right: 3%;
-	transform: translateY(-50%);
-	display: inline-block;
-	height: auto;
-	padding: 1px 6px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	> a {
-		color: white;
-	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		top: calc(50% + 2px);
-	}
-}
+
 
 .belonged {
 	position: absolute;
@@ -921,9 +895,6 @@ input[type="file"] {
 			td {
 				padding: 10px;
 				position: relative;
-			}
-			.btn {
-				margin-left: 0px;
 			}
 			.beside {
 				display: inline-block;
@@ -1218,9 +1189,6 @@ input[type="file"] {
 	display: block;
 	margin-top: 15px;
 	text-align: center;
-	.btn {
-		margin: 0;
-	}
 }
 
 // レスポンシブ
@@ -1232,7 +1200,7 @@ input[type="file"] {
 	}
 	// タブ
 	.tab-area {
-		.tab-buttons {
+		&__tab-buttons {
 			width: 100%;
 		}
 	}
@@ -1241,9 +1209,9 @@ input[type="file"] {
 	.home-image {
 		p {
 			font-size: 1rem;
-			.title {
-				font-size: 2.5rem;
-			}
+		}
+		&__title {
+			font-size: 2.5rem;
 		}
 	}
 	
@@ -1280,8 +1248,7 @@ input[type="file"] {
 		font-size: 1rem;
 	}
 
-	.btn {
-		margin-left: 10px;
+	%btn {
 		>a{
 			font-size: 1.0rem;
 		}
@@ -1322,7 +1289,7 @@ input[type="file"] {
 		}
 	}
 
-	.dropdown-menu {
+	.dropdown__menu {
 		top: 21px;
 		right: -5px;
 	}
@@ -1337,7 +1304,7 @@ input[type="file"] {
 				font-size: 1.0rem;
 			}
 		}
-		.tab-buttons {
+		&__tab-buttons {
 			width: 100%;
 			.tab1#lamp {
 				top: 24px;
@@ -1352,9 +1319,9 @@ input[type="file"] {
 	.home-image {
 		p {
 			font-size: 0.8rem;
-			.title {
-				font-size: 1.8rem;
-			}
+		}
+		&__title {
+			font-size: 1.8rem;
 		}
 	}
 

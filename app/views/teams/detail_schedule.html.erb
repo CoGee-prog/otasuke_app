@@ -37,7 +37,7 @@
     <% if current_user.id == current_team.admin_user_id %>
       <% if current_team.already_game_requested?(@team) %>
         <div class="center">
-          <span class="btn btn-red">
+          <span class="btn--red">
             <% game_request = GameRequest.find_by(requesting_team_id: current_team.id, requested_team_id: @team.id) %>
             <%= link_to "対戦申込を取り消す", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
           </span>
@@ -61,7 +61,7 @@
 <% else %>
   <span class="center">
     ※対戦申込はログイン後、チーム管理者のみ行うことができます。<br>
-    <span class="btn btn-navy">
+    <span class="btn--navy">
       <%= link_to "ログインする",login_path %>
     </span>
   </span>

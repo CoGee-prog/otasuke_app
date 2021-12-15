@@ -12,10 +12,10 @@
     <% end %>
   <img id="preview" , class="qr-preview">
   </div>
-  <label class="file-select btn-navy">
+  <label class="file-select btn--navy">
     <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", id: "preview_image" %> ファイルを選択
   </label>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :image %>
   <%= f.hidden_field :requested_team_id, value: @team.id %>
-  <%= f.submit "対戦を申し込む", class: "form-btn btn-orange" %>
+  <%= f.submit "対戦を申し込む", class: "form__btn btn--orange" %>
 <% end %>
