@@ -8,13 +8,13 @@
     <% end %>
 		<% if @team.id != nil %>
         <span class="center">
-          <span class="btn btn-red">
+          <span class="btn--red">
             <%= link_to "画像を削除", destroy_image_team_path(@team.id), method: :patch%>
           </span>
         </span>
 		<% end %>
   </div>
-  <label class="file-select btn-navy">
+  <label class="file-select btn--navy">
     <%= f.file_field :image, accept: "image/jpg,image/gif,image/png",id: "preview_image" %>ファイルを選択
   </label>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :image %>
@@ -48,5 +48,5 @@
   <%= f.label :other,'その他' %>
   <%= f.text_area :other, rows: 5 %>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :other %>
-  <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+  <%= f.submit yield(:button_text), class: "form__btn btn--orange" %>
 <% end %>
