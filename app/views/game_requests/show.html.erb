@@ -48,11 +48,11 @@
             </span>
           <% end %>
         </div>
-        <span class="btn-center">
-          <span class="btn--red">
-            <%= link_to "試合リクエストを削除する", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-          </span>
-        </span>
+				<span class="center">
+					<span class="btn__margin-top--center-red">
+							<%= link_to "試合リクエストを削除する", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+					</span>
+				</span>
       </li>
     <% end %>
   </ul>
