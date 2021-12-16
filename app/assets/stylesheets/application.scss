@@ -109,11 +109,27 @@ table{
 %__right{
 	position: absolute;
 	top: 50%;
-	right: 6%;
+	right: 4%;
 	transform: translateY(-50%);
 	> a {
 		display: block;
 	}
+	&:active{
+		position: absolute;
+		top: calc(50% + 2px);
+	}
+}
+
+%__margin-left {
+	margin-left: 5px;
+}
+
+%--center {
+	margin: 0 auto;
+	display: block;
+	color: white;
+	height: auto;
+	padding: 1px 6px;
 }
 
 .btn {
@@ -129,7 +145,7 @@ table{
 		@extend %btn;
 		background-color: #ff5050;
 	}
-	&--google{
+	&--google {
 		@extend %btn;
 		font-weight: normal;
 		width: auto;
@@ -167,6 +183,54 @@ table{
 			@extend %__right;
 			background-color: #ff5050;
 		}
+	}
+	&__search {
+	@extend %btn;
+	margin-left: 5px;
+	background-color: #384878;
+	}
+	&__margin-left {
+		@extend %btn;
+		@extend %__margin-left;
+		&--navy {
+			@extend %btn;
+			@extend %__margin-left;
+			background-color: #384878;
+		}
+		&--orange {
+			@extend %btn;
+			@extend %__margin-left;
+			background-color: #ff8c00;
+		}
+	}
+	&__margin-top {
+	@extend %btn;
+	margin-top: 10px;
+	text-align: center;
+	  &--orange{
+			@extend %btn;
+			margin-top: 10px;
+			background-color: #ff8c00;
+		}
+		&--center {
+			&-orange {
+				@extend %btn;
+				@extend %--center;
+				margin-top: 10px;
+				background-color: #ff8c00;
+			}
+			&-red {
+				@extend %btn;
+				@extend %--center;
+				margin-top: 10px;
+				display: inline-block;
+				background-color: #ff5050;
+				>a {
+					width: auto;
+				}
+			}
+		}
+
 	}
 }
 
@@ -733,7 +797,7 @@ input[type="file"] {
 	font-weight: bold;
 }
 
-.btn-search {
+.btn__search {
 	display: inline-block;
 	margin-left: 5px;
 	height: 25px;
@@ -966,29 +1030,7 @@ input[type="file"] {
 	width: 35px;
 }
 
-.btn-event {
-	display: inline-block;
-	height: auto;
-	margin-top: 10px;
-	font-size: 15px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	> a {
-		display: block;
-		color: white;
-		height: auto;
-		padding: 1px 6px;
-		width: 100%;
-	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
-	}
-}
+
 
 .no-event {
 	display: table-cell;
@@ -1046,25 +1088,6 @@ input[type="file"] {
 	background-color: #ff9191;
 }
 
-// 出欠変更ボタン
-.btn-event-edit {
-	display: block;
-	margin: 10px auto 0;
-	color: white;
-	height: 25px;
-	padding: 1px 6px;
-	font-size: 15px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	@include box_sizing;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
-	}
-}
 
 // スケジュールから相手チーム検索
 
@@ -1185,12 +1208,6 @@ input[type="file"] {
 	height: auto;
 }
 
-.btn-center {
-	display: block;
-	margin-top: 15px;
-	text-align: center;
-}
-
 // レスポンシブ
 
 @media screen and (max-width: 1024px) {
@@ -1254,16 +1271,7 @@ input[type="file"] {
 		}
 	}
 
-	.btn-right{
-		>a{
-			font-size: 1.0rem;
-		}
-	}
-	.btn-event{
-		>a{
-			font-size: 1.0rem;
-		}
-	}
+	
 
 	// ロゴ
 	#logo {
@@ -1406,6 +1414,13 @@ input[type="file"] {
 			}
 		}
 	}
+
+	.event {
+		th {
+			max-width: 50px;
+			overflow-wrap: break-word;
+		}
+	}
 		
 	// スケジュールから相手チーム検索
 	.event-search {
@@ -1489,16 +1504,7 @@ input[type="file"] {
 		}
 	}
 
-	.btn-search {
-		display: inline-block;
-		margin-left: 5px;
-		height: auto;
-		padding: 1px 6px;
-		border-radius: 5px;
-		cursor: pointer;
-		color: white;
-		@include box_sizing;
-	}
+
 
 	// ユーザー一覧表示
 

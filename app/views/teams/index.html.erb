@@ -4,7 +4,7 @@
 <ul class="teams">
   <%= form_with(url: teams_path, method: :get) do %>
     <%= text_field_tag :search, params[:search], placeholder: "チーム名" %>
-    <%= submit_tag '検索',name: nil, class: "btn-search btn--navy" %>
+    <%= submit_tag '検索',name: nil, class: "btn__search" %>
   <% end %>
   <%= render @teams %>
 </ul>

@@ -7,7 +7,7 @@
             <th>
               <% team_member = TeamMember.find_by(user_id: event_entry.user_id, team_id: event_entry.event.team_id) %>
               <% if team_member.display_name.present? %>
-                <th nowrap><%=team_member.display_name %></th>
+                <th><%=team_member.display_name %></th>
               <% else %>
                 <th><%= User.find(event_entry.user_id).name %></th>
               <% end %>
@@ -49,5 +49,5 @@
       <% end %>
     </table>
   </div>
-  <%= f.submit "更新する", class: "btn-event-edit btn--orange" %>
+  <%= f.submit "更新する", class: "btn__margin-top--center-orange" %>
 <% end %>
