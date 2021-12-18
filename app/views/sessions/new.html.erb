@@ -7,14 +7,14 @@
     <%= f.email_field :email %>
     <%= f.label :password, 'パスワード' %>
     <%= f.password_field :password %>
-    <%= f.label :remember_me, class: "login-checkbox" do %>
+    <%= f.label :remember_me, class: "form__login-checkbox" do %>
       <%= f.check_box :remember_me, id: "login-checkbox" %>
       ログイン状態を保持する
     <% end %>
-    <div class="password-forgot">
+    <div class="form__password-forgot">
       <%= link_to "パスワードをお忘れですか？", new_password_reset_path %>
     </div>
-    <%= f.submit "ログイン", class: "form__btn btn--navy", id: "login-btn" %>
+    <%= f.submit "ログイン", class: "form__btn--navy", id: "login-btn" %>
   <% end %>
 	<%= link_to ("/auth/google_oauth2"), method: :post do %>
 		<div class="btn--google">
@@ -27,10 +27,10 @@
 			<p id="google">Googleでログイン</p>
 		</div>
 	<% end %>
-  <div class="other">
+  <div class="form__other">
     <p>アカウントをお持ちでない方</p>
     <%= link_to (signup_path) do %>
-      <div class="form__btn btn--orange">新規登録</div>
+      <div class="form__btn--orange">新規登録</div>
     <% end %>
   </div>
 </div>

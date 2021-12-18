@@ -7,7 +7,7 @@
       <span>
         <% @belong_teams.each do |belomg_team| %>
           <%= link_to (switch_team_path(belomg_team)), method: :post do %>
-            <div class="list">
+            <div class="team-change__list">
               <% if belomg_team.image.attached? %>
                 <%= image_tag(belomg_team.image,  size: "25x25", gravity: :center, crop: "25x25+0+0", class: "icon pc") %>
                 <%= image_tag(belomg_team.image,  size: "20x20", gravity: :center, crop: "20x20+0+0", class: "icon sp") %>

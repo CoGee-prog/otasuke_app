@@ -6,12 +6,12 @@
     <%= image_tag("default_team_image.webp", size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon pc") %>
     <%= image_tag("default_team_image.webp", size: "30x30", gravity: :center, crop: "30x30+0+0", class: "icon sp") %>
   <% end %>
-  <div class="team-header">
+  <div class="team__header">
     <%= link_to team.name, team %><br>
     <p><%= team.level %></p>
   </div>
   <% if current_user.already_belong?(team) %>
-    <div class="belonged">
+    <div class="status">
       所属済み
     </div>
   <% elsif current_user.already_requested?(team) %>
@@ -23,7 +23,7 @@
       <%= link_to "所属申請をする", user_member_requests_path(team_id: team.id), method: :post %>
     </span>
   <% end %>
-  <div class="team-body">
+  <div class="team__body">
     活動エリア: <%= Prefecture.find(team.prefecture_id).name %><br>
     <% if team.admin_user_id? && admin = User.find(team.admin_user_id) %>
       チーム管理者: <%= admin.name %>

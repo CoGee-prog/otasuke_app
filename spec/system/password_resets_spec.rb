@@ -16,7 +16,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       visit new_password_reset_path
       fill_in 'password_reset[email]', with: ''
       click_on '送信する'
-      expect(page).to have_selector('.alert-danger', text: 'メールアドレスが見つかりません')
+      expect(page).to have_selector('.alert__danger', text: 'メールアドレスが見つかりません')
     end
 
     it 'メールアドレスが有効な場合' do
@@ -24,7 +24,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       expect(user.reset_digest).not_to eq user.reload.reset_digest
       expect(ActionMailer::Base.deliveries.size).to eq 1
       expect(page).to have_current_path root_path, ignore_query: true
-      expect(page).to have_selector('.alert-info', text: 'パスワード再設定のメールを送信しました')
+      expect(page).to have_selector('.alert__info', text: 'パスワード再設定のメールを送信しました')
     end
   end
 
@@ -62,7 +62,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       fill_in 'user[password]', with: 'hogehoge'
       fill_in 'user[password_confirmation]', with: 'fugafuga'
       click_on 'パスワードを更新する'
-      expect(page).to have_selector('.form-alert-danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
+      expect(page).to have_selector('.form__alert--danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
     end
 
     it 'パスワードが空' do
@@ -70,7 +70,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       fill_in 'user[password]', with: ''
       fill_in 'user[password_confirmation]', with: ''
       click_on 'パスワードを更新する'
-      expect(page).to have_selector('.form-alert-danger', text: 'パスワードを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'パスワードを入力してください')
     end
 
     it '有効なパスワードとパスワード確認' do
@@ -80,7 +80,7 @@ RSpec.describe 'パスワードの再設定', type: :system do
       click_on 'パスワードを更新する'
       expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.dropdown', text: '設定')
-      expect(page).to have_selector('.alert-success', text: 'パスワードの再設定が完了しました')
+      expect(page).to have_selector('.alert__success', text: 'パスワードの再設定が完了しました')
     end
   end
 end

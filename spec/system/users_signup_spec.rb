@@ -15,10 +15,10 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
         fill_in 'user[password_confirmation]', with: 'fuga'
         click_on '登録する'
       end.not_to change(User, :count)
-      expect(page).to have_selector('.form-alert-danger', text: 'ニックネームを入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'メールアドレスを入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'パスワードは6文字以上で入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
+      expect(page).to have_selector('.form__alert--danger', text: 'ニックネームを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'メールアドレスを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'パスワードは6文字以上で入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
       expect(page).to have_current_path users_path, ignore_query: true
     end
 
@@ -40,7 +40,7 @@ RSpec.describe 'ユーザー登録テスト', type: :system do
         expect(page).to have_current_path root_path, ignore_query: true
       end.to change(User, :count).by(1)
       expect(page).to have_selector('.dropdown', text: '設定')
-      expect(page).to have_selector('.alert-success', text: 'ユーザー登録が完了しました')
+      expect(page).to have_selector('.alert__success', text: 'ユーザー登録が完了しました')
     end
   end
 end

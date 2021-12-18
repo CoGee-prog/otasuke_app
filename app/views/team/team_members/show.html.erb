@@ -10,7 +10,7 @@
           <%= link_to "削除", team_team_member_path(member.id), method: :delete, data: { confirm: "本当に削除しますか？" } %>
         </span>
       <% else %>
-        <span class="belonged">
+        <span class="status">
           チーム管理者
         </span>
       <% end %>

@@ -10,10 +10,10 @@ RSpec.describe 'ユーザー編集テスト', type: :system do
       fill_in 'user[password]', with: 'hoge'
       fill_in 'user[password_confirmation]', with: 'fuga'
       click_on '更新する'
-      expect(page).to have_selector('.form-alert-danger', text: 'ニックネームを入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'メールアドレスを入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'パスワードは6文字以上で入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
+      expect(page).to have_selector('.form__alert--danger', text: 'ニックネームを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'メールアドレスを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'パスワードは6文字以上で入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'パスワード（確認用）とパスワードの入力が一致しません')
       expect(page).to have_current_path user_path(user), ignore_query: true
     end
 
@@ -29,7 +29,7 @@ RSpec.describe 'ユーザー編集テスト', type: :system do
       fill_in 'user[password_confirmation]', with: ''
       click_on '更新する'
       expect(page).to have_current_path root_path, ignore_query: true
-      expect(page).to have_selector('.alert-success', text: 'ユーザープロフィールを更新しました')
+      expect(page).to have_selector('.alert__success', text: 'ユーザープロフィールを更新しました')
       user.reload
       expect(user.name).to eq name
       expect(user.email).to eq email
@@ -40,10 +40,10 @@ RSpec.describe 'ユーザー編集テスト', type: :system do
       log_in_as(user)
       expect(page).to have_current_path edit_user_path(user), ignore_query: true
       click_on 'ログアウト'
-      expect(page).to have_selector('.alert-success', text: 'ログアウトしました')
+      expect(page).to have_selector('.alert__success', text: 'ログアウトしました')
       log_in_as(user)
       expect(page).to have_current_path root_path, ignore_query: true
-      expect(page).to have_selector('.alert-success', text: 'ログインしました')
+      expect(page).to have_selector('.alert__success', text: 'ログインしました')
     end
   end
 end

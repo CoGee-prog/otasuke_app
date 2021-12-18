@@ -24,7 +24,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
         fill_in 'game_request[comment]', with: 'よろしくお願いします！'
         click_on '対戦を申し込む'
       end.to change(GameRequest, :count).by(1)
-      expect(page).to have_selector('.alert-success', text: '対戦を申し込みました')
+      expect(page).to have_selector('.alert__success', text: '対戦を申し込みました')
       expect(page).to have_current_path detail_schedule_team_path(other_team1), ignore_query: true
     end
 
@@ -36,7 +36,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
         fill_in 'game_request[comment]', with: 'よろしくお願いします！'
         click_on '対戦を申し込む'
       end.not_to change(GameRequest, :count)
-      expect(page).to have_selector('.form-alert-danger', text: '連絡先、LINEQRコード等はどちらか1つは必ず入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: '連絡先、LINEQRコード等はどちらか1つは必ず入力してください')
     end
   end
 end

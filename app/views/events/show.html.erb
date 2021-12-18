@@ -40,7 +40,7 @@
               <%= event.tournament_name %>
               <%= event.other%>
               <% if @current_team.admin_user_id == @current_user.id %>
-                <span class="beside">
+                <span class="events__beside">
                   <span class="btn--navy"><%= link_to "編集", edit_event_path(event) %></span>
                   <span class="btn--red"><%= link_to "削除", event_path(event), method: :delete, data: {confirm: "このスケジュールを削除しますか？"} %></span>
                 </span>
@@ -59,11 +59,11 @@
                 <% else %>
                   <td nowrap class="entry">
                     <% if event_option_entry.NG? %>
-                      <span class="bg-red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
+                      <span class="bg--red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
                     <% elsif event_option_entry.Neither? %>
-                      <span class="bg-yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
+                      <span class="bg--yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
                     <% elsif event_option_entry.OK? %>
-                      <span class="bg-green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
+                      <span class="bg--green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
                     <% end %>
                   </td>
                 <% end %>
@@ -73,15 +73,15 @@
                 <% else %>
                   <td nowrap class="entry">
                     <% if event_option_entry.NG? %>
-                      <span class="bg-red">
+                      <span class="bg--red">
                         <p>&nbsp; × &nbsp;</p>
                       </span>
                     <% elsif event_option_entry.Neither? %>
-                      <span class="bg-yellow">
+                      <span class="bg--yellow">
                         <p>&nbsp; △ &nbsp;</p>
                       </span>
                     <% elsif event_option_entry.OK? %>
-                      <span class="bg-green">
+                      <span class="bg--green">
                         <p>&nbsp; ◯ &nbsp;</p>
                       </span>
                     <% end %>
