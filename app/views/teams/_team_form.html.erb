@@ -1,21 +1,21 @@
 <%= form_with(model:@team,local:true) do |f| %>
   <%= f.label :image,'チームプロフィール画像' %>
-  <div class="preview_image">
+  <div class="preview-image">
     <% if @team.image.attached? && @team.image.present? %>
-      <%= image_tag(@team.image, id:"preview", class:"team_preview" ) %>
+      <%= image_tag(@team.image, id:"preview", class:"preview-image__team" ) %>
     <% else %>
-      <%= image_tag("default_team_image.webp", id:"preview", class:"team_preview" ) %>
+      <%= image_tag("default_team_image.webp", id:"preview", class:"preview-image__team" ) %>
     <% end %>
 		<% if @team.id != nil %>
         <span class="center">
-          <span class="btn btn-red">
+          <span class="btn--red">
             <%= link_to "画像を削除", destroy_image_team_path(@team.id), method: :patch%>
           </span>
         </span>
 		<% end %>
   </div>
-  <label class="file-select btn-navy">
-    <%= f.file_field :image, accept: "image/jpg,image/gif,image/png",id: "preview_image" %>ファイルを選択
+  <label class="btn__file-select">
+    <%= f.file_field :image, accept: "image/jpg,image/gif,image/png",id: "preview-image" %>ファイルを選択
   </label>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :image %>
   <%= f.label :name,'チーム名' %>
@@ -32,7 +32,7 @@
   </div>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :prefecture_id %>
   <p>活動曜日</p>
-  <span class="checkbox-inline">
+  <span class="form__checkbox--inline">
     <% weekly_columns.each_with_index do |day,i| %>
       <%= f.check_box day.to_sym , {} ,"true", "false" %>
       <%= f.label day.to_sym , ["月","火","水","木","金","土","日"][i] %>
@@ -48,5 +48,5 @@
   <%= f.label :other,'その他' %>
   <%= f.text_area :other, rows: 5 %>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :other %>
-  <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+  <%= f.submit yield(:button_text), class: "form__btn--orange" %>
 <% end %>

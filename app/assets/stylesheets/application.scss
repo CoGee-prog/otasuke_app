@@ -48,6 +48,7 @@ img {
 .pc {
 	display: inline-block;
 }
+
 .sp {
 	display: none;
 }
@@ -83,17 +84,16 @@ table{
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
 }
 
-.btn {
+%btn{
 	display: inline-block;
 	height: auto;
-	margin-left: 10px;
 	font-weight: bold;
 	border-radius: 5px;
 	cursor: pointer;
 	z-index: 1;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
-	> a {
+	>a {
 		display: inline-block;
 		color: white;
 		height: auto;
@@ -107,41 +107,157 @@ table{
 	}
 }
 
-.btn-google{
-	font-weight: normal;
-	width: auto;
-	border-radius: 5px;
-	border: #5f6368;
-	padding: 3px 0px;
-	margin-top: 5px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	#google{
-		color: #5f6368;
-	}
-	>svg{
-		margin-right: 5px;
+%__right{
+	position: absolute;
+	top: 50%;
+	right: 4%;
+	transform: translateY(-50%);
+	> a {
+		display: block;
 	}
 	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
+		position: absolute;
+		top: calc(50% + 2px);
 	}
 }
 
-#google{
-	font-family: "Roboto-Medium";
+%__margin-left {
+	margin-left: 5px;
+}
+
+%--center {
+	margin: 0 auto;
+	display: block;
+	color: white;
+	height: auto;
+	padding: 1px 6px;
+}
+
+.btn {
+	display: flex;
+	flex-direction: row;
+	position: absolute;
+	top: 50%;
+	right: 3%;
+	transform: translateY(-50%);
+	&--orange {
+		@extend %btn;
+		background-color: #ff8c00;
+	}
+	&--navy {
+		@extend %btn;
+		background-color: #384878;
+	}
+	&--red {
+		@extend %btn;
+		background-color: #ff5050;
+	}
+	&--google {
+		@extend %btn;
+		font-weight: normal;
+		width: auto;
+		border-radius: 5px;
+		border: #5f6368;
+		padding: 3px 0px;
+		margin-top: 5px;
+		text-align: center;
+		display: flex;	
+		justify-content: center;
+		align-items: center;
+		#google{
+			color: #5f6368;
+			font-family: "Roboto-Medium";
+		}
+		>svg{
+			margin-right: 5px;
+		}
+	}
+	&__right {
+		@extend %btn;
+		@extend %__right;
+		&--orange {
+			@extend %btn;
+			@extend %__right;
+			background-color: #ff8c00;
+		}
+		&--navy {
+			@extend %btn;
+			@extend %__right;
+			background-color: #384878;
+		}
+		&--red {
+			@extend %btn;
+			@extend %__right;
+			background-color: #ff5050;
+		}
+	}
+	&__search {
+	@extend %btn;
+	color: white;
+	padding: 1px 6px;
+	margin-left: 5px;
+	background-color: #384878;
+	}
+	&__margin-left {
+		@extend %btn;
+		@extend %__margin-left;
+		&--navy {
+			@extend %btn;
+			@extend %__margin-left;
+			background-color: #384878;
+		}
+		&--orange {
+			@extend %btn;
+			@extend %__margin-left;
+			background-color: #ff8c00;
+		}
+		&--red {
+			@extend %btn;
+			@extend %__margin-left;
+			background-color: #ff5050;
+		}
+	}
+	&__margin-top {
+	@extend %btn;
+	margin-top: 10px;
+	text-align: center;
+	  &--orange{
+			@extend %btn;
+			margin-top: 10px;
+			background-color: #ff8c00;
+		}
+		&--center {
+			&-orange {
+				@extend %btn;
+				@extend %--center;
+				margin-top: 10px;
+				background-color: #ff8c00;
+			}
+			&-red {
+				@extend %btn;
+				@extend %--center;
+				margin-top: 10px;
+				display: inline-block;
+				background-color: #ff5050;
+				>a {
+					width: auto;
+				}
+			}
+		}
+	}
+	&__file-select {
+		@extend %btn;
+		width: 50%;
+		margin: 5px auto 15px auto;
+		text-align: center;
+		color: #fff;
+		background-color: #384878;
+	}
 }
 
 .center {
 	display: block;
 	text-align: center;
-	.btn {
-		margin: 0;
-	}
 	p {
 		font-weight: bold;
 	}
@@ -197,9 +313,7 @@ table{
 		color: #008cff;
 		text-align: center;
 	}
-}
-
-.down-arrow:after {
+	&__down-arrow:after {
 	content: "";
 	display: inline-block;
 	width: 6px;
@@ -210,27 +324,27 @@ table{
 	-webkit-transform: rotate(45deg);
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg);
-}
-
-.dropdown-menu {
-	border: solid 1px;
-	visibility: hidden;
-	opacity: 0;
-	z-index: 2;
-	position: absolute;
-	-webkit-transition: all 0.2s ease;
-	transition: all 0.2s ease;
-	top: 30px;
-	right: -15px;
-	a:hover {
-		opacity: 0.7;
-		background-color: #f3f3f3;
 	}
-}
 
-.dropdown:hover .dropdown-menu {
-	visibility: visible;
-	opacity: 1;
+	&__menu {
+		border: solid 1px;
+		visibility: hidden;
+		opacity: 0;
+		z-index: 2;
+		position: absolute;
+		-webkit-transition: all 0.2s ease;
+		transition: all 0.2s ease;
+		top: 30px;
+		right: -15px;
+			a:hover {
+				opacity: 0.7;
+				background-color: #f3f3f3;
+			}
+	}
+	&:hover &__menu{
+		visibility: visible;
+		opacity: 1;
+	}
 }
 
 // タブ
@@ -242,7 +356,7 @@ table{
 	margin: 5px 0px 15px;
 	height: 34px;
 	line-height: 30px;
-	.tab-buttons {
+	&__tab-button {
 		position: relative;
 		width: 50%;
 		height: 30px;
@@ -314,12 +428,12 @@ table{
 		top: 50%;
 		left: 50%;
 		font-size: 2rem;
-		.title {
-			font-size: 5rem;
-		}
 		span {
 			font-weight: bold;
 		}
+	}
+	&__title {
+		font-size: 5rem;
 	}
 }
 
@@ -372,11 +486,9 @@ table{
 		text-align: center;
 		margin-bottom: 15px;
 	}
-
 	label {
 		display: block;
 	}
-
 	select {
 		border-radius: 5px;
 		border: 1px #bbb solid;
@@ -384,53 +496,79 @@ table{
 		width: 100%;
 		margin-bottom: 15px;
 	}
-}
-
-.form-btn {
-	display: inline-block;
-	color: white;
-	margin-top: 5px;
-	height: auto;
-	padding: 1px 6px;
-	width: 100%;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
+	&__btn {
+		@extend %btn;
+		color: white;
+		margin-top: 5px;
+			&--orange{
+				@extend %btn;
+				width: 100%;
+				color: white;
+				margin-top: 5px;
+				background-color: #ff8c00;
+			}
+			&--navy{
+				@extend %btn;
+				width: 100%;
+				color: white;
+				margin-top: 5px;
+				background-color: #384878;
+			}
+		}
+	&__alert--danger {
+		margin-top: -15px;
+		margin-bottom: 15px;
+		li {
+			list-style: none;
+			color: red;
+		}
+		p{
+			color: red;
+		}
 	}
-}
-
-input.form-btn {
-	color: white;
-	border: none;
-	outline: none;
-}
-
-.password-forgot {
-	text-align: center;
-	margin-bottom: 15px;
-	width: 100%;
-	> a {
-		display: inline-block;
-		color: blue;
+	&__other {
+		width: 100%;
+		text-align: center;
+		padding: 10px 0;
+		border-top: 2px #aaa solid;
+		margin-top: 20px;
 	}
-}
-
-.btn-orange {
-	background-color: #ff8c00;
-}
-
-.btn-navy {
-	background-color: #384878;
-}
-
-.btn-red {
-	background-color: #ff5050;
+	&__password-forgot {
+		text-align: center;
+		margin-bottom: 15px;
+		width: 100%;
+		> a {
+			display: inline-block;
+			color: blue;
+		}
+	}
+	&__login-checkbox {
+		margin-top: -15px;
+		input {
+			width: 15px;
+			margin-right: -5px;
+		}
+	}
+	&__checkbox--inline {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 15px;
+		label {
+			display: inline;
+			margin-right: 10px;
+		}
+		.field_with_errors {
+			display: inline;
+		}
+		input {
+			width: auto;
+			margin-bottom: 0px;
+		}
+	}
+	input[type="file"] {
+		display: none;
+	}
 }
 
 #error_explanation {
@@ -447,7 +585,7 @@ input.form-btn {
 	background-color: #fff;
 }
 
-.alert {
+%alert {
 	display: block;
 	min-height: 30px;
 	line-height: 30px;
@@ -459,137 +597,69 @@ input.form-btn {
 	font-size: 0.8rem;
 }
 
-
-
-.alert-success {
-	background-color: #b9e6b9;
-	li {
-		list-style: none;
+.alert{
+	&__success {
+		@extend %alert;
+		background-color: #b9e6b9;
+		li {
+			list-style: none;
+		}
+		p{
+			color: #46b446;
+		}
 	}
-	p{
-		color: #46b446;
+	&__info {
+		@extend %alert;
+		background-color: #50afff;
+		width: 500px;
+		li {
+			list-style: none;
+		}
+		p{
+			color: #0044a2;
+		}
 	}
-}
-
-.alert-info {
-	background-color: #50afff;
-	width: 500px;
-	li {
-		list-style: none;
+	&__danger {
+		@extend %alert;
+		background-color: #ffafaf;
+		li {
+			list-style: none;
+		}
+		p{
+			color: red;
+		}
 	}
-	p{
-		color: #0044a2;
+	&__warning {
+		@extend %alert;
+		background-color: #f0f087;
+		width: 500px;
+		li {
+			list-style: none;
+		}
+		p{
+			color: #f0be00;
+		}
 	}
-}
-.alert-long {
-	line-height: 15px;
-}
-
-.alert-danger {
-	background-color: #ffafaf;
-	li {
-		list-style: none;
-	}
-	p{
-		color: red;
-	}
-}
-
-.alert-warning {
-	background-color: #f0f087;
-	width: 500px;
-	li {
-		list-style: none;
-	}
-	p{
-		color: #f0be00;
-	}
-}
-
-.form-alert-danger {
-	margin-top: -15px;
-	margin-bottom: 15px;
-	li {
-		list-style: none;
-		color: red;
-	}
-	p{
-		color: red;
-	}
-}
-
-.other {
-	width: 100%;
-	text-align: center;
-	padding: 10px 0;
-	border-top: 2px #aaa solid;
-	margin-top: 20px;
-}
-
-.login-checkbox {
-	margin-top: -15px;
-	input {
-		width: 15px;
-		margin-right: -5px;
+	&__long {
+		line-height: 15px;
 	}
 }
 
 .selectbox {
 	width: 100%;
 	position: relative;
-}
-
-.selectbox:after {
-	content: "";
-	display: block;
-	width: 10px;
-	height: 10px;
-	position: absolute;
-	right: 5%;
-	top: 20%;
-	border-bottom: 2px solid;
-	border-right: 2px solid;
-	transform: rotate(45deg) translateY(-30%);
-}
-
-.checkbox-inline {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: 15px;
-	label {
-		display: inline;
-		margin-right: 10px;
+	&:after {
+		content: "";
+		display: block;
+		width: 10px;
+		height: 10px;
+		position: absolute;
+		right: 5%;
+		top: 20%;
+		border-bottom: 2px solid;
+		border-right: 2px solid;
+		transform: rotate(45deg) translateY(-30%);
 	}
-	.field_with_errors {
-		display: inline;
-	}
-	input {
-		width: auto;
-		margin-bottom: 0px;
-	}
-}
-
-input[type="file"] {
-	display: none;
-}
-
-.file-select {
-	height: auto;
-	width: 50%;
-	margin: 5px auto 15px auto;
-	text-align: center;
-	cursor: pointer;
-	color: #fff;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-}
-
-.team_preview {
-	height: 100px;
-	width: 100px;
-	border-radius: 50%;
-	object-fit: cover;
 }
 
 // チームプロフィール
@@ -624,8 +694,14 @@ input[type="file"] {
 	}
 }
 
-.preview_image {
+.preview-image {
 	text-align: center;
+	&__team {
+		height: 100px;
+		width: 100px;
+		border-radius: 50%;
+		object-fit: cover;
+	}
 }
 
 // ユーザー一覧表示
@@ -633,43 +709,17 @@ input[type="file"] {
 .users {
 	text-align: center;
 	list-style: none;
-}
-
-.user {
-	position: relative;
-	align-items: center;
-	border: 1px solid;
-	width: 450px;
-	padding: 10px;
-	margin: 0 auto -1px;
-	text-align: left;
-}
-
-.btn-destroy {
-	position: absolute;
-	top: 50%;
-	right: 6%;
-	transform: translateY(-50%);
-	display: inline-block;
-	height: auto;
-	font-size: 15px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	> a {
-		display: block;
-		color: white;
-		height: auto;
-		padding: 1px 6px;
-		width: 100%;
-	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		top: calc(50% + 2px);
+	.user {
+		position: relative;
+		align-items: center;
+		border: 1px solid;
+		width: 450px;
+		padding: 10px;
+		margin: 0 auto -1px;
+		text-align: left;
 	}
 }
+
 
 // チーム一覧表示
 
@@ -683,97 +733,45 @@ input[type="file"] {
 		@include box_sizing;
 		padding: 0px 5px;
 	}
-}
-
-.team {
-	position: relative;
-	align-items: center;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
-	width: 450px;
-	padding: 10px;
-	margin: 0 auto;
-	margin-bottom: 15px;
-	text-align: left;
-	img {
-		vertical-align: top;
-		margin-right: auto;
+	.team {
+		position: relative;
+		align-items: center;
+		box-shadow: 0px 2px 4px rgba(0,0,0,0.2);
+		width: 450px;
+		padding: 10px;
+		margin: 0 auto;
+		margin-bottom: 15px;
+		text-align: left;
+		img {
+			vertical-align: top;
+			margin-right: auto;
+		}
+		&__header {
+			display: inline-block;
+			text-align: left;
+			width: 240px;
+			> a {
+				color: blue;
+			}
+		}
+		&__body {
+			display: block;
+			margin-top: 5px;
+			> a {
+				color: blue;
+				word-wrap: break-word;
+			}
+		}
 	}
 }
 
-.team-header {
-	display: inline-block;
-	text-align: left;
-	width: 240px;
-	> a {
-		color: blue;
-	}
-}
-
-.team-body {
-	display: block;
-	margin-top: 5px;
-	> a {
-		color: blue;
-		word-wrap: break-word;
-	}
-}
-
-.btns {
-	display: flex;
-	flex-direction: row;
-	position: absolute;
-	top: 50%;
-	right: 3%;
-	transform: translateY(-50%);
-}
-
-.btn-right {
-	position: absolute;
-	top: 50%;
-	right: 3%;
-	transform: translateY(-50%);
-	display: inline-block;
-	height: auto;
-	padding: 1px 6px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	> a {
-		color: white;
-	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		top: calc(50% + 2px);
-	}
-}
-
-.belonged {
+.status {
 	position: absolute;
 	top: 50%;
 	right: 5%;
 	transform: translateY(-50%);
 	display: inline-block;
-	padding: 1px 6px;
 	font-weight: bold;
-}
-
-.btn-search {
-	display: inline-block;
-	margin-left: 5px;
-	height: 25px;
-	padding: 1px 6px;
-	border-radius: 5px;
-	cursor: pointer;
-	color: white;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
-	}
 }
 
 // チーム切り替え
@@ -787,7 +785,7 @@ input[type="file"] {
 		vertical-align: top;
 		margin-right: -5px;
 	}
-	.list {
+	&__list {
 		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 		min-width: 300px;
 		margin: 0 auto;
@@ -922,10 +920,7 @@ input[type="file"] {
 				padding: 10px;
 				position: relative;
 			}
-			.btn {
-				margin-left: 0px;
-			}
-			.beside {
+			.events__beside {
 				display: inline-block;
 				a{
 					text-decoration: none;
@@ -971,51 +966,25 @@ input[type="file"] {
 	}
 }
 
-.bg-red {
-	background-color: #ff9191;
+%bg {
 	display: block;
 	margin: 0 auto;
 	height: 20px;
 	width: 35px;
 }
 
-.bg-yellow {
-	background-color: #f0f087;
-	display: block;
-	margin: 0 auto;
-	height: 20px;
-	width: 35px;
-}
-
-.bg-green {
-	background-color: #b9e6b9;
-	display: block;
-	margin: 0 auto;
-	height: 20px;
-	width: 35px;
-}
-
-.btn-event {
-	display: inline-block;
-	height: auto;
-	margin-top: 10px;
-	font-size: 15px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	@include box_sizing;
-	> a {
-		display: block;
-		color: white;
-		height: auto;
-		padding: 1px 6px;
-		width: 100%;
+.bg {
+	&--red {
+		@extend %bg;
+		background-color: #ff9191;
 	}
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
+	&--yellow {
+		@extend %bg;
+		background-color: #f0f087;
+	}
+	&--green {
+		@extend %bg;
+		background-color: #b9e6b9;
 	}
 }
 
@@ -1030,13 +999,12 @@ input[type="file"] {
 .radio-button-group {
 	display: flex;
 	justify-content: center;
-}
-
-.input-container {
-	position: relative;
-	height: 3rem;
-	width: 4rem;
-	margin: 0.5rem;
+	&__input-container {
+		position: relative;
+		height: 3rem;
+		width: 4rem;
+		margin: 0.5rem;
+	}
 }
 
 .radio_button {
@@ -1048,6 +1016,15 @@ input[type="file"] {
 	width: 100%;
 	margin: 0;
 	cursor: pointer;
+	&:checked + .ok {
+		background-color: #b9e6b9;
+	}
+	&:checked + .neither {
+		background-color: #f0f087;
+	}
+	&:checked + .ng {
+		background-color: #ff9191;
+	}
 }
 
 .radio-tile {
@@ -1061,38 +1038,6 @@ input[type="file"] {
 	border-radius: 5px;
 	padding: 1rem;
 	background-color: #dfdfdf;
-}
-
-.radio_button:checked + .ok {
-	background-color: #b9e6b9;
-}
-
-.radio_button:checked + .neither {
-	background-color: #f0f087;
-}
-
-.radio_button:checked + .ng {
-	background-color: #ff9191;
-}
-
-// 出欠変更ボタン
-.btn-event-edit {
-	display: block;
-	margin: 10px auto 0;
-	color: white;
-	height: 25px;
-	padding: 1px 6px;
-	font-size: 15px;
-	font-weight: bold;
-	border-radius: 5px;
-	cursor: pointer;
-	@include box_sizing;
-	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
-	&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		position: relative;
-		top: 2px;
-	}
 }
 
 // スケジュールから相手チーム検索
@@ -1112,12 +1057,8 @@ input[type="file"] {
 		white-space: nowrap;
 		margin: 0px 5px;
 	}
-	.search-input {
-		width: 265px;
-		text-align: center;
-		margin-left: auto;
-	}
-	.event-time {
+	
+	&__event-time {
 		width: 100%;
 		display: flex;
 		input {
@@ -1130,12 +1071,12 @@ input[type="file"] {
 			height: 28px;
 		}
 	}
-	.area-level {
-		.area {
+	&__area-level {
+		&--area {
 			display: flex;
 			width: 100%;
 		}
-		.level {
+		&--level {
 			display: flex;
 			width: 100%;
 		}
@@ -1148,27 +1089,26 @@ input[type="file"] {
 			margin-bottom: 10px;
 		}
 	}
-	.btn-event-search {
+	&__input {
+		width: 265px;
+		text-align: center;
+		margin-left: auto;
+	}
+	&__btn {
+		@extend %btn;
+		background-color: #384878;
 		position: absolute;
 		top: 50%;
 		right: 4%;
 		transform: translateY(-50%);
-		display: inline-block;
-		height: auto;
 		padding: 1px 6px;
-		display: inline-block;
-		padding: 1px 6px;
-		border-radius: 5px;
-		cursor: pointer;
 		color: white;
-		box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 		@include box_sizing;
 		&:active{
-		box-shadow: 0px 1px 2px rgba(0,0,0,0.3);
-		top: calc(50% + 2px);
+			position: absolute;
+			top: calc(50% + 2px);
+		}
 	}
-	}
-	
 }
 
 .instruction {
@@ -1197,13 +1137,12 @@ input[type="file"] {
 			background-color: #efefef;
 		}
 	}
-
 	th,
 	td {
 		border: 1px solid;
 		padding: 5px;
 	}
-	.detail-schedule {
+	&__schedule {
 		font-weight: normal;
 		text-align: left;
 	}
@@ -1212,15 +1151,6 @@ input[type="file"] {
 .qr-preview {
 	width: 150px;
 	height: auto;
-}
-
-.btn-center {
-	display: block;
-	margin-top: 15px;
-	text-align: center;
-	.btn {
-		margin: 0;
-	}
 }
 
 // レスポンシブ
@@ -1232,7 +1162,7 @@ input[type="file"] {
 	}
 	// タブ
 	.tab-area {
-		.tab-buttons {
+		&__tab-button {
 			width: 100%;
 		}
 	}
@@ -1241,9 +1171,9 @@ input[type="file"] {
 	.home-image {
 		p {
 			font-size: 1rem;
-			.title {
-				font-size: 2.5rem;
-			}
+		}
+		&__title {
+			font-size: 2.5rem;
 		}
 	}
 	
@@ -1280,23 +1210,13 @@ input[type="file"] {
 		font-size: 1rem;
 	}
 
-	.btn {
-		margin-left: 10px;
+	%btn {
 		>a{
 			font-size: 1.0rem;
 		}
 	}
 
-	.btn-right{
-		>a{
-			font-size: 1.0rem;
-		}
-	}
-	.btn-event{
-		>a{
-			font-size: 1.0rem;
-		}
-	}
+	
 
 	// ロゴ
 	#logo {
@@ -1322,7 +1242,7 @@ input[type="file"] {
 		}
 	}
 
-	.dropdown-menu {
+	.dropdown__menu {
 		top: 21px;
 		right: -5px;
 	}
@@ -1337,7 +1257,7 @@ input[type="file"] {
 				font-size: 1.0rem;
 			}
 		}
-		.tab-buttons {
+		&__tab-button {
 			width: 100%;
 			.tab1#lamp {
 				top: 24px;
@@ -1352,9 +1272,9 @@ input[type="file"] {
 	.home-image {
 		p {
 			font-size: 0.8rem;
-			.title {
-				font-size: 1.8rem;
-			}
+		}
+		&__title {
+			font-size: 1.8rem;
 		}
 	}
 
@@ -1366,7 +1286,7 @@ input[type="file"] {
 			transform: scale(0.8);
 			margin: 0;
 		}
-		.login-checkbox {
+		.form__login-checkbox {
 			display: flex;
 			align-items: center;
 			justify-content: flex-start;
@@ -1377,7 +1297,7 @@ input[type="file"] {
 		}
 	}
 
-	.alert {
+	%alert {
 		margin-bottom: 5px;
 		font-size: 0.5rem;
 		width: auto;
@@ -1439,16 +1359,26 @@ input[type="file"] {
 			}
 		}
 	}
+
+	.event {
+		th {
+			max-width: 50px;
+			overflow-wrap: break-word;
+		}
+	}
+
+	%bg {
+		width: 25px;
+	}
 		
 	// スケジュールから相手チーム検索
 	.event-search {
 		width: 100%;
 		padding: 10px 60px 0px 5px;
-
 		label {
 			margin-top: 5px;
 		}
-		.search-input {
+		&__input {
 			min-width: 150px;
 			width: 63%;
 			input {
@@ -1464,7 +1394,7 @@ input[type="file"] {
 				top: 22%;
 			}
 		}
-		.btn-event-search {
+		.event-search__btn {
 			right: 2%;
 			font-size: 1.0rem;
 		}
@@ -1495,7 +1425,7 @@ input[type="file"] {
 			border: 1px solid;
 			padding: 5px;
 		}
-		.detail-schedule {
+		.detail-schedules__schedule {
 			font-weight: normal;
 			text-align: left;
 		}
@@ -1503,40 +1433,26 @@ input[type="file"] {
 
 	// チーム一覧
 
-	.team {
-		width: 100%;
-		padding: 10px;
-		margin-bottom: 5px;
-		img {
-			vertical-align: top;
-			margin-right: auto;
+	.teams{
+		.team {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 5px;
+			img {
+				vertical-align: top;
+				margin-right: auto;
+			}
+			&__header {
+				width: 180px;
+			}
 		}
-	}
-
-	.team-header {
-		display: inline-block;
-		text-align: left;
-		width: 180px;
-		> a {
-			color: blue;
-		}
-	}
-
-	.btn-search {
-		display: inline-block;
-		margin-left: 5px;
-		height: auto;
-		padding: 1px 6px;
-		border-radius: 5px;
-		cursor: pointer;
-		color: white;
-		@include box_sizing;
 	}
 
 	// ユーザー一覧表示
-
-	.user {
-		width: 100%;
+	.users{
+		.user {
+			width: 100%;
+		}
 	}
 
 	// その他

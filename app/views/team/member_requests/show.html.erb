@@ -10,11 +10,11 @@
     <% @requests.each do |request| %>
       <li class="user">
         <%= User.find(request.user_id).name %>
-        <div class="btns">
-          <span class="btn btn-navy">
+        <div class="btn">
+          <span class="btn__margin-left--navy">
             <%= link_to "所属承認をする", team_team_members_path(id: request.id), method: :post %>
           </span>
-          <span class="btn btn-red">
+          <span class="btn__margin-left--red">
             <%= link_to "拒否する", team_member_request_path(id: request.id), method: :delete %>
           </span>
         </div>

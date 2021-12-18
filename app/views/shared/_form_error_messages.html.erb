@@ -1,5 +1,5 @@
 <% if object.errors.any? %>
-  <div class="form-alert-danger">
+  <div class="form__alert--danger">
     <ul>
       <% object.errors.full_messages_for(attribute).each do |msg| %>
         <li><%= msg %></li>

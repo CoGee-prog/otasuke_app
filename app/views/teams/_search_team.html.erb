@@ -7,14 +7,14 @@
       <%= image_tag("default_team_image.webp",  size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon pc") %>
       <%= image_tag("default_team_image.webp",  size: "38x38", gravity: :center, crop: "38x38+0+0", class: "icon sp") %>
     <% end %>
-    <div class="team-header">
+    <div class="team__header">
       <%= team.name %><br>
       <%= team.level %>
     </div>
-    <span class="btn-right btn-navy">
+    <span class="btn__right--navy">
       <%= link_to "スケジュール詳細", detail_schedule_team_path(team) %>
     </span>
-    <div class="team-body">
+    <div class="team__body">
       活動エリア: <%= Prefecture.find(team.prefecture_id).name %><br>
       活動曜日:
       <% weekly_columns.each_with_index do |day,i| %>

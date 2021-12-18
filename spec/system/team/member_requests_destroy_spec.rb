@@ -16,7 +16,7 @@ RSpec.describe 'チームのメンバーリクエスト削除テスト', type: :
         click_link('拒否する', match: :first)
       end.to change(MemberRequest, :count).by(-1)
       expect(page).to have_current_path team_member_request_path(team.id), ignore_query: true
-      expect(page).to have_selector('.alert-success', text: 'チーム所属申請を拒否しました')
+      expect(page).to have_selector('.alert__success', text: 'チーム所属申請を拒否しました')
     end
   end
 end

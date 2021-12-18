@@ -16,7 +16,7 @@ RSpec.describe 'スケジュール編集テスト', type: :system do
       fill_in 'event[tournament_name]', with: 'パ・リーグトーナメント'
       fill_in 'event[other]', with: '三塁側'
       click_on '更新する'
-      expect(page).to have_selector('.form-alert-danger', text: '日時を入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: '日時を入力してください')
       expect(page).to have_current_path event_path(event), ignore_query: true
     end
 
@@ -31,7 +31,7 @@ RSpec.describe 'スケジュール編集テスト', type: :system do
       fill_in 'event[tournament_name]', with: '交流戦'
       fill_in 'event[other]', with: '三塁側'
       click_on '更新する'
-      expect(page).to have_selector('.alert-success', text: 'スケジュールを更新しました')
+      expect(page).to have_selector('.alert__success', text: 'スケジュールを更新しました')
       expect(page).to have_current_path event_path(team), ignore_query: true
       expect(page).to have_selector('#event', text: '12/01(水) 10:00 東京ドーム VSジャイアンツ 交流戦 三塁側 編集 削除')
     end

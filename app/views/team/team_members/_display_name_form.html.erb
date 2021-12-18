@@ -2,5 +2,5 @@
   <%= f.label :display_name, '表示名' %>
   <%= f.text_field :display_name %>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :display_name %>
-  <%= f.submit yield(:button_text), class: "form-btn btn-orange" %>
+  <%= f.submit yield(:button_text), class: "form__btn--orange" %>
 <% end %>

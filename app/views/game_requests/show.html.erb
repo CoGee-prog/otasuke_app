@@ -17,11 +17,11 @@
           <%= image_tag("default_team_image.webp", size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon pc") %>
 					<%= image_tag("default_team_image.webp", size: "30x30", gravity: :center, crop: "30x30+0+0", class: "icon sp") %>
 				<% end %>
-        <div class="team-header">
+        <div class="team__header">
           <%= link_to @team.name, team_path(@team) %><br>
           <p><%= @team.level %></p>
         </div>
-        <div class="team-body">
+        <div class="team__body">
           活動エリア: <%= Prefecture.find(@team.prefecture_id).name %><br>
           活動曜日:
           <% weekly_columns.each_with_index do |day,i| %>
@@ -48,11 +48,11 @@
             </span>
           <% end %>
         </div>
-        <span class="btn-center">
-          <span class="btn btn-red">
-            <%= link_to "試合リクエストを削除する", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-          </span>
-        </span>
+				<span class="center">
+					<span class="btn__margin-top--center-red">
+							<%= link_to "試合リクエストを削除する", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+					</span>
+				</span>
       </li>
     <% end %>
   </ul>

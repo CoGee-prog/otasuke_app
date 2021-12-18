@@ -10,7 +10,7 @@ RSpec.describe 'チーム編集テスト', type: :system do
       expect(page).to have_current_path edit_team_path(team), ignore_query: true
       fill_in 'team[name]', with: ''
       click_on '更新する'
-      expect(page).to have_selector('.form-alert-danger', text: 'チーム名を入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'チーム名を入力してください')
       expect(page).to have_current_path team_path(team), ignore_query: true
     end
 
@@ -22,7 +22,7 @@ RSpec.describe 'チーム編集テスト', type: :system do
       expect(page).to have_current_path edit_team_path(team), ignore_query: true
       fill_in 'team[name]', with: 'ジャイアンツ'
       click_on '更新する'
-      expect(page).to have_selector('.alert-success', text: 'チームプロフィールを更新しました')
+      expect(page).to have_selector('.alert__success', text: 'チームプロフィールを更新しました')
       expect(page).to have_current_path team_path(team), ignore_query: true
     end
   end

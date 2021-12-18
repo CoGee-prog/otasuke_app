@@ -20,7 +20,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
       expect do
         click_on '対戦申込を取り消す'
       end.to change(GameRequest, :count).by(-1)
-      expect(page).to have_selector('.alert-success', text: '対戦申込を取り消しました')
+      expect(page).to have_selector('.alert__success', text: '対戦申込を取り消しました')
       expect(page).to have_current_path detail_schedule_team_path(other_team1), ignore_query: true
     end
 
@@ -34,7 +34,7 @@ RSpec.describe '対戦相手検索テスト', type: :system do
       expect do
         click_on '試合リクエストを削除する'
       end.to change(GameRequest, :count).by(-1)
-      expect(page).to have_selector('.alert-success', text: '試合リクエストを削除しました')
+      expect(page).to have_selector('.alert__success', text: '試合リクエストを削除しました')
       expect(page).to have_current_path game_request_path(other_team1), ignore_query: true
     end
   end
