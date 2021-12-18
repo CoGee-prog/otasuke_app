@@ -26,7 +26,7 @@ RSpec.describe 'スケジュール出欠編集テスト', type: :system do
       end
       click_on '更新する'
       expect(page).to have_current_path event_path(team), ignore_query: true
-      expect(page).to have_selector('.alert-success', text: '出欠を更新しました')
+      expect(page).to have_selector('.alert__success', text: '出欠を更新しました')
       expect(page).to have_selector('.entry', text: ' ◯ ')
       expect(page).to have_selector('.entry', text: ' △ ')
     end

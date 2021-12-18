@@ -6,16 +6,16 @@
   <%= f.text_area :comment, rows: 5 %>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :comment %>
   <%= f.label :image,'LINEQRコード等' %>
-  <div class="preview_image">
+  <div class="preview-image">
     <% if @game_request.image.attached? && @game_request.image.present? %>
       <%= image_tag(@game_request.image, id: "preview", class: "qr-preview" ) %>
     <% end %>
-  <img id="preview" , class="qr-preview">
+  <img id="preview", class="qr-preview">
   </div>
-  <label class="file-select btn--navy">
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", id: "preview_image" %> ファイルを選択
+  <label class="btn__file-select">
+    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png", id: "preview-image" %> ファイルを選択
   </label>
   <%= render 'shared/form_error_messages', object: f.object, attribute: :image %>
   <%= f.hidden_field :requested_team_id, value: @team.id %>
-  <%= f.submit "対戦を申し込む", class: "form__btn btn--orange" %>
+  <%= f.submit "対戦を申し込む", class: "form__btn--orange" %>
 <% end %>

@@ -25,7 +25,7 @@ $(function () {
 
 // 画像プレビュー
 $(function () {
-	$('#preview_image').on('change', function (e) {
+	$('#preview-image').on('change', function (e) {
 		let reader = new FileReader();
 		reader.onload = function (e) {
 			$("#preview").attr('src', e.target.result);

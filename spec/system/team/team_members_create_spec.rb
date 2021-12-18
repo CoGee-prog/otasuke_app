@@ -14,7 +14,7 @@ RSpec.describe 'チームのメンバーリクエスト承認テスト', type: :
         click_on '所属承認をする'
       end.to change(MemberRequest, :count).by(-1).and change(TeamMember, :count).by(1)
       expect(page).to have_current_path team_member_request_path(team.id), ignore_query: true
-      expect(page).to have_selector('.alert-success', text: 'チーム所属申請を承認しました')
+      expect(page).to have_selector('.alert__success', text: 'チーム所属申請を承認しました')
       click_on 'メンバー一覧'
       expect(page).to have_current_path team_team_member_path(team.id), ignore_query: true
       expect(page).to have_content('ジロー', count: 1)
@@ -22,7 +22,7 @@ RSpec.describe 'チームのメンバーリクエスト承認テスト', type: :
         click_on '削除'
       end.to change(TeamMember, :count).by(-1)
       expect(page).to have_current_path team_team_member_path(team.id), ignore_query: true
-      expect(page).to have_selector('.alert-success', text: 'メンバーを削除しました')
+      expect(page).to have_selector('.alert__success', text: 'メンバーを削除しました')
       expect(page).to have_content('ジロー', count: 0)
     end
   end

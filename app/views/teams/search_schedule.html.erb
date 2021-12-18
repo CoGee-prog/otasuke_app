@@ -3,31 +3,31 @@
 <h2>対戦相手検索</h2>
 <div class="event-search">
   <%= form_with(scope: :event_team_search, url: search_schedule_teams_path, method: :get, local: true) do |f|%>
-    <span class="event-time">
+    <span class="event-search__event-time">
       <%= f.label :day_time,'日時' %>
-      <span class="search-input">
+      <span class="event-search__input">
         <%= f.datetime_field :day_time, value: @event_search_params[:day_time], min: Date.today %>
       </span>
     </span>
-    <div class="area-level">
-      <span class="area">
+    <div class="event-search__area-level">
+      <span class="event-search__area-level--area">
         <%= f.label :prefecture_id,'活動エリア' %>
-        <span class="search-input">
+        <span class="event-search__input">
           <div class = "selectbox">
             <%= f.collection_select(:prefecture_id, Prefecture.all, :id, :name, include_blank: true, selected: @event_search_params[:prefecture_id]) %>
           </div>
         </span>
       </span>
-      <span class="level">
+      <span class="event-search__area-level--level">
         <%= f.label :level,'チームレベル' %>
-        <span class="search-input">
+        <span class="event-search__input">
           <div class = "selectbox">
             <%= f.select :level, team_levels, include_blank: true, selected: @event_search_params[:level]%>
           </div>
         </span>
       </span>
     </div>
-    <%= f.submit '検索', class: "btn-event-search btn--navy" %>
+    <%= f.submit '検索', class: "event-search__btn" %>
   <% end %>
 </div>
 <span class="instruction">

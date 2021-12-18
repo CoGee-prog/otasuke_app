@@ -9,7 +9,7 @@ RSpec.describe 'ユーザーアカウント削除テスト', type: :system do
         click_on 'アカウント削除'
       end.to change(User, :count).by(-1)
       expect(page).to have_current_path root_path, ignore_query: true
-      expect(page).to have_selector('.alert-success', text: 'アカウントを削除しました')
+      expect(page).to have_selector('.alert__success', text: 'アカウントを削除しました')
     end
   end
 end

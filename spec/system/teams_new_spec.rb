@@ -10,10 +10,10 @@ RSpec.describe 'チーム登録テスト', type: :system do
         fill_in 'team[name]', with: ''
         click_on '登録する'
       end.not_to change(Team, :count)
-      expect(page).to have_selector('.form-alert-danger', text: 'チーム名を入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: 'チームレベルを入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: '活動エリアを入力してください')
-      expect(page).to have_selector('.form-alert-danger', text: '活動曜日を1つ以上選択してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'チーム名を入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: 'チームレベルを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: '活動エリアを入力してください')
+      expect(page).to have_selector('.form__alert--danger', text: '活動曜日を1つ以上選択してください')
       expect(page).to have_current_path teams_path, ignore_query: true
     end
 
@@ -32,7 +32,7 @@ RSpec.describe 'チーム登録テスト', type: :system do
         fill_in 'team[other]', with: '精一杯頑張ります'
         click_on '登録する'
       end.to change(Team, :count).by(1)
-      expect(page).to have_selector('.alert-success', text: 'チームを作成しました')
+      expect(page).to have_selector('.alert__success', text: 'チームを作成しました')
       expect(page).to have_current_path root_path, ignore_query: true
       expect(page).to have_selector('.menu', text: 'ジャイアンツ')
     end

@@ -18,7 +18,7 @@ RSpec.describe 'チームメンバーの表示名変更テスト', type: :system
       fill_in 'team_member[display_name]', with: 'じろー'
       click_on '更新する'
       expect(page).to have_current_path event_path(team.id), ignore_query: true
-      expect(page).to have_selector('.alert-success', text: '表示名を更新しました')
+      expect(page).to have_selector('.alert__success', text: '表示名を更新しました')
       expect(page).to have_content('ジロー', count: 0)
       expect(page).to have_content('じろー', count: 1)
     end
