@@ -28,7 +28,11 @@ class EventEntriesController < ApplicationController
   # beforeアクション
 
   def set_event_entry
-    @event_entries = EventEntry.joins(:event).where(user_id: User.find(params[:id]), event: { team_id: current_team.id }).order(:day_time)
+    @event_entries = EventEntry.joins(:event).where(user_id: User.find_by(id: params[:id]),
+                                                    event: { team_id: current_team.id }).order(:day_time)
+    return if @event_entries.present?
+
+    redirect_to event_path(current_team)
   end
 
   # 正しいユーザーのイベント出欠か、またはチーム管理者か確認し、違う場合は現在のチームのスケジュール管理ページにリダイレクトする
