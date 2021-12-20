@@ -10,11 +10,11 @@
     <%= link_to team.name, team %><br>
     <p><%= team.level %></p>
   </div>
-  <% if current_user.already_belong?(team) %>
+  <% if @current_user.already_belong?(team) %>
     <div class="status">
       所属済み
     </div>
-  <% elsif current_user.already_requested?(team) %>
+  <% elsif @current_user.already_requested?(team) %>
     <span class="btn__right--red">
       <%= link_to "申請を取り消す", user_member_request_path(team.id), method: :delete %>
     </span>

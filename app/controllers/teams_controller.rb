@@ -8,7 +8,7 @@ class TeamsController < ApplicationController
   before_action :currect_switch_user, only: :switch
 
   def index
-    @teams = Team.belong_team_search(params[:search]).page(params[:page])
+    @teams = Team.includes(:users).with_attached_image.belong_team_search(params[:search]).page(params[:page])
   end
 
   def destroy
@@ -63,12 +63,12 @@ class TeamsController < ApplicationController
   end
 
   def list
-    @belong_teams = User.find(params[:id]).teams
+    @belong_teams = User.find(params[:id]).teams.with_attached_image
   end
 
   def switch
-    current_user.current_team_id = Team.find(params[:id]).id
-    current_user.save
+    @current_user.current_team_id = Team.find(params[:id]).id
+    @current_user.save
     flash[:success] = 'チームを切り替えました'
     redirect_to event_path(current_team)
   end
@@ -76,9 +76,9 @@ class TeamsController < ApplicationController
   def search_schedule
     @event_search_params = event_search_params
     if logged_in? && current_team
-      @teams = Team.where.not(id: current_team.id).event_team_search(@event_search_params).distinct.page(params[:page])
+      @teams = Team.with_attached_image.where.not(id: current_team.id).event_team_search(@event_search_params).distinct.page(params[:page])
     else
-      @teams = Team.event_team_search(@event_search_params).distinct.page(params[:page])
+      @teams = Team.with_attached_image.event_team_search(@event_search_params).distinct.page(params[:page])
     end
   end
 
@@ -109,14 +109,14 @@ class TeamsController < ApplicationController
 
   # 正しいユーザーのチーム切り替え一覧か確認し、そのユーザーのチーム切り替え一覧画面にリダイレクトする
   def currect_list_user
-    return if current_user.id == params[:id].to_i
+    return if @current_user.id == params[:id].to_i
 
-    redirect_to list_team_path(current_user.id)
+    redirect_to list_team_path(@current_user.id)
   end
 
   # 既に所属しているチームのチーム切り替えか確認する
   def currect_switch_user
-    return if current_user.already_belong?(Team.find(params[:id]))
+    return if @current_user.already_belong?(Team.find(params[:id]))
 
     redirect_to root_path
   end
