@@ -38,7 +38,7 @@ class GameRequestsController < ApplicationController
   end
 
   def show
-    @game_requests = Team.find(params[:id]).requested_team.all.page(params[:page])
+    @game_requests = Team.find(params[:id]).requested_team.page(params[:page])
   end
 
   private

@@ -7,7 +7,7 @@
   </span>
 <% else %>
   <ul class="teams">
-    <% @game_requests.each do |game_request| %>
+    <% @game_requests.includes(:requesting_team).each do |game_request| %>
       <% @team = Team.find(game_request.requesting_team_id) %>
       <li class="team">
         <% if @team.image.attached? %>
