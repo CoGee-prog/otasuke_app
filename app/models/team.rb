@@ -70,7 +70,7 @@ class Team < ApplicationRecord
 
   # 対戦リクエストを送っているかどうか
   def already_game_requested?(team)
-    requesting_team.exists?(requested_team: team.id)
+    requesting_teams.exists?(requested_team: team.id)
   end
 
   private
