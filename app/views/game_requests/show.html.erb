@@ -7,12 +7,12 @@
   </span>
 <% else %>
   <ul class="teams">
-    <% @game_requests.includes(:requesting_team).each do |game_request| %>
+    <% @game_requests.each do |game_request| %>
       <% @team = Team.find(game_request.requesting_team_id) %>
       <li class="team">
         <% if @team.image.attached? %>
-          <%= image_tag(@team.image, size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon pc") %>
-          <%= image_tag(@team.image, size: "30x30", gravity: :center, crop: "30x30+0+0", class: "icon sp") %>
+          <%= image_tag(game_request.image, size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon pc") %>
+          <%= image_tag(game_request.image, size: "30x30", gravity: :center, crop: "30x30+0+0", class: "icon sp") %>
         <% else %>
           <%= image_tag("default_team_image.webp", size: "50x50", gravity: :center, crop: "50x50+0+0", class: "icon pc") %>
 					<%= image_tag("default_team_image.webp", size: "30x30", gravity: :center, crop: "30x30+0+0", class: "icon sp") %>
