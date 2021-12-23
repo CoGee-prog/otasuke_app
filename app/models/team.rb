@@ -6,10 +6,10 @@ class Team < ApplicationRecord
   has_many :users, through: :team_members
   has_many :member_requests, dependent: :destroy
   has_many :events, dependent: :destroy
-  has_many :requesting_team, class_name: 'GameRequest', foreign_key: 'requesting_team_id', dependent: :destroy,
-                             inverse_of: 'requesting_team'
-  has_many :requested_team, class_name: 'GameRequest', foreign_key: 'requested_team_id', dependent: :destroy,
-                            inverse_of: 'requested_team'
+  has_many :requesting_teams, class_name: 'GameRequest', foreign_key: 'requesting_team_id', dependent: :destroy,
+                              inverse_of: 'requesting_team'
+  has_many :requested_teams, class_name: 'GameRequest', foreign_key: 'requested_team_id', dependent: :destroy,
+                             inverse_of: 'requested_team'
   validates :name, presence: true, length: { maximum: 50 }
   validates :level, presence: true
   validates :prefecture_id, presence: true
@@ -70,7 +70,7 @@ class Team < ApplicationRecord
 
   # 対戦リクエストを送っているかどうか
   def already_game_requested?(team)
-    requesting_team.exists?(requested_team: team.id)
+    requesting_teams.exists?(requested_team: team.id)
   end
 
   private

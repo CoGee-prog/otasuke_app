@@ -39,7 +39,7 @@
         <div class="center">
           <span class="btn--red">
             <% game_request = GameRequest.find_by(requesting_team_id: current_team.id, requested_team_id: @team.id) %>
-            <%= link_to "対戦申込を取り消す", game_request_path(game_request), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+            <%= link_to "対戦申込を取り消す", game_request_path(game_request), method: :delete, data: { confirm: "本当に取り消しますか？" } %>
           </span>
         </div>
       <% else %>
