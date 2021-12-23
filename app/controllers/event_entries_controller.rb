@@ -38,7 +38,7 @@ class EventEntriesController < ApplicationController
   # 正しいユーザーのイベント出欠か、またはチーム管理者か確認し、違う場合は現在のチームのスケジュール管理ページにリダイレクトする
   def event_entry_correct_user_team_page
     @user = User.find_by(id: params[:id])
-    return if (@user == current_user.id)
+    return if (@user == current_user)
     @user.teams.each do |team|
       if team.admin_user_id == current_user.id
         return

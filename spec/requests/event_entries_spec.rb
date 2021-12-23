@@ -1,10 +1,12 @@
 RSpec.describe 'EventEntries', type: :request do
   let!(:user) { FactoryBot.create(:user) }
   let!(:other_user) { FactoryBot.create(:other_user) }
+  let!(:not_admin_user) { FactoryBot.create(:not_admin_user) }
   let!(:team) { FactoryBot.create(:team) }
   let!(:other_team1) { FactoryBot.create(:other_team1) }
   let!(:team_member1) { FactoryBot.create(:team_member1, team: team, user: user) }
   let!(:team_member2) { FactoryBot.create(:team_member2, team: team, user: other_user) }
+  let!(:team_member3) { FactoryBot.create(:team_member2, team: team, user: not_admin_user) }
   let!(:event) { FactoryBot.create(:event) }
   let!(:event_entry) { EventEntry.find_by(user_id: user, event_id: event) }
 
@@ -52,6 +54,16 @@ RSpec.describe 'EventEntries', type: :request do
       post login_path params: { session: { email: user.email, password: user.password } }
       get edit_event_entry_path(other_user)
       patch event_entry_path(other_user), params: { event_option_entries: { id: { feeling: 1 } } }
+      expect(flash[:success]).to eq '出欠を更新しました'
+      expect(response).to redirect_to event_path(team)
+    end
+  end
+
+  describe 'チーム管理者ではない場合、自分のスケジュール出欠の編集、更新に成功する' do
+    it 'スケジュール出欠編集、更新が成功する' do
+      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
+      get edit_event_entry_path(not_admin_user)
+      patch event_entry_path(not_admin_user), params: { event_option_entries: { id: { feeling: 1 } } }
       expect(flash[:success]).to eq '出欠を更新しました'
       expect(response).to redirect_to event_path(team)
     end
