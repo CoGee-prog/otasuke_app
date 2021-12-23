@@ -11,15 +11,14 @@
           <th>△</th>
           <th>×</th>
           <% @team.users.sort_by(&:id).each do |user| %>
+            <% team_member = TeamMember.find_by(user_id: user.id, team_id: @team.id) %>
             <% if @current_team.admin_user_id == @current_user.id || user.id == current_user.id %>
-              <% team_member = TeamMember.find_by(user_id: user.id, team_id: @team.id) %>
               <% if team_member.display_name.present? %>
                 <th nowrap><%= link_to team_member.display_name, edit_team_team_member_path(team_member) %></th>
               <% else %>
                 <th nowrap><%= link_to user.name, edit_team_team_member_path(team_member) %></th>
               <% end %>
             <% else %>
-              <% team_member = TeamMember.find_by(user_id: user.id, team_id: @team.id) %>
               <% if team_member.display_name.present? %>
                 <th nowrap><%=team_member.display_name %></th>
               <% else %>
