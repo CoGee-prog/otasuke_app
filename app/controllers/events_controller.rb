@@ -20,7 +20,7 @@ class EventsController < ApplicationController
 
   def show
     @team = Team.find(params[:id])
-    @events = @team.events.includes(:event_option, event_entries: :event_option_entry)
+    @events = @team.events.includes(event_option: :event_option_entries, event_entries: :event_option_entry)
   end
 
   def edit
