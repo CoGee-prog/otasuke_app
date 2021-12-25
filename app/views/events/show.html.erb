@@ -11,8 +11,8 @@
           <th>△</th>
           <th>×</th>
           <% @team.users.sort_by(&:id).each do |user| %>
-            <% team_member = TeamMember.find_by(user_id: user.id, team_id: @team.id) %>
-            <% if @current_team.admin_user_id == @current_user.id || user.id == current_user.id %>
+						<% team_member = user.team_members.find_by(team: @team.id) %>
+            <% if @current_team.admin_user_id == @current_user.id || user.id == @current_user.id %>
               <% if team_member.display_name.present? %>
                 <th nowrap><%= link_to team_member.display_name, edit_team_team_member_path(team_member) %></th>
               <% else %>
@@ -50,7 +50,7 @@
             <td><%= event_option.count_ok %></td>
             <td><%= event_option.count_neither %></td>
             <td><%= event_option.count_ng %></td>
-            <% event.event_entries.sort_by {|event_entries| event_entries.user_id}.each do |event_entry| %>
+            <% event.event_entries.sort_by {|event_entry| event_entry.user_id}.each do |event_entry| %>
               <% event_option_entry = event_entry.event_option_entry %>
               <%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
                 <% if event_option_entry.None? %>
