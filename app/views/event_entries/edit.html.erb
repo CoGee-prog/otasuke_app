@@ -9,22 +9,21 @@
               <% if team_member.display_name.present? %>
                 <th><%=team_member.display_name %></th>
               <% else %>
-                <th><%= User.find(event_entry.user_id).name %></th>
+                <th><%= event_entry.user.name %></th>
               <% end %>
             </th>
           </tr>
         <% end %>
         <tr>
           <td>
-            <% event = Event.find(event_entry.event_id) %>
-            <%= event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event.day_time.wday] %>)
-            <%= event.day_time.strftime('%H:%M') %>
-            <%= event.ground %>
-            <% if event.opponent_team_name.present? %>
-              VS<%= event.opponent_team_name %>
+            <%= event_entry.event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event_entry.event.day_time.wday] %>)
+            <%= event_entry.event.day_time.strftime('%H:%M') %>
+            <%= event_entry.event.ground %>
+            <% if event_entry.event.opponent_team_name.present? %>
+              VS<%= event_entry.event.opponent_team_name %>
             <% end %>
-            <%= event.tournament_name %>
-            <%= event.other%>
+            <%= event_entry.event.tournament_name %>
+            <%= event_entry.event.other%>
           </td>
           <td nowrap>
             <div class="radio-button-group" id=<%=i%>>
