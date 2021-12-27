@@ -1,0 +1,7 @@
+<%= form_with(model:@event_comment,local:true) do |f| %>
+  <%= f.label :comment, 'コメント' %>
+  <%= f.text_area :comment, rows: 3 %>
+  <%= render 'shared/form_error_messages', object: f.object, attribute: :comment %>
+  <%= f.hidden_field :team, value: @team.id %>
+  <%= f.submit "コメントを追加する", class: "form__btn--orange" %>
+<% end %>

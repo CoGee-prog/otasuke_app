@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :teams, through: :team_members, dependent: :destroy
   has_many :admin_teams, class_name: 'Team', foreign_key: :admin_user_id
   has_many :event_entries, dependent: :destroy
+  has_many :event_comments
   attr_accessor :remember_token, :activation_token, :reset_token
 
   before_save :downcase_email
