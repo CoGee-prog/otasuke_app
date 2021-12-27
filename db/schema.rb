@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_102900) do
+ActiveRecord::Schema.define(version: 2021_12_27_145756) do
 
   create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -38,6 +38,16 @@ ActiveRecord::Schema.define(version: 2021_11_27_102900) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "event_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "team_id"
+    t.string "comment", limit: 50, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["team_id"], name: "index_event_comments_on_team_id"
+    t.index ["user_id"], name: "index_event_comments_on_user_id"
   end
 
   create_table "event_entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -156,6 +166,8 @@ ActiveRecord::Schema.define(version: 2021_11_27_102900) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "event_comments", "teams"
+  add_foreign_key "event_comments", "users"
   add_foreign_key "event_entries", "events"
   add_foreign_key "event_entries", "users"
   add_foreign_key "event_option_entries", "event_entries"

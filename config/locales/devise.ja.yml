@@ -46,6 +46,8 @@ ja:
         image: LINEQRコード等
       team_member:
         display_name: 表示名
+      event_comment:
+        comment: コメント
     models:
       user: ユーザー
   devise:

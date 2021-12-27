@@ -10,6 +10,7 @@ class Team < ApplicationRecord
                               inverse_of: 'requesting_team'
   has_many :requested_teams, class_name: 'GameRequest', foreign_key: 'requested_team_id', dependent: :destroy,
                              inverse_of: 'requested_team'
+  has_many :event_comments
   validates :name, presence: true, length: { maximum: 50 }
   validates :level, presence: true
   validates :prefecture_id, presence: true
