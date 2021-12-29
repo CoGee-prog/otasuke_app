@@ -6,14 +6,20 @@ class EventCommentsController < ApplicationController
       flash[:success] = 'コメントを投稿しました'
       redirect_to event_path(current_team)
     else
-      @team = Team.find(params[:event_comment][:team])
+      @team = Team.find(params[:event_comment][:team_id])
       @events = @team.events.includes(event_option: :event_option_entries, event_entries: :event_option_entry)
       render template: 'events/show'
     end
   end
 
   def destroy
-
+    if (event_comment = EventComment.find_by(id: params[:id]))
+      event_comment.destroy
+      flash[:success] = 'コメントを削除しました'
+    else
+      flash[:danger] = 'コメントは既に削除されています'
+    end
+    redirect_to event_path(current_team)
   end
 
   private
