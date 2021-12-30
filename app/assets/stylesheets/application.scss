@@ -91,6 +91,7 @@ table{
 	border-radius: 5px;
 	cursor: pointer;
 	z-index: 1;
+	color: white;
 	box-shadow: 0px 2px 4px rgba(0,0,0,0.3);
 	@include box_sizing;
 	>a {
@@ -497,21 +498,16 @@ table{
 		margin-bottom: 15px;
 	}
 	&__btn {
-		@extend %btn;
-		color: white;
-		margin-top: 5px;
 			&--orange{
 				@extend %btn;
 				width: 100%;
 				color: white;
-				margin-top: 5px;
 				background-color: #ff8c00;
 			}
 			&--navy{
 				@extend %btn;
 				width: 100%;
 				color: white;
-				margin-top: 5px;
 				background-color: #384878;
 			}
 		}
@@ -568,6 +564,18 @@ table{
 	}
 	input[type="file"] {
 		display: none;
+	}
+	&__comment{
+		width: 350px;
+		margin-top: 15px;
+		textarea {
+			border: 1px #bbb solid;
+			width: 100%;
+			border-radius: 5px;
+			margin-bottom: 15px;
+			@include box_sizing;
+			padding: 0px 5px;
+		}
 	}
 }
 
@@ -945,6 +953,16 @@ table{
 				transform: translateY(-50%) translateX(-50%);
 			}
 		}
+	}
+}
+
+.comment-area{
+	display: block;
+	margin-top: 15px;
+	span{
+		display: inline-block;
+		line-height: auto;
+		margin-top: 2px;
 	}
 }
 
@@ -1356,6 +1374,15 @@ table{
 			th,
 			td {
 				min-width: 42px;
+			}
+		}
+	}
+
+	.comment-area{
+		span{
+			font-size: 0.8rem;
+			a{
+				font-size: 0.8rem;
 			}
 		}
 	}

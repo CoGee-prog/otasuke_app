@@ -102,4 +102,27 @@
       <%= link_to '新しいスケジュールを登録する', new_event_path %>
     </span>
   <% end %>
+	<div class="comment-area">
+		<% @team.event_comments.includes(:user).sort_by(&:created_at).each do |event_comment| %>
+			<span>
+				<% team_member = event_comment.user.team_members.find_by(team: @team.id) %>
+				<% if team_member.display_name.present? %>
+					【<%= team_member.display_name %>】
+				<% else %>
+					【<%= event_comment.user.name %>】
+				<% end %>
+				<%= event_comment.comment %>
+				[<%= event_comment.created_at.strftime('%m/%d') %>
+				(<%= %w(日 月 火 水 木 金 土)[event_comment.created_at.wday] %>)
+				<%= event_comment.created_at.strftime('%H:%M') %>]
+				<% if event_comment.user_id == @current_user.id || event_comment.team.admin_user_id == @current_user.id %>
+					<span class="btn--red"><%= link_to "削除", event_comment_path(event_comment), method: :delete, data: {confirm: "このコメントを削除しますか？"} %></span>
+				<% end %>
+			</span>
+			<br>
+		<% end %>
+	</div>
+	<div class="form__comment">
+		<%= render 'event_comments/event_comments_form' %>
+	</div>
 </div>

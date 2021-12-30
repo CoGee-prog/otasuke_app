@@ -1,5 +1,5 @@
 RSpec.describe Event, type: :model do
-  let(:event) { FactoryBot.build(:event) }
+  let!(:event) { FactoryBot.build(:event) }
 
   describe 'スケジュールの有効性のテスト' do
     it 'スケジュールが有効である' do

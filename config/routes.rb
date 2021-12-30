@@ -34,5 +34,5 @@ Rails.application.routes.draw do
   resources :events, except: :index
   resources :event_entries, only: [:edit, :update]
   resources :game_requests, only: [:create, :destroy, :show]
-
+	resources :event_comments, only: [:create, :destroy]
 end
