@@ -11,7 +11,7 @@ https://otasuke-app.com/
 
 <img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
 
-<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/145830054-f12f11b7-9e7d-4e17-af56-afc4db865e76.gif">  
+<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/147806203-7cb7d7b0-f57c-417d-8668-a0ff562303ea.gif">  
   
 <img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/141124401-c40aad17-ffb1-47fb-982e-5b973507a954.gif">  
 
@@ -38,7 +38,7 @@ https://otasuke-app.com/
 * Google+ API
 
 # ER図  
-![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/145220909-5d52b194-8cd3-4ce8-9008-e9e8e348f0c1.png)  
+![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/147806136-c943cd0a-021f-4242-9e0b-4d395227f92e.png)  
 # インフラ構成図  
 ![おたスケ インフラ構成図 drawio](https://user-images.githubusercontent.com/80146722/137757056-4329a93c-6c62-40bd-9b29-d84888f428c7.png)
 
@@ -69,7 +69,9 @@ https://otasuke-app.com/
 	* スケジュール削除機能
 	* 出欠一括回答機能  
 	* 出欠合計計算機能  
-	* チームメンバー表示名変更機能
+	* チームメンバー表示名変更機能  
+	* コメント投稿機能  
+	* コメント削除機能
 * 対戦相手検索機能  
 	* 指定した日時のスケジュールが空いているチーム検索機能
 	* 活動エリア検索機能
