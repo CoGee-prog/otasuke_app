@@ -1,4 +1,4 @@
-<%= form_with(url: event_entry_path, method: :put, local: true) do |f| %>
+<%= form_with(url: event_entry_path, method: :patch, local: true) do |f| %>
   <div class="event">
     <table>
       <% @event_entries.each_with_index do |event_entry, i| %>
