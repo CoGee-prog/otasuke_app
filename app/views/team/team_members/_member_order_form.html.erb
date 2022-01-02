@@ -1,0 +1,36 @@
+<%= form_with(url: update_order_team_team_member_path, method: :patch, local: true) do |f| %>
+  <div class="event">
+    <table>
+      <% @member_orders.each_with_index do |member_order, i| %>
+        <% if i == 0 %>
+          <tr>
+            <th>
+							メンバー名
+            </th>
+						<th>
+							表示順
+						</th>
+          </tr>
+        <% end %>
+        <tr>
+          <td>
+						<% if member_order.display_name.present? %>
+							<%= member_order.display_name %>
+						<% else %>
+							<%= member_order.user.name %>
+						<% end %>
+          </td>
+          <td nowrap>
+						<%= f.fields_for "team_members[]", member_order do |team_member| %>
+							<div class="order-form" id=<%= i %>>
+								<%= team_member.text_field :event_order %>
+								<%= team_member.hidden_field :id, value: member_order.id %>
+							</div>
+						<% end %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <%= f.submit "更新する", class: "btn__margin-top--center-orange" %>
+<% end %>

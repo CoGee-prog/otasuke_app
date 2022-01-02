@@ -1,7 +1,8 @@
 class Team::TeamMembersController < ApplicationController
   before_action :logged_in_user
   before_action :current_team_admin_user, except: %i[edit update]
-  before_action :team_member_set, only: %i[edit update]
+  before_action :set_team_member, only: %i[edit update]
+  before_action :set_member_orders, only: :edit_order
   before_action :team_member_current_team_page, only: :show
   before_action :team_member_display_name_correct_user, only: %i[edit update]
 
@@ -44,6 +45,24 @@ class Team::TeamMembersController < ApplicationController
     end
   end
 
+  def edit_order
+
+  end
+
+  def update_order
+    @member_orders = member_orders_params.keys.each do |id|
+      if member_order = TeamMember.find_by(id: id)
+        member_order.update(member_orders_params[id])
+      else
+        flash[:danger] = 'メンバーが削除されています'
+        redirect_to event_path(current_team)
+        return
+      end
+    end
+    flash[:success] = '表示順を変更しました'
+    redirect_to event_path(current_team)
+  end
+
   def destroy
     if (belong = TeamMember.find_by(id: params[:id]))
       team = Team.find(belong.team_id)
@@ -65,8 +84,19 @@ class Team::TeamMembersController < ApplicationController
 
   private
 
-  def team_member_set
+  def set_team_member
     @team_member = TeamMember.find(params[:id])
+  end
+
+  def set_member_orders
+    @member_orders = TeamMember.includes(:user).where(team_id: Team.find_by(id: params[:id])).order(:event_order)
+    return if @member_orders.present?
+
+    redirect_to event_path(current_team)
+  end
+
+  def member_orders_params
+    params.permit(team_members: [:event_order])[:team_members]
   end
 
   # 正しいチームメンバー一覧のページか確認し、違う場合は現在のチームのチームメンバー一覧ページにリダイレクトする

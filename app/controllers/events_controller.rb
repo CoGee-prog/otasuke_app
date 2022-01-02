@@ -19,7 +19,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @team = Team.find(params[:id])
+    @team = Team.includes(:users, :team_members).find(params[:id])
     @events = @team.events.includes(event_option: :event_option_entries, event_entries: :event_option_entry)
     @event_comment = EventComment.new
   end

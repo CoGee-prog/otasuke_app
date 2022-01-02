@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :team_members, only: [:show, :create, :edit, :update, :destroy] do
 			member do
       get 'edit_order'
-      post 'update_order' 
+      patch 'update_order' 
     	end
 		end
   end
