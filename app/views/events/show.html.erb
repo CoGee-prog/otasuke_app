@@ -3,9 +3,11 @@
 <div class="event-area">
   <%= current_team.name %> | スケジュール管理
   <% if current_team.events.present? %>
-		<span class="btn--orange">
-			<%= link_to 'メンバーの並び順変更', edit_order_team_team_member_path(current_team)%>
-		</span>
+		<% if current_team.admin_user_id == current_user.id %>
+			<span class="btn--navy">
+				<%= link_to 'メンバーの表示順変更', edit_order_team_team_member_path(current_team)%>
+			</span>
+		<% end %>
     <div class="events">
       <table>
         <tr>

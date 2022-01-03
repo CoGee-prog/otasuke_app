@@ -861,6 +861,7 @@ table{
 	margin: 0 calc(50% - 45vw);
 	.events {
 		overflow-x: auto;
+		margin-top: 5px;
 		table {
 			border-collapse: collapse;
 			table-layout: fixed;
@@ -981,6 +982,36 @@ table{
 		border: 1px solid;
 		text-align: center;
 		padding: 5px;
+	}
+}
+
+.order {
+	table,
+	td {
+		margin: 0 auto;
+		border-collapse: collapse;
+		border: 1px solid;
+		text-align: center;
+		padding: 10px;
+		position: relative;
+	}
+	th {
+		border-collapse: collapse;
+		border: 1px solid;
+		text-align: center;
+		padding: 5px;
+	}
+	input,
+	textarea {
+		border: 1px #bbb solid;
+		width: 50%;
+		text-align: center;
+		border-radius: 5px;
+		@include box_sizing;
+		padding: 0px 5px;
+	}
+	input {
+		height: a
 	}
 }
 
@@ -1225,7 +1256,7 @@ table{
 	}
 
 	h2 {
-		font-size: 1rem;
+		font-size: 1.0rem;
 	}
 
 	%btn {
@@ -1350,6 +1381,11 @@ table{
 
 	// スケジュール
 	.event-area{
+		.btn--navy{
+			a{
+				font-size: 0.9rem;
+			}
+		}
 		.events {
 			table {
 				tr:nth-child(even) {
