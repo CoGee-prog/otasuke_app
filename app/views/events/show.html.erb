@@ -3,6 +3,11 @@
 <div class="event-area">
   <%= current_team.name %> | スケジュール管理
   <% if current_team.events.present? %>
+		<% if current_team.admin_user_id == current_user.id %>
+			<span class="btn--navy">
+				<%= link_to 'メンバーの表示順変更', edit_order_team_team_member_path(current_team)%>
+			</span>
+		<% end %>
     <div class="events">
       <table>
         <tr>
@@ -10,7 +15,7 @@
           <th>◯</th>
           <th>△</th>
           <th>×</th>
-          <% @team.users.sort_by(&:id).each do |user| %>
+          <% @team.users.order("team_members.event_order").each do |user| %>
 						<% team_member = user.team_members.find_by(team: @team.id) %>
             <% if @current_team.admin_user_id == @current_user.id || user.id == @current_user.id %>
               <% if team_member.display_name.present? %>
@@ -50,44 +55,44 @@
             <td><%= event_option.count_ok %></td>
             <td><%= event_option.count_neither %></td>
             <td><%= event_option.count_ng %></td>
-            <% event.event_entries.sort_by {|event_entry| event_entry.user_id}.each do |event_entry| %>
-              <% event_option_entry = event_entry.event_option_entry %>
-              <%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
-                <% if event_option_entry.None? %>
-                  <td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></td>
-                <% else %>
-                  <td nowrap class="entry">
-                    <% if event_option_entry.NG? %>
-                      <span class="bg--red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
-                    <% elsif event_option_entry.Neither? %>
-                      <span class="bg--yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
-                    <% elsif event_option_entry.OK? %>
-                      <span class="bg--green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(event_entry.user_id) %></span>
-                    <% end %>
-                  </td>
-                <% end %>
-              <% else %>
-                <% if event_option_entry.None? %>
-                  <td nowrap class="entry">&nbsp; - &nbsp;</td>
-                <% else %>
-                  <td nowrap class="entry">
-                    <% if event_option_entry.NG? %>
-                      <span class="bg--red">
-                        <p>&nbsp; × &nbsp;</p>
-                      </span>
-                    <% elsif event_option_entry.Neither? %>
-                      <span class="bg--yellow">
-                        <p>&nbsp; △ &nbsp;</p>
-                      </span>
-                    <% elsif event_option_entry.OK? %>
-                      <span class="bg--green">
-                        <p>&nbsp; ◯ &nbsp;</p>
-                      </span>
-                    <% end %>
-                  </td>
-                <% end %>
-              <% end %>
-            <% end %>
+						<% @team.users.order("team_members.event_order").each do |user| %>
+							<% event_option_entry = user.event_entries.find_by(event_id: event.id).event_option_entry %>
+							<%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
+								<% if event_option_entry.None? %>
+									<td nowrap class="entry"><%= link_to '&nbsp; - &nbsp;'.html_safe, edit_event_entry_path(user.id) %></td>
+								<% else %>
+									<td nowrap class="entry">
+										<% if event_option_entry.NG? %>
+											<span class="bg--red"><%= link_to '&nbsp; × &nbsp;'.html_safe, edit_event_entry_path(user.id) %></span>
+										<% elsif event_option_entry.Neither? %>
+											<span class="bg--yellow"><%= link_to '&nbsp; △ &nbsp;'.html_safe, edit_event_entry_path(user.id) %></span>
+										<% elsif event_option_entry.OK? %>
+											<span class="bg--green"><%= link_to '&nbsp; ◯ &nbsp;'.html_safe, edit_event_entry_path(user.id) %></span>
+										<% end %>
+									</td>
+								<% end %>
+							<% else %>
+								<% if event_option_entry.None? %>
+									<td nowrap class="entry">&nbsp; - &nbsp;</td>
+								<% else %>
+									<td nowrap class="entry">
+										<% if event_option_entry.NG? %>
+											<span class="bg--red">
+												<p>&nbsp; × &nbsp;</p>
+											</span>
+										<% elsif event_option_entry.Neither? %>
+											<span class="bg--yellow">
+												<p>&nbsp; △ &nbsp;</p>
+											</span>
+										<% elsif event_option_entry.OK? %>
+											<span class="bg--green">
+												<p>&nbsp; ◯ &nbsp;</p>
+											</span>
+										<% end %>
+									</td>
+								<% end %>
+							<% end %>
+						<% end %>
           </tr>
         <% end %>
       </table>
@@ -103,7 +108,7 @@
     </span>
   <% end %>
 	<div class="comment-area">
-		<% @team.event_comments.includes(:user).sort_by(&:created_at).each do |event_comment| %>
+		<% @team.event_comments.includes(user: :team_members).sort_by(&:created_at).each do |event_comment| %>
 			<span>
 				<% team_member = event_comment.user.team_members.find_by(team: @team.id) %>
 				<% if team_member.display_name.present? %>

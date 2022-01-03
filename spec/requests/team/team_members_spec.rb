@@ -42,17 +42,31 @@ RSpec.describe 'Team::TeamMembers', type: :request do
       expect(flash[:danger]).to eq 'ログインしてください'
       expect(response).to redirect_to login_path
     end
+
+    it 'メンバー表示順編集からリダイレクトされる' do
+      get edit_order_team_team_member_path(team_member1.id)
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
+
+    it 'メンバー表示順更新からリダイレクトされる' do
+      patch update_order_team_team_member_path(team_member1.id)
+      expect(flash[:danger]).to eq 'ログインしてください'
+      expect(response).to redirect_to login_path
+    end
   end
 
   describe 'チーム管理者ではないユーザーのチームメンバーのテスト' do
-    it 'メンバー一覧からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
+    end
+
+    it 'メンバー一覧からリダイレクトされる' do
       get team_team_member_path(team)
       expect(response).to redirect_to root_path
     end
 
     it 'メンバーリクエスト承認からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       expect do
         post team_team_members_path(id: member_request1.id)
       end.to not_change(MemberRequest, :count).and not_change(TeamMember, :count)
@@ -60,7 +74,6 @@ RSpec.describe 'Team::TeamMembers', type: :request do
     end
 
     it 'メンバー削除からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       expect do
         delete team_team_member_path(team_member1)
       end.not_to change(TeamMember, :count)
@@ -68,15 +81,23 @@ RSpec.describe 'Team::TeamMembers', type: :request do
     end
 
     it 'メンバー表示名編集からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       get edit_team_team_member_path(team_member1.id)
       expect(response).to redirect_to event_path(not_admin_user.current_team_id)
     end
 
     it 'メンバー表示名更新からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       patch team_team_member_path(team_member1.id)
       expect(response).to redirect_to event_path(not_admin_user.current_team_id)
+    end
+
+    it 'メンバー表示順編集からリダイレクトされる' do
+      get edit_order_team_team_member_path(team.id)
+      expect(response).to redirect_to root_path
+    end
+
+    it 'メンバー表示順更新からリダイレクトされる' do
+      patch update_order_team_team_member_path(team.id)
+      expect(response).to redirect_to root_path
     end
   end
 
@@ -99,8 +120,11 @@ RSpec.describe 'Team::TeamMembers', type: :request do
   end
 
   describe '別のチームの管理者のチームメンバーのテスト' do
-    it 'メンバーリクエスト承認からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+
+    it 'メンバーリクエスト承認からリダイレクトされる' do
       expect do
         post team_team_members_path(id: member_request1.id)
       end.to not_change(MemberRequest, :count).and not_change(TeamMember, :count)
@@ -108,7 +132,6 @@ RSpec.describe 'Team::TeamMembers', type: :request do
     end
 
     it 'チームメンバー削除からリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       expect do
         delete team_team_member_path(team_member4)
       end.not_to change(TeamMember, :count)
@@ -116,21 +139,28 @@ RSpec.describe 'Team::TeamMembers', type: :request do
     end
 
     it '別のチームのチームメンバー一覧から現在のチームのメンバー一覧にリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get team_team_member_path(team)
       expect(response).to redirect_to team_team_member_path(other_user.current_team_id)
     end
 
     it 'メンバー表示名編集から現在のチームのスケジュール管理にリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get edit_team_team_member_path(team_member1.id)
       expect(response).to redirect_to event_path(other_user.current_team_id)
     end
 
     it 'メンバー表示名更新から現在のチームのスケジュール管理にリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       patch team_team_member_path(team_member1.id)
       expect(response).to redirect_to event_path(other_user.current_team_id)
+    end
+
+    it 'メンバー表示順編集から現在のチームの表示順編集にリダイレクトされる' do
+      get edit_order_team_team_member_path(team.id)
+      expect(response).to redirect_to edit_order_team_team_member_path(other_user.current_team_id)
+    end
+
+    it 'メンバー表示順更新から現在のチームの表示順編集にリダイレクトされる' do
+      patch update_order_team_team_member_path(team.id)
+      expect(response).to redirect_to edit_order_team_team_member_path(other_user.current_team_id)
     end
   end
 end

@@ -28,7 +28,12 @@ Rails.application.routes.draw do
 
   namespace :team do
     resources :member_requests, only: [:show, :destroy]
-    resources :team_members, only: [:show, :create, :edit, :update, :destroy]
+    resources :team_members, only: [:show, :create, :edit, :update, :destroy] do
+			member do
+      get 'edit_order'
+      patch 'update_order' 
+    	end
+		end
   end
 
   resources :events, except: :index
