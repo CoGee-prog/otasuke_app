@@ -2,6 +2,7 @@ class Team::TeamMembersController < ApplicationController
   before_action :logged_in_user
   before_action :current_team_admin_user, except: %i[edit update]
   before_action :set_team_member, only: %i[edit update]
+  before_action :member_order_edit_current_team_page, only: %i[edit_order update_order]
   before_action :set_member_orders, only: :edit_order
   before_action :team_member_current_team_page, only: :show
   before_action :team_member_display_name_correct_user, only: %i[edit update]
@@ -45,9 +46,7 @@ class Team::TeamMembersController < ApplicationController
     end
   end
 
-  def edit_order
-
-  end
+  def edit_order; end
 
   def update_order
     @member_orders = member_orders_params.keys.each do |id|
@@ -59,7 +58,7 @@ class Team::TeamMembersController < ApplicationController
         return
       end
     end
-    flash[:success] = '表示順を変更しました'
+    flash[:success] = 'メンバーの表示順を変更しました'
     redirect_to event_path(current_team)
   end
 
@@ -104,6 +103,13 @@ class Team::TeamMembersController < ApplicationController
     return if (current_team.id == params[:id].to_i)
 
     redirect_to team_team_member_path(current_team)
+  end
+
+  # 正しいチームの表示順編集か確認し、現在のチームの表示順編集にリダイレクトする
+  def member_order_edit_current_team_page
+    return if current_team.id == params[:id].to_i
+
+    redirect_to edit_order_team_team_member_path(current_team)
   end
 
   def team_member_params

@@ -1,5 +1,5 @@
 <%= form_with(url: update_order_team_team_member_path, method: :patch, local: true) do |f| %>
-  <div class="event">
+  <div class="order">
     <table>
       <% @member_orders.each_with_index do |member_order, i| %>
         <% if i == 0 %>
@@ -32,5 +32,5 @@
       <% end %>
     </table>
   </div>
-  <%= f.submit "更新する", class: "btn__margin-top--center-orange" %>
+  <%= f.submit yield(:button_text), class: "btn__margin-top--center-orange" %>
 <% end %>
