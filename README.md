@@ -4,17 +4,22 @@
 非効率なうえに返信が来るまで他のチームに依頼することができません。  
 そんなスケジュール調整の悩みをワンストップで解消することができるサイトです。  
 
+スケジュール管理では、メンバーの表示名や表示順の変更、コメントを投稿することができます。
+
 対戦相手検索では、指定した日時のスケジュールが空いているチームを検索することができます。  
 レスポンシブ対応しているため、スマホからもご確認いただけます。  
 また、Googleアカウントからログインすることも可能です。  
 https://otasuke-app.com/
-
+  
+ホーム画面
 <img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
-
+  
+スケジュール管理画面
 <img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/147806203-7cb7d7b0-f57c-417d-8668-a0ff562303ea.gif">  
   
+対戦相手検索画面
 <img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/141124401-c40aad17-ffb1-47fb-982e-5b973507a954.gif">  
-
+  
 # 使用技術  
 * Ruby 2.6.7  
 * Ruby on Rails 6.1.3  
