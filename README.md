@@ -43,7 +43,7 @@ https://otasuke-app.com/
 * Google+ API
 
 # ER図  
-![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/147806136-c943cd0a-021f-4242-9e0b-4d395227f92e.png)  
+![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/148057623-ad1d1f9d-1cfa-4b62-93ee-45cbfd5465a3.png)  
 # インフラ構成図  
 ![おたスケ インフラ構成図 drawio](https://user-images.githubusercontent.com/80146722/137757056-4329a93c-6c62-40bd-9b29-d84888f428c7.png)
 
