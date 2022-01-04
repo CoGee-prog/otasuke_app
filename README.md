@@ -11,13 +11,13 @@
 また、Googleアカウントからログインすることも可能です。  
 https://otasuke-app.com/
   
-<ホーム画面>
+【ホーム画面】
 <img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
   
-<スケジュール管理画面>
+【スケジュール管理画面】
 <img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/148054991-58266b89-0e2d-401a-922a-cfc54a277dda.gif">  
   
-<対戦相手検索画面>
+【対戦相手検索画面】
 <img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/141124401-c40aad17-ffb1-47fb-982e-5b973507a954.gif">  
   
 # 使用技術  
