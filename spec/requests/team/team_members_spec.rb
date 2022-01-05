@@ -102,8 +102,11 @@ RSpec.describe 'Team::TeamMembers', type: :request do
   end
 
   describe 'メンバーリクエストがない場合' do
-    it 'チームメンバー承認からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: user.email, password: user.password } }
+    end
+
+    it 'チームメンバー承認からリダイレクトされる' do
       post team_team_members_path(2)
       expect(flash[:danger]).to eq '既に削除されているか存在しないメンバーリクエストです'
       expect(response).to redirect_to team_member_request_path(team)
@@ -111,8 +114,11 @@ RSpec.describe 'Team::TeamMembers', type: :request do
   end
 
   describe 'メンバー所属がない場合' do
-    it 'チームメンバー削除からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: user.email, password: user.password } }
+    end
+
+    it 'チームメンバー削除からリダイレクトされる' do
       delete team_team_member_path(2)
       expect(flash[:danger]).to eq '既に削除されているか存在しないメンバーです'
       expect(response).to redirect_to team_team_member_path(team)

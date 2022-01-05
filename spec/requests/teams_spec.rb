@@ -82,14 +82,16 @@ RSpec.describe 'Teams', type: :request do
   end
 
   describe 'チーム管理者ユーザー以外からのチームプロフィール編集、更新、削除が失敗する' do
-    it 'チーム編集からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+
+    it 'チーム編集からリダイレクトされる' do
       get edit_team_path(team)
       expect(response).to redirect_to edit_team_path(other_team1)
     end
 
     it 'チーム更新からリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       patch team_path(team), params: { team: { name: 'イーグルス', level: team.level, prefecture_id: team.prefecture_id,\
                                                activity_monday: team.activity_monday, activity_tuesday: team.activity_tuesday,\
                                                activity_wednesday: team.activity_wednesday, activity_thursday: team.activity_thursday,\
@@ -100,7 +102,6 @@ RSpec.describe 'Teams', type: :request do
     end
 
     it 'チーム削除からリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       expect do
         delete team_path(team)
       end.not_to change(Team, :count)
@@ -109,14 +110,16 @@ RSpec.describe 'Teams', type: :request do
   end
 
   describe '他のユーザーの所属チーム一覧からリダイレクトされる' do
-    it '間違ったユーザーがログインした時、所属チーム一覧からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+
+    it '間違ったユーザーがログインした時、所属チーム一覧からリダイレクトされる' do
       get list_team_path(user)
       expect(response).to redirect_to list_team_path(other_user)
     end
 
     it '所属していないチームへのチーム切り替えからリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       post switch_team_path(team)
       expect(flash[:success]).not_to eq 'チームを切り替えました'
       expect(response).to redirect_to root_path
