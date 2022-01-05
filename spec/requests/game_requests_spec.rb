@@ -29,8 +29,11 @@ RSpec.describe 'GameRequests', type: :request do
   end
 
   describe 'チーム管理者ユーザー以外からのスケジュール作成、登録、編集、更新、削除が失敗する' do
-    it '対戦申込登録からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
+    end
+
+    it '対戦申込登録からリダイレクトされる' do
       expect do
         post game_requests_path, params: { game_request: { requested_team_id: game_request.requested_team_id, \
                                                            contact_address: game_request.contact_address, comment: game_request.comment } }
@@ -40,7 +43,6 @@ RSpec.describe 'GameRequests', type: :request do
     end
 
     it 'スケジュール削除からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       expect do
         delete game_request_path(game_request)
       end.not_to change(GameRequest, :count)
@@ -49,8 +51,11 @@ RSpec.describe 'GameRequests', type: :request do
   end
 
   describe '別のチームの管理者ユーザーのテスト' do
-    it '別のチームの対戦申込削除からホーム画面にリダイレクトされる' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+
+    it '別のチームの対戦申込削除からホーム画面にリダイレクトされる' do
       expect do
         delete game_request_path(game_request)
       end.not_to change(GameRequest, :count)
@@ -58,7 +63,6 @@ RSpec.describe 'GameRequests', type: :request do
     end
 
     it '別のチームの対戦申込一覧から現在のチームの対戦申込一覧にリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get game_request_path(team)
       expect(response).to redirect_to game_request_path(other_user.current_team_id)
     end
