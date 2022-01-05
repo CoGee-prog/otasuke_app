@@ -35,14 +35,16 @@ RSpec.describe 'EventEntries', type: :request do
   end
 
   describe '他のユーザーのスケジュール出欠の編集、更新が失敗する' do
-    it 'スケジュール出欠編集からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+
+    it 'スケジュール出欠編集からリダイレクトされる' do
       get edit_event_entry_path(user)
       expect(response).to redirect_to event_path(other_team1)
     end
 
     it 'スケジュール出欠更新からリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       patch event_entry_path(user), params: { event_option_entries: { id: event_entry.event_option_entry.id, feeling: 1 } }
       expect(flash[:success]).not_to eq '出欠を更新しました'
       expect(response).to redirect_to event_path(other_team1)

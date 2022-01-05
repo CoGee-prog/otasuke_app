@@ -51,14 +51,16 @@ RSpec.describe 'Events', type: :request do
   end
 
   describe 'チーム管理者ユーザー以外からのスケジュール作成、登録、編集、更新、削除が失敗する' do
-    it 'スケジュール作成からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
+    end
+
+    it 'スケジュール作成からリダイレクトされる' do
       get new_event_path
       expect(response).to redirect_to root_path
     end
 
     it 'スケジュール登録からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       expect do
         post events_path, params: { event: { day_time: event.day_time, ground: event.ground,\
                                              opponent_team_name: event.opponent_team_name, other: event.other } }
@@ -68,13 +70,11 @@ RSpec.describe 'Events', type: :request do
     end
 
     it 'スケジュール編集からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       get edit_event_path(event)
       expect(response).to redirect_to root_path
     end
 
     it 'スケジュール更新からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       patch event_path(event), params: { event: { day_time: event.day_time, ground: event.ground,\
                                                   opponent_team_name: event.opponent_team_name, other: event.other } }
       expect(flash[:success]).not_to eq 'スケジュールを更新しました'
@@ -82,7 +82,6 @@ RSpec.describe 'Events', type: :request do
     end
 
     it 'スケジュール削除からリダイレクトされる' do
-      post login_path params: { session: { email: not_admin_user.email, password: not_admin_user.password } }
       expect do
         delete event_path(event)
       end.not_to change(Event, :count)

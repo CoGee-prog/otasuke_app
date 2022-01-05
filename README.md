@@ -4,17 +4,22 @@
 非効率なうえに返信が来るまで他のチームに依頼することができません。  
 そんなスケジュール調整の悩みをワンストップで解消することができるサイトです。  
 
+スケジュール管理では、メンバーの表示名や表示順の変更、コメントを投稿することができます。
+
 対戦相手検索では、指定した日時のスケジュールが空いているチームを検索することができます。  
 レスポンシブ対応しているため、スマホからもご確認いただけます。  
 また、Googleアカウントからログインすることも可能です。  
 https://otasuke-app.com/
-
-<img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
-
-<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/147806203-7cb7d7b0-f57c-417d-8668-a0ff562303ea.gif">  
   
+【ホーム画面】
+<img width="1426" alt="おたスケ ホーム画面" src="https://user-images.githubusercontent.com/80146722/141123043-35974a1e-9681-482a-8b57-fa1aed9691a4.png">  
+  
+【スケジュール管理画面】
+<img width="1426" alt="おたスケ スケジュール管理" src="https://user-images.githubusercontent.com/80146722/148054991-58266b89-0e2d-401a-922a-cfc54a277dda.gif">  
+  
+【対戦相手検索画面】
 <img width="1426" alt="おたスケ 対戦相手検索" src="https://user-images.githubusercontent.com/80146722/141124401-c40aad17-ffb1-47fb-982e-5b973507a954.gif">  
-
+  
 # 使用技術  
 * Ruby 2.6.7  
 * Ruby on Rails 6.1.3  
@@ -38,7 +43,7 @@ https://otasuke-app.com/
 * Google+ API
 
 # ER図  
-![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/147806136-c943cd0a-021f-4242-9e0b-4d395227f92e.png)  
+![おたスケ ER図 drawio](https://user-images.githubusercontent.com/80146722/148057623-ad1d1f9d-1cfa-4b62-93ee-45cbfd5465a3.png)  
 # インフラ構成図  
 ![おたスケ インフラ構成図 drawio](https://user-images.githubusercontent.com/80146722/137757056-4329a93c-6c62-40bd-9b29-d84888f428c7.png)
 
@@ -70,6 +75,7 @@ https://otasuke-app.com/
 	* 出欠一括回答機能  
 	* 出欠合計計算機能  
 	* チームメンバー表示名変更機能  
+	* チームメンバー表示順変更機能
 	* コメント投稿機能  
 	* コメント削除機能
 * 対戦相手検索機能  

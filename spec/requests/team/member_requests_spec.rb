@@ -50,8 +50,11 @@ RSpec.describe 'Team/MemberRequests', type: :request do
   end
 
   describe '別のチームの管理者のメンバーリクエストのテスト' do
-    it 'メンバーリクエスト削除からリダイレクトされる' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+
+    it 'メンバーリクエスト削除からリダイレクトされる' do
       expect do
         delete team_member_request_path(member_request1)
       end.not_to change(MemberRequest, :count)
@@ -59,7 +62,6 @@ RSpec.describe 'Team/MemberRequests', type: :request do
     end
 
     it '別のチームのメンバーリクエスト一覧から現在のチームのメンバーリクエスト一覧にリダイレクトされる' do
-      post login_path params: { session: { email: other_user.email, password: other_user.password } }
       get team_member_request_path(team)
       expect(response).to redirect_to team_member_request_path(other_user.current_team_id)
     end
