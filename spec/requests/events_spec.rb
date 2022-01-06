@@ -71,28 +71,50 @@ RSpec.describe 'Events', type: :request do
 
     it 'スケジュール編集からリダイレクトされる' do
       get edit_event_path(event)
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to event_path(team)
     end
 
     it 'スケジュール更新からリダイレクトされる' do
       patch event_path(event), params: { event: { day_time: event.day_time, ground: event.ground,\
                                                   opponent_team_name: event.opponent_team_name, other: event.other } }
       expect(flash[:success]).not_to eq 'スケジュールを更新しました'
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to event_path(team)
     end
 
     it 'スケジュール削除からリダイレクトされる' do
       expect do
         delete event_path(event)
       end.not_to change(Event, :count)
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to event_path(team)
     end
   end
 
-  describe 'チームに所属していないユーザーのテスト' do
-    it 'スケジュール管理画面から現在のチームのスケジュール管理画面にリダイレクトされる' do
+  describe 'チームに所属していない別のチームの管理者のテスト' do
+    before do
       post login_path params: { session: { email: other_user.email, password: other_user.password } }
+    end
+    it 'スケジュール管理画面から現在のチームのスケジュール管理画面にリダイレクトされる' do
       get event_path(team)
+      expect(response).to redirect_to event_path(other_user.current_team_id)
+    end
+
+    it 'スケジュール編集から現在のチームのスケジュール管理画面にリダイレクトされる' do
+      get edit_event_path(event)
+      expect(response).to redirect_to event_path(other_user.current_team_id)
+    end
+
+    it 'スケジュール更新から現在のチームのスケジュール管理画面にリダイレクトされる' do
+      patch event_path(event), params: { event: { day_time: event.day_time, ground: event.ground,\
+                                                  opponent_team_name: event.opponent_team_name, other: event.other } }
+      expect(flash[:success]).not_to eq 'スケジュールを更新しました'
+      expect(response).to redirect_to event_path(other_user.current_team_id)
+    end
+
+    it 'スケジュール削除から現在のチームのスケジュール管理画面にリダイレクトされる' do
+      expect do
+        delete event_path(event)
+      end.not_to change(Event, :count)
+      expect(flash[:success]).not_to eq 'スケジュールを削除しました'
       expect(response).to redirect_to event_path(other_user.current_team_id)
     end
   end

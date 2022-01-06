@@ -1,8 +1,9 @@
 class EventsController < ApplicationController
   before_action :logged_in_user
   before_action :event_current_team_page, only: :show
-  before_action :current_team_admin_user, only: %i[new create edit update destroy]
-  before_action :set_event, only: %i[edit update]
+  before_action :current_team_admin_user, only: %i[new create]
+  before_action :set_event, only: %i[edit update destroy]
+  before_action :currect_event_team_admin_user, only: %i[edit update destroy]
 
   def new
     @event = Event.new
@@ -46,8 +47,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    if (event = Event.find_by(id: params[:id]))
-      event.destroy
+    if @event&.destroy
       flash[:success] = 'スケジュールを削除しました'
     else
       flash[:danger] = 'スケジュールは既に削除されています'
@@ -72,5 +72,11 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find_by(id: params[:id])
+  end
+
+  def currect_event_team_admin_user
+    return if @event&.team.admin_user_id == current_user.id
+
+    redirect_to event_path(current_team)
   end
 end
