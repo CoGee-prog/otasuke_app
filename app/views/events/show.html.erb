@@ -11,10 +11,10 @@
     <div class="events">
       <table>
         <tr>
-          <th class="fixed"></th>
-          <th>◯</th>
-          <th>△</th>
-          <th>×</th>
+          <th class="events__fixed"></th>
+          <th class="events__fixed--ok">◯</th>
+          <th class="events__fixed--neither">△</th>
+          <th class="events__fixed--ng">×</th>
           <% @team.users.order("team_members.event_order").each do |user| %>
 						<% team_member = user.team_members.find_by(team: @team.id) %>
             <% if @current_team.admin_user_id == @current_user.id || user.id == @current_user.id %>
@@ -34,7 +34,7 @@
         </tr>
         <% @events.sort_by(&:day_time).each do |event| %>
           <tr>
-            <th class="fixed" id="event">
+            <th class="events__fixed" id="event">
               <%= event.day_time.strftime('%m/%d') %>(<%= %w(日 月 火 水 木 金 土)[event.day_time.wday] %>)
               <%= event.day_time.strftime('%H:%M') %>
               <%= event.ground %>
@@ -52,9 +52,9 @@
             </th>
             <% event_option = event.event_option %>
             <% event_option.calc_event_option_entry %>
-            <td><%= event_option.count_ok %></td>
-            <td><%= event_option.count_neither %></td>
-            <td><%= event_option.count_ng %></td>
+            <td class="events__fixed--ok"><%= event_option.count_ok %></td>
+            <td class="events__fixed--neither"><%= event_option.count_neither %></td>
+            <td class="events__fixed--ng"><%= event_option.count_ng %></td>
 						<% @team.users.order("team_members.event_order").each do |user| %>
 							<% event_option_entry = user.event_entries.find_by(event_id: event.id).event_option_entry %>
 							<%if event_option_entry.event_entry.user_id == current_user.id || current_team.admin_user_id == current_user.id %>
