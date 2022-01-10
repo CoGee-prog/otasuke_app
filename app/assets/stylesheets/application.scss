@@ -894,18 +894,21 @@ table{
 					min-width: 47px;
 					text-align: center;
 					left: 700px;
+					padding: 0px;
 				}
 				&--neither{
 					@extend %events__fixed;
 					min-width: 47px;
 					text-align: center;
 					left: 747px;
+					padding: 0px;
 				}
 				&--ng{
 					@extend %events__fixed;
 					min-width: 47px;
 					text-align: center;
 					left: 794px;
+					padding: 0px;
 				}
 			}
 			tr:nth-child(even) {
@@ -953,6 +956,9 @@ table{
 			td {
 				padding: 10px;
 				position: relative;
+			}
+			td {
+
 			}
 			.events__beside {
 				display: inline-block;
