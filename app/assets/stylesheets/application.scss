@@ -1422,7 +1422,7 @@ table{
 	// スケジュール
 
 	%events__fixed{
-		min-width: 180px;
+		min-width: 150px;
 		font-size: 0.8rem;
 		a{
 			font-size: 0.8rem;
@@ -1439,16 +1439,16 @@ table{
 			table {
 				.events__fixed{
 					&--ok{
-						min-width: 30px;
-						left: 180px;
+						min-width: 25px;
+						left: 150px;
 					}
 					&--neither{
-						min-width: 30px;
-						left: 210px;
+						min-width: 25px;
+						left: 175px;
 					}
 					&--ng{
-						min-width: 30px;
-						left: 240px;
+						min-width: 25px;
+						left: 200px;
 					}
 				}
 			}
