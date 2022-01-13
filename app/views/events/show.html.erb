@@ -107,6 +107,9 @@
       <%= link_to '新しいスケジュールを登録する', new_event_path %>
     </span>
   <% end %>
+	<span class="btn__margin-top--orange">
+		<%= link_to '自分の出欠を変更する', edit_event_entry_path(current_user.id) %>
+	</span>
 	<div class="comment-area">
 		<% @team.event_comments.includes(user: :team_members).sort_by(&:created_at).each do |event_comment| %>
 			<span>
